@@ -1,0 +1,57 @@
+<dialog slot="control-panel">
+  <div class="panel-header">
+    <strong>SlideDeck Controls</strong>
+    <form method="dialog">
+      <button close-dialog>close</button>
+    </form>
+  </div>
+  <div class="panel-controls">
+    <h2>View:</h2>
+    <button set-view>grid</button>
+    <button set-view>slideshow</button>
+    <button set-view>speaker</button>
+
+    <h2>Controls</h2>
+    <button slide-event="start">start presentation</button>
+    <button slide-event="join-as-speaker">join as speaker</button>
+    <button slide-event="key-control">navigation controls</button>
+  </div>
+</dialog>
+
+<style webc:bucket="slides-core">
+@layer slide.base {
+  [slot=control-panel] {
+    background: Canvas;
+    color: CanvasText;
+    border: medium solid var(--slide-border-color);
+    container: panel / inline-size;
+    min-width: min(50ch, 100%);
+    padding: 0;
+
+    h2 {
+      font-size: inherit !important;
+      margin-block: unset;
+    }
+  }
+
+  .panel-header {
+    align-items: center;
+    border-block-end: thin solid var(--slide-border-color);
+    display: flex;
+    gap: var(--slide-half-gap);
+    grid-template-columns: 1fr auto;
+    justify-content: space-between;
+    padding: var(--slide-half-gap);
+
+    form { margin: unset; }
+  }
+
+  .panel-controls {
+    padding: var(--slide-gap);
+  }
+
+  [close-dialog] {
+    padding: 0 var(--slide-half-gap);
+  }
+}
+</style>

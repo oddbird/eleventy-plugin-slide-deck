@@ -1,0 +1,20 @@
+<slide-item
+  @canvas-type="todo"
+  :id="this.slide.id"
+  :@caption="this.slide.caption"
+  :@note="this.slide.note"
+  :@slide="this.slide"
+>
+  <h2>Todo:</h2>
+  <div
+    @html="slideMDownBlock(this.slide.todo || this.slide)"
+  ></div>
+</slide-item>
+
+<style webc:bucket="slides-core">
+@layer slide.type {
+  [slide-canvas='todo'] {
+    --slide-canvas-border: medium dashed mediumvioletred;
+  }
+}
+</style>

@@ -1,0 +1,24 @@
+<build-deck
+  webc:nokeep
+  id="my-very-good-talk"
+  :slides="this.slides"
+></build-deck>
+
+<style webc:keep>
+  html {
+    block-size: 100%;
+    scroll-snap-type: block proximity;
+    text-size-adjust: none;
+  }
+
+  body {
+    font-size: clamp(1em, 0.8em + 0.5vi, 2em);
+    margin: unset;
+    min-block-size: 100%;
+  }
+
+  .oddlogo {
+    width: auto;
+    height: 1.5lh;
+  }
+</style>

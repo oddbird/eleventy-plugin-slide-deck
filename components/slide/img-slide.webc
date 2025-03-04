@@ -1,0 +1,51 @@
+<slide-item
+  content-type="image"
+  :id="this.slide.id"
+  :@caption="this.slide.caption"
+  :@note="this.slide.note"
+  :@src="this.slide.img"
+  :@cite="this.slide.cite"
+  :style="slideStyles(this.slide, ['background', 'fit', 'position', 'padding'])"
+>
+  <img
+    :src="slideImg(this.src)"
+    :alt="this.slide.alt || ''"
+    sizes="100vw"
+  >
+  <slide-image-credit
+    webc:if="this.cite"
+    @html="`credit: ${slideMDownInline(this.cite)}`"
+  ></slide-image-credit>
+</slide-item>
+
+<style webc:bucket="slides-core">
+@layer slide.type {
+  [slide-content~=image] {
+    display: flex;
+    flex-direction: column;
+    place-items: stretch;
+    position: relative;
+
+    img {
+      clip-path: var(--slide-image-clip);
+      flex: 1 1 0;
+      inline-size: 100%;
+      overflow: hidden;
+      object-fit: var(--slide-fit , cover);
+      object-position: var(--slide-position , top);
+    }
+
+    slide-image-credit {
+      background: Canvas;
+      border-radius: 3px;
+      color: CanvasText;
+      font-size: var(--slide-small-text, smaller);
+      font-style: italic;
+      inset: auto 0 0 auto;
+      margin: var(--slide-half-gap);
+      padding-inline: var(--slide-half-gap);
+      position: absolute;
+    }
+  }
+}
+</style>

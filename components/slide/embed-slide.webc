@@ -1,0 +1,32 @@
+<slide-item
+  content-type="embed"
+  :id="this.slide.id"
+  :@caption="this.slide.caption"
+  :@note="this.slide.note"
+>
+  <video
+    webc:if="this.slide.video"
+    controls
+    :src="this.slide.video"
+    @text="this.slide.title"
+  ></video>
+  <template
+    webc:nokeep
+    webc:else
+    @html="this.slide.embed"
+  ></template>
+</slide-item>
+
+<style webc:bucket="slides-core">
+@layer slide.type {
+  [slide-content~=embed] {
+    container: video / size;
+    place-items: stretch;
+
+    > * {
+      height: 100cqh;
+      width: 100cqw;
+    }
+  }
+}
+</style>

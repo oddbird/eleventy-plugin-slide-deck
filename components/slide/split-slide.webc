@@ -1,0 +1,47 @@
+<slide-item
+  content-type="split"
+  :id="this.slide.id"
+  :@caption="this.slide.caption"
+  :@note="this.slide.note"
+  :@src="this.slide.img"
+  :@credit="this.slide.cite"
+  :style="slideStyles(this.slide, ['background', 'fit', 'position', 'padding'])"
+>
+  <div slide-content="image">
+    <img
+      :src="slideImg(this.src)"
+      :alt="this.slide.alt || ''"
+      sizes="50vw"
+    >
+    <photo-credit
+      webc:if="this.cite"
+      @html="`photo: ${slideMDownInline(this.cite)}`"
+    ></photo-credit>
+  </div>
+  <div slide-content="default">
+    <h2 webc:if="this.slide.title">
+      <slide-title
+        webc:nokeep
+        :@pre="this.slide.pre"
+        :@title="this.slide.title"
+      ></slide-title>
+    </h2>
+    <p class="sub" webc:if="this.slide.sub" @html="slideMDownInline(this.slide.sub)"></p>
+    <div webc:if="this.slide.md" @html="slideMDownBlock(this.slide.md)"></div>
+    <div webc:if="this.slide.webc" @html="this.slide.webc"></div>
+  </div>
+</slide-item>
+
+<style webc:bucket="slides-core">
+@layer slide.type {
+  [slide-content='split'] {
+    --slide-image-clip: polygon(
+      0 0, 100% 0,
+      calc(100% - 5cqi) 100%,
+      0 100%
+    );
+    display: grid;
+    grid-template-columns: minmax(25%, 0.5fr) 1fr;
+  }
+}
+</style>

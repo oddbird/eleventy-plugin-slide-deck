@@ -1,0 +1,27 @@
+<slide-item
+  :id="this.slide.id"
+  :@caption="this.slide.caption"
+  :@note="this.slide.note"
+  :@slide="this.slide"
+  :style="slideStyles(this.slide, ['background', 'color', 'mode'])"
+>
+  <h2 webc:if="this.slide.title" slide-title="main">
+    <slide-title
+      webc:nokeep
+      :@pre="this.slide.pre"
+      :@title="this.slide.title"
+    ></slide-title>
+  </h2>
+  <p slide-title="sub" webc:if="this.slide.sub" @html="slideMDownInline(this.slide.sub)"></p>
+  <div webc:if="this.slide.md" @html="slideMDownBlock(this.slide.md)"></div>
+  <div webc:if="this.slide.webc" @html="this.slide.webc"></div>
+</slide-item>
+
+<style webc:bucket="slides-core">
+@layer slide.type {
+  [slide-content~=default] {
+    place-content: safe center;
+    padding: var(--slide-gap);
+  }
+}
+</style>

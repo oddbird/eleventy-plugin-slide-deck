@@ -1,0 +1,51 @@
+<script webc:setup>
+  const canILink = (feature) => `https://caniuse.com/#feat=${feature}`;
+
+  const canICaption = (slide) => {
+    const text = `Can I Use ${slide.caniuse}`;
+    const permalink = `[[${text}](${canILink(slide.caniuse)})]`;
+
+    return slide.caption
+      ? `${slide.caption} ${permalink}`
+      : permalink;
+  }
+
+  const exploreLink = (feature) => (
+    `https://web-platform-dx.github.io/web-features-explorer/features/${feature}`
+  );
+</script>
+
+<slide-item
+  webc:if="this.slide.caniuse"
+  style="--slide-fit: contain; --slide-background: #db5602;"
+  content-type="image"
+  :id="this.slide.id"
+  :@caption="canICaption(this.slide)"
+  :@note="this.slide.note"
+>
+  <img
+    :src="`https://caniuse.bitsofco.de/image/${this.slide.caniuse}.jpg`"
+    :alt="`Support data from CanIUse.com on the ${this.slide.caniuse} feature`"
+    sizes="100vw"
+  >
+</slide-item>
+
+<slide-item
+  webc:else
+  content-type="default"
+  :id="this.slide.id"
+  :@caption="this.slide.caption"
+  :@note="this.slide.note"
+  :@link="exploreLink(this.slide.support)"
+>
+  <browser-support
+    webc:import="npm:@oddbird/browser-support"
+    :@link="link"
+  >
+    <h2 slot="title" @text="this.slide.support"></h2>
+    <a :href="link">
+      Browser support for
+      <code @text="this.slide.support"></code>
+    </a>
+  </browser-support>
+</slide-item>

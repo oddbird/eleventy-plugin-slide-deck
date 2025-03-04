@@ -1,0 +1,79 @@
+<script webc:setup>
+  const langs = ['html', 'css', 'scss', 'js', 'code'];
+
+  const getCode = (slide) => {
+    const code = {};
+
+    langs.forEach((lang) => {
+      if (!slide[lang]) { return; }
+
+      if (lang === 'code') {
+        code[slide.lang || 'code'] = slide.code;
+      } else {
+        code[lang] = slide[lang];
+      }
+    });
+
+    return code;
+  };
+</script>
+
+<slide-item
+  content-type="code"
+  :id="this.slide.id"
+  :@caption="this.slide.caption"
+  :@note="this.slide.note"
+  :@code="getCode(this.slide)"
+>
+  <slide-code-block
+    webc:for="(lang, content) in this.code"
+  >
+    <slide-code-label
+      @text="`${lang}`"
+    ></slide-code-label>
+    <template
+      webc:nokeep
+      @raw="this.highlight(lang, content)"
+    ></template>
+  </slide-code-block>
+</slide-item>
+
+<style webc:bucket="slides-core">
+@layer slide.type {
+  [slide-content~=code] {
+    grid-template-columns:
+      [full-start] 1fr
+      [code-start] auto [code-end]
+      1fr [full-end]
+    ;
+
+    & slide-code-block {
+      display: grid;
+      font-size: clamp(1em, -0.067em + 2.667cqi, 2em);
+      grid-column: full;
+      grid-template-rows: auto 1fr;
+      grid-template-columns: inherit;
+      grid-template-columns: subgrid;
+    }
+
+    & slide-code-label {
+      color-scheme: dark;
+      background: Canvas;
+      color: CanvasText;
+      font-family: var(--slide-code-font, monospace);
+      grid-column: full;
+      padding: var(--slide-half-gap) var(--slide-gap);
+    }
+
+    & pre {
+      align-content: safe center;
+      background: unset;
+      display: grid;
+      grid-column: code;
+      margin: unset;
+      max-inline-size: 100%;
+      padding: var(--slide-gap);
+    }
+  }
+}
+</style>

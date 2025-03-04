@@ -1,0 +1,51 @@
+<script webc:setup>
+  const findPage = (demo) => $data.collections.demos.find(
+    (page) => (page.data.demo === demo)
+  );
+
+  const demoPage = (slide) => {
+    const found = {
+      title: slide.title,
+      url: slide.demo,
+    };
+
+    if (found.url.includes('://')) return found;
+
+    const srcPage = $data.collections.all.find(
+      (page) => (page.data.demo === slide.demo)
+    );
+
+    return srcPage
+      ? {
+        ...found,
+        title: slide.title || srcPage.data.title,
+        url: srcPage.url,
+      }
+      : found;
+  };
+
+  const demoCaption = (slide) => {
+    const page = demoPage(slide);
+    const title = slide.title || page.title;
+    const linkText = slide.caption
+      ? title || 'permalink'
+      : 'permalink';
+    return `${slide.caption || title} [[${linkText}](${page.url})]`;
+  }
+</script>
+
+<slide-item
+  content-type="embed"
+  :id="this.slide.id"
+  :@caption="demoCaption(this.slide)"
+  :@note="this.slide.note"
+  :@demo="demoPage(this.slide)"
+>
+  <iframe
+    :src="demo.url"
+    :title="demo.title || 'demo embed'"
+    :width="demo.width || '100%'"
+    :height="demo.height || 600"
+    frameborder="0"
+  ></iframe>
+</slide-item>

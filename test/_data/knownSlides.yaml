@@ -1,0 +1,16 @@
+event-title:
+  exit: >
+    [nowhere to go](/)
+  caption: |
+    <img
+      src="/_img/oddbird-logo.svg"
+      alt="logo"
+      sizes="96w"
+      width="180"
+      class="oddlogo">
+    <a href="https://front-end.social/@mia">
+      @mia@front-end.social
+    </a>
+    <span>
+      (<kbd>Cmd/Ctr-k</kbd> for settings)
+    </span>

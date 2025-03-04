@@ -1,0 +1,125 @@
+<script webc:setup>
+  const codePenTemplates = Object.assign({
+    'new': 'https://pen.new',
+  }, $data.slideDeckConfig.newPenTemplates);
+
+  const newPen = (slide) => ({
+    pre: 'Live demo…',
+    title: `[New CodePen](${codePenTemplates[slide.pen]})`,
+    ...slide,
+  });
+
+  const penParts = (url) => {
+    const partKeys = [null, 'user', null, 'hash'];
+    const parts = {};
+
+    url
+      .split('://')[1]
+      .split('/')
+      .forEach((part, i) => {
+        const key = partKeys[i];
+        if (key) { parts[key] = part; }
+      });
+
+      return parts;
+  }
+
+  const penUrl = (pen, user) => {
+    const userPath = user ? `${user}/` : '';
+    return `https://cdpn.io/${userPath}pen/${pen}`;
+  }
+
+  const penDetails = (slide) => {
+    const details = {
+      user: slide.user || $data.slideDeckConfig.codePenUser,
+    };
+
+    if (slide.pen.includes('://')) {
+      const parts = penParts(slide.pen);
+      details.url = slide.pen;
+      details.hash = parts.hash;
+      details.user = parts.user;
+    } else {
+      details.hash = slide.pen;
+      details.url = penUrl(slide.pen, details.user);
+    }
+
+    const pres = `https://cdpn.io/pen/pres/${details.hash}`;
+    details.editors = slide.editors || $data.slideDeckConfig.codePenEditors || '1110';
+    details.layout = slide.layout || $data.slideDeckConfig.codePenLayout || 'left';
+    details.pres = `${pres}?editors=${details.editors}&layout=${details.layout}`;
+
+    details.debug = `https://cdpn.io/pen/debug/${details.hash}`;
+    details.live = slide.live;
+
+    const embed = slide.preview ? 'embed/preview' : 'embed';
+    details.embed = `https://codepen.io/${details.user}/${embed}/${details.hash}`;
+
+    return details;
+  }
+
+  const getLink = (text, url) => url ? `[${text}](${url})` : null;
+
+  const slideLinks = (pen) => {
+    return [
+      getLink('live code', pen.live),
+      getLink('present', pen.pres),
+      getLink('debug', pen.debug),
+    ].filter(item => item).join(', ');
+  }
+
+  const slideCaption = (slide) => {
+    const pre = slide.caption || slide.title || '';
+    const details = penDetails(slide);
+    return `${pre} [${slideLinks(details)}]`;
+  }
+
+  const filterObject = (obj) => {
+    Object
+      .keys(obj)
+      .forEach((key) => obj[key] === undefined && delete obj[key]);
+    return obj;
+  }
+
+  const buildEmbedSrc = (slide) => {
+    const details = penDetails(slide);
+
+    const params = new URLSearchParams({
+      'embed-version': 2,
+      'default-tab': slide.tab || 'result',
+      user: details.user,
+      editable: slide.editable || 'true',
+      editors: details.editors,
+      layout: details.layout,
+    });
+
+    return `${details.embed}?${params.toString()}`;
+  }
+</script>
+
+<default-slide
+  webc:if="codePenTemplates[this.slide.pen]"
+  :@slide="newPen(this.slide)"
+></default-slide>
+
+<slide-item
+  webc:else
+  content-type="embed"
+  :id="this.slide.id"
+  :@caption="slideCaption(this.slide)"
+  :@note="this.slide.note"
+  :@embed="buildEmbedSrc(this.slide)"
+>
+  <iframe
+    code-pen
+    :src="this.embed"
+    :height="600"
+    :title="this.slide.title || 'Codepen Embed'"
+    allowfullscreen="true"
+    allowtransparency="true"
+    frameborder="0"
+    loading="lazy"
+    scrolling="no"
+    width="100%"
+  ></iframe>
+</slide-item>

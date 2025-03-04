@@ -1,0 +1,11 @@
+<span
+  webc:if="this.pre"
+  slide-title="pre"
+  @html="slideMDownInline(this.pre)"
+></span>
+<template
+  webc:nokeep
+  webc:if="this.title"
+  @html="slideMDownInline(this.title)"
+></template>
+<slot></slot>

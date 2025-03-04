@@ -1,0 +1,175 @@
+<template
+  webc:root
+  slide-item="container"
+>
+  <figure
+    :slide-canvas="this.canvasType || ''"
+  >
+    <div
+      :slide-content="this.contentType || 'default'"
+    ><slot></slot></div>
+
+    <figcaption
+      slide-caption
+      webc:if="this.caption"
+      @html="slideMDownInline(this.caption)"
+    ></figcaption>
+    <template
+      webc:else
+      webc:nokeep
+    ><slot name="slide-caption"></slot></template>
+
+    <button to-slide><visually-hidden>focus slide </visually-hidden></button>
+  </figure>
+
+  <div
+    slide-note
+    webc:if="this.note"
+    @html="slideMDownBlock(this.note)"
+  ></div>
+</template>
+
+<style webc:bucket="slides-core">
+@layer slide.base {
+  [slide-item] {
+    border: none;
+    container-type: normal;
+    display: grid;
+    padding: 0;
+    position: relative;
+    scroll-margin-block: var(--slide-target-margin);
+  }
+
+  [slide-item][aria-current] {
+    --slide-animation-active: initial;
+    --slide-play: running;
+
+    & + [slide-item] {
+      --slide-animation-active: none;
+    }
+  }
+
+  [slide-canvas] {
+    --step-n1: clamp(0.625rem, 0.4859rem + 0.7418cqi, 1.0608rem);
+    --step-0: clamp(0.75rem, 0.5106rem + 1.2766cqi, 1.5rem);
+    --step-1: clamp(0.9rem, 0.5103rem + 2.0783cqi, 2.121rem);
+    --step-2: clamp(1.08rem, 0.4675rem + 3.2665cqi, 2.9991rem);
+    --step-3: clamp(1.296rem, 0.3562rem + 5.0123cqi, 4.2407rem);
+
+    --slide-small-text: var(--step-0);
+    --slide-normal-text: var(--step-1);
+    --slide-large-text: var(--step-2);
+    --slide-xlarge-text: var(--step-3);
+    --slide-title-text: var(--slide-xlarge-text);
+
+    aspect-ratio: var(--slide-ratio);
+    border: var(--slide-canvas-border, thin solid);
+    container: slide-canvas / inline-size;
+    display: grid;
+    grid-template: 'content' 1fr 'caption' auto / minmax(0, 1fr);
+    margin: 0;
+    position: relative;
+
+    [slide-item]:target & {
+      outline: var(--slide-target-outline) var(--slide-accent-color);
+      outline-offset: var(--slide-target-outline-offset);
+    }
+
+    > button[to-slide] {
+      font-variant-numeric: lining-nums;
+      inset: var(--to-slide-inset, 0 0 auto auto);
+      min-inline-size: 3em;
+      padding: 0 0.25em;
+      position: absolute;
+      translate: var(--to-slide-translate, var(--slide-gap) -50%);
+      text-align: center;
+      opacity: var(--to-slide-opacity, 1);
+
+      &:focus,
+      &:hover,
+      &:active {
+        --to-slide-opacity: 1;
+      }
+
+      &::after {
+        content: var(--slide-index-string);
+      }
+    }
+  }
+
+  [slide-content] {
+    background: var(--slide-background, Canvas);
+    color: var(--slide-color, CanvasText);
+    color-scheme: var(--slide-mode);
+    display: grid;
+
+    [style*='--slide-mode'] & {
+      --slide-accent-color: AccentColor;
+      --action: LinkColor;
+      --active: ActiveText;
+    }
+  }
+
+  [slide-caption] {
+    background: var(--slide-caption, aliceBlue);
+    color: var(--slide-caption-text, currentColor);
+    padding: var(--slide-half-gap) var(--slide-gap);
+    font-size: var(--slide-small-text);
+  }
+}
+
+@layer slide.content {
+  [role=list] { list-style: none; }
+  picture { display: contents; }
+  source { display: none; }
+
+  img,
+  svg {
+    block-size: auto;
+    max-inline-size: 100%;
+    vertical-align: middle;
+  }
+
+  textarea:not([rows]) { min-height: 10lh; }
+  :target { scroll-margin-block: var(--target-margin); }
+  [hidden] { display: none !important; }
+
+  visually-hidden,
+  [visually-hidden] {
+    &:not(:focus, :active, :focus-within) {
+      clip: rect(1px, 1px, 1px, 1px);
+      -webkit-clip-path: inset(1px 1px 1px 1px);
+      clip-path: inset(1px 1px 1px 1px);
+      height: 1px;
+      overflow: hidden;
+      pointer-events: none;
+      position: absolute;
+      width: 1px;
+    }
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    text-wrap: balance;
+    margin-block: unset;
+  }
+
+  slide-title {
+    font-size: var(--slide-title-text);
+  }
+
+  [slide-title=pre] {
+    display: block;
+    font-style: italic;
+    font-weight: lighter;
+    margin: unset;
+  }
+
+  [slide-title=sub] {
+    margin: unset;
+  }
+
+  [slide-content] {
+    font-size: var(--slide-normal-text);
+  }
+}
+</style>

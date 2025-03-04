@@ -1,0 +1,122 @@
+<slide-item
+  content-type="event"
+  :id="this.slide.id"
+  :@note="this.slide.note"
+  :@slide="this.slide"
+  :@url="this.url"
+>
+  <div slide-auto="exit"
+    webc:if="slide.exit"
+    @html="slideMDownInline(slide.exit)"
+  ></div>
+
+  <header slide-auto="details">
+    <div slide-auto="event">
+      <time
+        webc:if="slide.date"
+        slide-auto="event-time"
+        :@datetime="slide.date.toISOString()"
+        @text="slide.date.toLocaleDateString(
+          $data.slideDeckConfig.eventDateLocale || 'en-US',
+          Object.assign({
+            timeZone: 'UTC',
+          }, $data.slideDeckConfig.eventDateFormat))"
+      ></time>
+      <p slide-auto="event-venue"
+        webc:if="slide.venue"
+        @text="slide.venue"
+      ></p>
+    </div>
+
+    <h1 slide-auto="title"><slide-title
+      webc:nokeep
+      :@pre="slide.pre"
+      :@title="slide.title"
+    ></slide-title></h1>
+    <p
+      webc:if="slide.sub"
+      slide-auto="sub"
+      @html="slideMDownInline(slide.sub)"
+    ></p>
+  </header>
+
+  <div slide-auto="detail">
+    <template
+      webc:nokeep
+      webc:if="slide.detail"
+      @html="slideMDownBlock(slide.detail)"
+    ></template>
+    <a
+      webc:elseif="$data.slideDeckConfig.domain"
+      :href="page.url"
+      @text="`${$data.slideDeckConfig.domain || ''}${page.url}`"
+    ></a>
+  </div>
+
+  <figcaption
+    slide-caption
+    slot="slide-caption"
+    webc:if="slide.caption"
+    @html="slideMDownInline(slide.caption)"
+  ></figcaption>
+</slide-item>
+
+<style webc:bucket="slides-core">
+@layer slide.type {
+  [slide-content='event'] {
+    display: flex;
+    flex-direction: column;
+    gap: var(--slide-gap);
+    justify-content: center;
+    padding: var(--slide-gap);
+  }
+
+  [slide-auto=exit] {
+    font-size: var(--slide-small-text);
+
+    &::before {
+      content: '« ';
+      content: '« ' / '';
+    }
+  }
+
+  [slide-auto=details] {
+    display: flex;
+    flex-direction: column;
+    gap: var(--slide-gap);
+    margin: auto;
+    max-width: 80cqi;
+    width: max-content;
+  }
+
+  [slide-auto=event] {
+    margin-block-end: var(--slide-header-margin-block-end, var(--slide-gap));
+    padding-block-end: var(--slide-header-padding-block-end, var(--slide-gap));
+    position: relative;
+    width: auto;
+
+    @container (width > 55em) {
+      --slide-header-margin-block-end: var(--double-gap);
+      --slide-header-padding-block-end: var(--double-gap);
+    }
+
+    &::after {
+      border-block-start: medium dotted teal;
+      content: '';
+      inset: auto 0 0;
+      position: absolute;
+      rotate: -2deg;
+    }
+  }
+
+  [slide-auto=event-time] {
+    font-size: var(--slide-small-text);
+  }
+
+  [slide-auto=event-venue] {
+    font-size: var(--slide-large-text);
+    font-weight: 800;
+    margin-block: 0;
+  }
+}
+</style>
