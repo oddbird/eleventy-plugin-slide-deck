@@ -1,10 +1,11 @@
-event-title:
+start-deck:
   exit: >
-    [nowhere to go](/)
+    [home](/)
   caption: |
+    <event-caption>
     <img
       src="/_img/oddbird-logo.svg"
-      alt="logo"
+      alt="OddBird"
       sizes="96w"
       width="180"
       class="oddlogo">
@@ -14,3 +15,4 @@ event-title:
     <span>
       (<kbd>Cmd/Ctr-k</kbd> for settings)
     </span>
+    </event-caption>

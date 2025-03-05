@@ -6,7 +6,7 @@ event: &event
 
 slides:
 # see the knownSlides yaml data
-- known: event-title
+- known: start-deck
   <<: *event
 
 # the default slide

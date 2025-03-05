@@ -10,7 +10,7 @@
     @html="slideMDownInline(slide.exit)"
   ></div>
 
-  <header slide-auto="details">
+  <div slide-auto="main">
     <div slide-auto="event">
       <time
         webc:if="slide.date"
@@ -28,29 +28,31 @@
       ></p>
     </div>
 
-    <h1 slide-auto="title"><slide-title
-      webc:nokeep
-      :@pre="slide.pre"
-      :@title="slide.title"
-    ></slide-title></h1>
-    <p
-      webc:if="slide.sub"
-      slide-auto="sub"
-      @html="slideMDownInline(slide.sub)"
-    ></p>
-  </header>
+    <header>
+      <h1 slide-auto="title"><slide-title
+        webc:nokeep
+        :@pre="slide.pre"
+        :@title="slide.title"
+      ></slide-title></h1>
+      <p
+        webc:if="slide.sub"
+        slide-auto="sub"
+        @html="slideMDownInline(slide.sub)"
+      ></p>
+    </header>
 
-  <div slide-auto="detail">
-    <template
-      webc:nokeep
-      webc:if="slide.detail"
-      @html="slideMDownBlock(slide.detail)"
-    ></template>
-    <a
-      webc:elseif="$data.slideDeckConfig.domain"
-      :href="page.url"
-      @text="`${$data.slideDeckConfig.domain || ''}${page.url}`"
-    ></a>
+    <div slide-auto="detail">
+      <template
+        webc:nokeep
+        webc:if="slide.detail"
+        @html="slideMDownBlock(slide.detail)"
+      ></template>
+      <a
+        webc:elseif="$data.slideDeckConfig.domain"
+        :href="page.url"
+        @text="`${$data.slideDeckConfig.domain || ''}${page.url}`"
+      ></a>
+    </div>
   </div>
 
   <figcaption
@@ -67,7 +69,6 @@
     display: flex;
     flex-direction: column;
     gap: var(--slide-gap);
-    justify-content: center;
     padding: var(--slide-gap);
   }
 
@@ -80,14 +81,17 @@
     }
   }
 
-  [slide-auto=details] {
-    display: flex;
-    flex-direction: column;
+  [slide-auto=main] {
+    place-content: center;
+    display: grid;
+    flex: auto;
     gap: var(--slide-gap);
-    margin: auto;
-    max-width: 80cqi;
-    width: max-content;
+    grid-template-columns: fit-content(80cqi);
   }
+
+  /* [slide-auto=detail] {
+
+  } */
 
   [slide-auto=event] {
     margin-block-end: var(--slide-header-margin-block-end, var(--slide-gap));

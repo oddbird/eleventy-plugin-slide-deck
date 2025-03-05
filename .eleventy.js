@@ -5,7 +5,7 @@ import yaml from "js-yaml";
 
 export default async function(eleventyConfig) {
   eleventyConfig.addPlugin(pluginSlideDeck, {
-    domain: 'talks.oddbird.net',
+    domain: 'example.oddbird.net',
     imgDir: '/_img/',
   });
 

@@ -73,49 +73,99 @@ All of them accept a `slide` object
 with `slide.id`, `slide.caption`, and `slide.note` properties.
 Each slide type also accepts some type-specific properties:
 
-- `<code-slide>`
-  - `slide.<language>` (for `html`, `css`, `scss`, or `js`)
-  - or `slide.code` and `slide.lang` for any other languages
-- `<default-slide>`
-  - `slide.pre`, `slide.title`, and `slide.sub` create the title block
-  - `slide.md`, and `slide.webc` allow for arbitrary content
-  - `slide.background`, `slide.color`, & `slide.mode` CSS values
-- `<demo-slide>` --
-  `slide.demo` embed any URL, or Eleventy page with matching `demo` value
-- `<embed-slide>` -- `slide.embed` for the code to embed (iframe, video, etc)
-- `<event-slide>`
+- `<event-slide>` -- usually the first/last slides of a deck
   - `slide.pre`, `slide.title`, & `slide.sub` for the talk title block
   - `slide.venue` the event title
   - `slide.date` the date of the talk
   - `slide.exit` optional (inline markdown) "back" link in the top
   - `slide.detail` optional (block markdown) section for more detail
+
+- `<todo-slide>` -- for drafting a new talk
+  - `slide.todo` markdown block
+
+- `<default-slide>` -- titles, bullets, and arbitrary content
+  - `slide.pre`, `slide.title`, and `slide.sub` create the title block
+  - `slide.md`, and `slide.webc` allow for arbitrary content
+  - `slide.background`, `slide.color`, & `slide.mode` CSS values
+
 - `<img-slide>`
   - `slide.src` and `slide.alt` to embed an image
   - `slide.cite` for (inline markdown) photo credits
   - `slide.background`, `slide.fit`, `slide.position`,
     & `slide.padding` CSS values
-- `<pen-slide>`
-  - `slide.pen` for the codepen url
-  - `slide.title` for the name of the pen
-  - `slide.live` for a separate live-code demo link
-- `<quote-slide>`
-  - `slide.quote` for the (block markdown) text of the blockquote
-  - `slide.cite` for a (inline markdown) citation after the quote
-  - `slide.avatar` for an image next to the quote
+
 - `<split-slide>` -- combo of `image-slide` and `default-slide` props
-- `<support-slide>` --
-  `slide.caniuse` or baseline `slide.support` feature ids
-- `<todo-slide>` -- `slide.todo` markdown block
-- `<url-slide>`
-  - `slide.url` a URL to link and screenshot
-    using the [11ty APIs](https://www.11ty.dev/docs/api-services/)
+
+- `<url-slide>` -- screenshot or open-graph image slide, generated from a url
+  using the [11ty APIs](https://www.11ty.dev/docs/api-services/)
+  - `slide.url` source URL
   - `slide.alt` optional alt text for the image
-  - `slide.size` for controlling screenshot size/dimensions
+  - `slide.size` controls the screenshot size/dimensions
   - `slide.type` can be set to `og` to use the open-graph API instead
   - `slide.title` will be added to the caption (and used as alt-fallback)
   - `slide.background`, `slide.fit`, `slide.position`,
     & `slide.padding` CSS values
 
+- `<quote-slide>`
+  - `slide.quote` the (block markdown) text of the blockquote
+  - `slide.cite` a (inline markdown) citation after the quote
+  - `slide.avatar` an image next to the quote
+
+- `<embed-slide>` -- `slide.embed` for the code to embed (iframe, video, etc)
+- `<demo-slide>` -- embeds and iframe, with a permalink in the caption
+  - `slide.demo` any URL or Eleventy page with matching `demo` value
+- `<pen-slide>` -- embed editable demos from code-pen
+  - `slide.pen` URL of the CodePen
+  - `slide.title` name of the pen, added to the caption
+  - `slide.live` link a live-code version of the demo, if different
+- `<code-slide>`
+  - `slide.<language>` (for `html`, `css`, `scss`, or `js`)
+  - or `slide.code` and `slide.lang` for any other languages
+- `<support-slide>`
+  - `slide.caniuse` feature id for CanIUse
+  - `slide.support` feature id for Baseline
+
 All markdown properties also allow `WebC` content.
+
+Reuse common slides across different decks
+by creating adding a `knownSlides` object
+to the Eleventy data cascade:
+
+```yaml
+start-deck:
+  exit: >
+    [home](/)
+  caption: |
+    <img src="oddbird-logo.svg" alt="OddBird" sizes="96w" width="180">
+    <a href="https://front-end.social/@mia">
+      @mia@front-end.social
+    </a>
+    <span>
+      (<kbd>Cmd/Ctr-k</kbd> for settings)
+    </span>
+yoda:
+  img: yoda.jpg
+  alt: Yoda using the force in a swamp
+  fit: cover
+  position: top
+```
+
+These can be referenced in a slide deck,
+using the `slide.known` property.
+Additional properties added here
+will be combined with (or override)
+properties in the known slide:
+
+```yaml
+slides:
+- known: start-deck
+  title: New Presentation
+  venue: The Best Conference
+- known: yoda
+  fit: contain
+  background: black
+  caption: >
+    I often try, actually
+```
 
 There's more to document, but this is a start.
