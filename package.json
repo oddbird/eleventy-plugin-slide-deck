@@ -3,7 +3,10 @@
   "description": "Build customizable presentations in eleventy",
   "version": "0.1.0",
   "type": "module",
-  "main": ".eleventy.js",
+  "main": "index.js",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "npx @11ty/eleventy",
     "serve": "npx @11ty/eleventy --serve"
@@ -12,7 +15,11 @@
     "type": "git",
     "url": "git+https://github.com/oddbird/eleventy-plugin-slide-deck.git"
   },
-  "author": "Miriam Suzanne",
+  "author": {
+    "name": "Miriam Suzanne",
+    "email": "miriam@oddbird.net",
+    "url": "https://oddbird.net/"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/oddbird/eleventy-plugin-slide-deck/issues"
