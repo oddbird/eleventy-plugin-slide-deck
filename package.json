@@ -1,6 +1,6 @@
 {
-  "name": "eleventy-plugin-slide-deck",
-  "description": "A plugin to use the slide-deck web component in eleventy projects",
+  "name": "@oddbird/eleventy-plugin-slide-deck",
+  "description": "Build customizable presentations in eleventy",
   "version": "0.1.0",
   "type": "module",
   "main": ".eleventy.js",
