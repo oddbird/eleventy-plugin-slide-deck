@@ -49,8 +49,6 @@ JavaScript for interactivity and loading the baseline `support` content are
 included in the default bundle. Make sure it's included in a template. 
 
 ```js
-<script @raw="getBundle('js')"></script>
-// or in a .webc template
 <script webc:keep @raw="getBundle('js')"></script>
 ```
 
