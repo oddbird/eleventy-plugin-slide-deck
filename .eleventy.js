@@ -16,6 +16,10 @@ export default async function(eleventyConfig) {
     ],
   });
 
+    eleventyConfig.addPassthroughCopy({
+      'test/_fonts': 'fonts',
+    });
+
   eleventyConfig.addDataExtension("yaml", (contents) => yaml.load(contents));
 
   eleventyConfig.addPlugin(eleventyImageTransformPlugin, {
