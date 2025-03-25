@@ -230,8 +230,6 @@
 <style webc:bucket="slides-theme">
   @layer slide.theme {
 
-    @layer props {
-
       /* Recursive Static Fonts */
       @font-face {
         font-display: auto;
@@ -286,7 +284,6 @@
         font-weight: normal;
         src: url('/fonts/RecursiveMonoLnrSt-Italic.woff2') format('woff2');
       }
-    }
 
     html {
 
@@ -305,11 +302,7 @@
       --active: hsl(330deg 52.857% 27.451%);
       --highlight: hsl(330deg 52.857% 27.451%);
       --feature: hsl(195.65deg 45.098% 20%);
-    }
-  }
-
-  @layer base {
-    html {
+  
       /* fonts */
       --os-serif: palatino, 'palatino linotype', 'palatino lt std', 'book antiqua',
         georgia;
@@ -321,11 +314,7 @@
       --serif: var(--wf-serif, var(--os-serif, ui-serif)), serif;
       --sans-serif: var(--wf-sans, var(--os-sans, ui-sans-serif)), sans-serif;
       --code: var(--wf-code, var(--os-code, ui-monospace)), monospace, serif;
-    }
-  }
 
-  @layer default {
-    html {
       accent-color: var(--accent-color);
       background: var(--bg);
       color: var(--text);
@@ -346,7 +335,6 @@
     h5,
     h6 {
       font-family: var(--sans-serif);
-      text-wrap: balance;
     }
 
     :focus-visible {
