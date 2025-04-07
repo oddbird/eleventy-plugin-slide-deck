@@ -17,7 +17,7 @@
 
 <slide-item
   webc:if="this.slide.caniuse"
-  style="--slide-fit: contain; --slide-background: #db5602;"
+  style="--slide-fit: contain; --slide-background-color: #db5602;"
   content-type="image"
   :id="this.slide.id"
   :@caption="canICaption(this.slide)"

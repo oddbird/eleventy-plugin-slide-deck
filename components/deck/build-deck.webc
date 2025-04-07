@@ -143,7 +143,7 @@
   }
 
   [slide-view=grid] {
-    --slide-border: thin solid gray;
+    --slide-border: thin solid var(--slide-border-color);
     --slide-note-margin-block: var(--slide-gap);
     --slide-normal-text: smaller;
     grid-template-columns: repeat(auto-fill, minmax(min(35ch, 100%), 1fr));
@@ -173,7 +173,7 @@
   }
 
   [slide-view=speaker] {
-    --slide-border: thin solid gray;
+    --slide-border: thin solid var(--slide-border-color);
     --slide-normal-text: var(--slide-small-text);
     display: grid;
     grid-template-columns: minmax(30vw, auto) minmax(65vw, 1fr);
@@ -288,41 +288,41 @@
     html {
 
       /* background colors */
-      --bg: hsl(200 12% 95.098%);
-      --callout: hsl(193, 28%, 87%);
-      --mark-bg: var(--callout);
+      --slide-background-color: hsl(200 12% 95.098%);
+      --slide-callout-color: hsl(193deg 28% 87%);
+      --slide-mark-bg-color: var(--slide-callout-color);
 
       /* content colors */
-      --text: hsl(200deg 12% 4.902%);
-      --text-light: hsl(192.86deg 10% 27.451%);
-      --accent-color: hsl(330.2deg 67.742% 42.549%);
-      --border-color: hsl(195deg 10% 50%);
-      --shadow: hsl(195deg 30.769% 94.902% / 0.4);
-      --action: hsl(195deg 53% 27%);
-      --active: hsl(330deg 52.857% 27.451%);
-      --highlight: hsl(330deg 52.857% 27.451%);
-      --feature: hsl(195.65deg 45.098% 20%);
+      --slide-text-color: hsl(200deg 12% 4.902%);
+      --slide-text-light-color: hsl(192.86deg 10% 27.451%);
+      --slide-accent-color: hsl(330.2deg 67.742% 42.549%);
+      --slide-border-color: hsl(195deg 10% 50%);
+      --slide-shadow-color: hsl(195deg 30.769% 94.902% / 0.4);
+      --slide-action-color: hsl(195deg 53% 27%);
+      --slide-active-color: hsl(330deg 52.857% 27.451%);
+      --slide-highlight-color: hsl(330deg 52.857% 27.451%);
+      --slide-feature-color: hsl(195.65deg 45.098% 20%);
   
       /* fonts */
-      --os-serif: palatino, 'palatino linotype', 'palatino lt std', 'book antiqua',
+      --slide-os-serif: palatino, 'palatino linotype', 'palatino lt std', 'book antiqua',
         georgia;
-      --os-sans: 'helvetica neue', helvetica, arial;
-      --os-code: sfmono-regular, consolas, monaco;
-      --wf-code: "Recursive Mono Linear";
-      --wf-sans: "Recursive Sans Linear";
+      --slide-os-sans-font: 'helvetica neue', helvetica, arial;
+      --slide-os-code-font: sfmono-regular, consolas, monaco;
+      --slide-wf-code-font: "Recursive Mono Linear";
+      --slide-wf-sans-font: "Recursive Sans Linear";
 
-      --serif: var(--wf-serif, var(--os-serif, ui-serif)), serif;
-      --sans-serif: var(--wf-sans, var(--os-sans, ui-sans-serif)), sans-serif;
-      --code: var(--wf-code, var(--os-code, ui-monospace)), monospace, serif;
+      --slide-serif-font: var(--slide-wf-serif-font, var(--slide-os-serif, ui-serif)), serif;
+      --slide-sans-serif-font: var(--slide-wf-sans-font, var(--slide-os-sans-font, ui-sans-serif)), sans-serif;
+      --slide-code-font: var(--slide-wf-code-font, var(--slide-os-code-font, ui-monospace)), monospace, serif;
 
-      accent-color: var(--accent-color);
-      background: var(--bg);
-      color: var(--text);
+      accent-color: var(--slide-accent-color);
+      background: var(--slide-background-color);
+      color: var(--slide-text-color);
       color-scheme: light;
     }
 
     body {
-      font-family: var(--sans-serif);
+      font-family: var(--slide-sans-serif-font);
       font-size: var(--normal);
       font-size-adjust: from-font;
       line-height: 1.3;
@@ -334,16 +334,16 @@
     h4,
     h5,
     h6 {
-      font-family: var(--sans-serif);
+      font-family: var(--slide-sans-serif-font);
     }
 
     :focus-visible {
-      outline: medium dotted var(--accent-color);
+      outline: medium dotted var(--slide-accent-color);
       outline-offset: 0.25em;
     }
 
     button {
-      background-color: var(--button-state, var(--accent-color));
+      background-color: var(--slide-button-state-color, var(--slide-accent-color));
       border: thick double;
       border-radius: 0.25em;
       color: canvas;
@@ -352,7 +352,7 @@
     }
 
     [aria-pressed=true] {
-      --button-state: var(--active);
+      --slide-button-state-color: var(--slide-active-color);
     }
 
     pre {
@@ -363,43 +363,43 @@
 
     pre,
     code:not(pre *) {
-      font-family: var(--code);
+      font-family: var(--slide-code-font);
     }
 
     mark {
       background: linear-gradient(to top,
-          var(--mark-bg) 65%,
+          var(--slide-mark-bg-color) 65%,
           transparent 65%);
       color: inherit;
-      text-shadow: 1px 1px 0 var(--shadow);
+      text-shadow: 1px 1px 0 var(--slide-shadow-color);
     }
 
     a {
 
       &:where(:link),
       &:where(:visited) {
-        --underline-color--default: var(--accent-color);
-        --underline-thickness--default: 0.1em;
-        --underline-offset--default: 0.15em;
+        --slide-underline-color--default: var(--slide-accent-color);
+        --slide-underline-thickness--default: 0.1em;
+        --slide-underline-offset--default: 0.15em;
 
-        color: var(--link, var(--action));
+        color: var(--slide-link-color, var(--slide-action-color));
         text-decoration: underline;
-        text-decoration-color: var(--underline-color,
-            var(--underline-color--default));
-        text-decoration-thickness: var(--underline-thickness,
-            var(--underline-thickness--default));
+        text-decoration-color: var(--slide-underline-color,
+            var(--slide-underline-color--default));
+        text-decoration-thickness: var(--slide-underline-thickness,
+            var(--slide-underline-thickness--default));
         text-decoration-skip-ink: auto;
-        text-underline-offset: var(--underline-offset,
-            var(--underline-offset--default));
+        text-underline-offset: var(--slide-underline-offset,
+            var(--slide-underline-offset--default));
         transition: text-decoration-thickness 150ms ease-out;
       }
 
       &:where(:hover),
       &:where(:focus) {
-        --underline-color: var(--active);
-        --underline-thickness: 0.2em;
+        --slide-underline-color: var(--slide-active-color);
+        --slide-underline-thickness: 0.2em;
 
-        color: var(--link-focus, var(--active));
+        color: var(--slide-link-focus, var(--slide-active-color));
       }
 
       &:has(link-text) {
