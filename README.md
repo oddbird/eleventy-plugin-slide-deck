@@ -66,6 +66,8 @@ slides:
 
 <style @raw="getBundle('css', 'slides-layer-order')" webc:keep></style>
 <style @raw="getBundle('css', 'slides-core')" webc:keep></style>
+<!--- Add optional slide theme styles --->
+<style @raw="getBundle('css', 'slides-theme')" webc:keep></style>
 ```
 
 Or build your own, using the provided slide types.
