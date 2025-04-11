@@ -230,61 +230,6 @@
 <style webc:bucket="slides-theme">
   @layer slide.theme {
 
-      /* Recursive Static Fonts */
-      @font-face {
-        font-display: auto;
-        font-family: 'Recursive Sans Linear';
-        font-stretch: normal;
-        font-style: normal;
-        font-weight: normal;
-        src: url('/fonts/RecursiveSansLnrSt-Regular.woff2') format('woff2');
-      }
-
-      @font-face {
-        font-display: auto;
-        font-family: 'Recursive Sans Linear';
-        font-stretch: normal;
-        font-style: normal;
-        font-weight: 700;
-        src: url('/fonts/RecursiveSansLnrSt-Bold.woff2') format('woff2');
-      }
-
-      @font-face {
-        font-display: auto;
-        font-family: 'Recursive Sans Linear';
-        font-stretch: normal;
-        font-style: italic;
-        font-weight: normal;
-        src: url('/fonts/RecursiveSansLnrSt-Italic.woff2') format('woff2');
-      }
-
-      @font-face {
-        font-display: auto;
-        font-family: 'Recursive Mono Linear';
-        font-stretch: normal;
-        font-style: normal;
-        font-weight: normal;
-        src: url('/fonts/RecursiveMonoLnrSt-Regular.woff2') format('woff2');
-      }
-
-      @font-face {
-        font-display: auto;
-        font-family: 'Recursive Mono Linear';
-        font-stretch: normal;
-        font-style: normal;
-        font-weight: 700;
-        src: url('/fonts/RecursiveMonoLnrSt-Bold.woff2') format('woff2');
-      }
-
-      @font-face {
-        font-display: auto;
-        font-family: 'Recursive Mono Linear';
-        font-stretch: normal;
-        font-style: italic;
-        font-weight: normal;
-        src: url('/fonts/RecursiveMonoLnrSt-Italic.woff2') format('woff2');
-      }
-
     html {
 
       /* background colors */
@@ -309,8 +254,6 @@
         georgia;
       --slide-os-sans-font: 'helvetica neue', helvetica, arial;
       --slide-os-code-font: sfmono-regular, consolas, monaco;
-      --slide-wf-code-font: "Recursive Mono Linear";
-      --slide-wf-sans-font: "Recursive Sans Linear";
 
       --slide-serif-font: var(--slide-wf-serif-font, var(--slide-os-serif, ui-serif)), serif;
       --slide-sans-serif-font: var(--slide-wf-sans-font, var(--slide-os-sans-font, ui-sans-serif)), sans-serif;
