@@ -250,14 +250,14 @@
       --slide-strikeout-color: var(--slide-highlight-color);
   
       /* fonts */
-      --slide-os-serif: palatino, 'palatino linotype', 'palatino lt std', 'book antiqua',
+      --slide-os-serif-font: palatino, 'palatino linotype', 'palatino lt std', 'book antiqua',
         georgia;
       --slide-os-sans-font: 'helvetica neue', helvetica, arial;
       --slide-os-code-font: sfmono-regular, consolas, monaco;
 
-      --slide-serif-font: var(--slide-wf-serif-font, var(--slide-os-serif, ui-serif)), serif;
-      --slide-sans-serif-font: var(--slide-wf-sans-font, var(--slide-os-sans-font, ui-sans-serif)), sans-serif;
-      --slide-code-font: var(--slide-wf-code-font, var(--slide-os-code-font, ui-monospace)), monospace, serif;
+      --slide-serif-font: var(--slide-web-font-serif, var(--slide-os-serif, ui-serif)), serif;
+      --slide-sans-serif-font: var(--slide-web-font-sans, var(--slide-os-sans-font, ui-sans-serif)), sans-serif;
+      --slide-code-font: var(--slide-web-font-code, var(--slide-os-code-font, ui-monospace)), monospace, serif;
 
       accent-color: var(--slide-accent-color);
       background: var(--slide-background-color);

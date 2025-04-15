@@ -169,5 +169,33 @@ slides:
   caption: >
     I often try, actually
 ```
+### Theme
+To get started using the provided 
+default theme, add the `slides-theme` 
+bundle to your project:
+
+```html
+<style @raw="getBundle('css', 'slides-theme')" webc:keep></style>
+```
+
+The theme in this layer adds settings for colors, basic styling,
+and fonts. 
+
+In the `slides-theme` layer we list 
+default font stacks for sans-serif 
+(`--slide-os-sans-font`), serif (`--slide-os-serif-font`), 
+and code (`--slide-os-code-font`) fonts. 
+
+To add a main font for each font stack type, manually 
+add self-hosted or web-based fonts to your project and then set the
+font-family name to the respective custom property for each font. 
+
+Example:
+
+```css
+--slide-web-font-sans: "Recursive Sans Linear";
+--slide-web-font-serif: freight-text-pro;
+```
+
 
 There's more to document, but this is a start.
