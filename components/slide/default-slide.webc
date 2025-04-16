@@ -3,7 +3,7 @@
   :@caption="this.slide.caption"
   :@note="this.slide.note"
   :@slide="this.slide"
-  :style="slideStyles(this.slide, ['background-color', 'color', 'mode'])"
+  :style="slideStyles(this.slide, ['background', 'color', 'mode'])"
 >
   <h2 webc:if="this.slide.title" slide-title="main">
     <slide-title

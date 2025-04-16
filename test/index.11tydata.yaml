@@ -43,7 +43,7 @@ slides:
 # dark mode, with an explicit background color
 - title: Hello Dark Mode
   mode: dark
-  background-color: maroon
+  background: maroon
 
 # code slides
 - caption: something -- else
