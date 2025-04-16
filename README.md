@@ -88,7 +88,7 @@ Each slide type also accepts some type-specific properties:
 - `<default-slide>` -- titles, bullets, and arbitrary content
   - `slide.pre`, `slide.title`, and `slide.sub` create the title block
   - `slide.md`, and `slide.webc` allow for arbitrary content
-  - `slide.background`, `slide.color`, & `slide.mode` CSS values
+  - `slide.background-color`, `slide.color`, & `slide.mode` CSS values
 
 - `<img-slide>`
   - `slide.src` and `slide.alt` to embed an image

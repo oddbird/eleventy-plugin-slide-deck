@@ -98,7 +98,7 @@
   }
 
   [slide-content] {
-    background: var(--slide-background, Canvas);
+    background: var(--slide-background-color, Canvas);
     color: var(--slide-color, CanvasText);
     color-scheme: var(--slide-mode);
     display: grid;

@@ -230,7 +230,7 @@
 <style webc:bucket="slides-theme">
   @layer slide.theme {
 
-    html {
+    slide-deck {
 
       /* background colors */
       --slide-background-color: hsl(200 12% 95.098%);
@@ -259,7 +259,6 @@
       --slide-sans-serif-font: var(--slide-web-font-sans, var(--slide-os-sans-font, ui-sans-serif)), sans-serif;
       --slide-code-font: var(--slide-web-font-code, var(--slide-os-code-font, ui-monospace)), monospace, serif;
 
-      accent-color: var(--slide-accent-color);
       background: var(--slide-background-color);
       color: var(--slide-text-color);
       color-scheme: light;
