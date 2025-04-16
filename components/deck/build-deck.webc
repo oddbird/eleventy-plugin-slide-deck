@@ -233,7 +233,7 @@
     slide-deck {
 
       /* background colors */
-      --slide-background-color: hsl(200 12% 95.098%);
+      --slide-background: hsl(200 12% 95.098%);
       --slide-callout-color: hsl(193deg 28% 87%);
       --slide-mark-bg-color: var(--slide-callout-color);
 
@@ -259,7 +259,7 @@
       --slide-sans-serif-font: var(--slide-web-font-sans, var(--slide-os-sans-font, ui-sans-serif)), sans-serif;
       --slide-code-font: var(--slide-web-font-code, var(--slide-os-code-font, ui-monospace)), monospace, serif;
 
-      background: var(--slide-background-color);
+      background: var(--slide-background);
       color: var(--slide-text-color);
       color-scheme: light;
     }
@@ -363,7 +363,7 @@
 
     ::selection {
       background-color: var(--slide-active-color) !important;
-      color: var(--slide-background-color) !important;
+      color: var(--slide-background) !important;
     }
   }
 </style>
