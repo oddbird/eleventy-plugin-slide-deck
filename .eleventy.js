@@ -35,6 +35,11 @@ export default async function(eleventyConfig) {
     },
   });
 
+  eleventyConfig.addPassthroughCopy({
+    './test/_css': 'css',
+    './test/_fonts': 'fonts',
+  });
+
   return {
     dir: {
       input: 'test',
