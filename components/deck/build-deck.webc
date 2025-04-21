@@ -256,16 +256,13 @@
       --slide-os-code-font: sfmono-regular, consolas, monaco;
 
       --slide-serif-font: var(--slide-web-font-serif, var(--slide-os-serif, ui-serif)), serif;
-      --slide-sans-serif-font: var(--slide-web-font-sans, var(--slide-os-sans-font, ui-sans-serif)), sans-serif;
+      --slide-sans-font: var(--slide-web-font-sans, var(--slide-os-sans-font, ui-sans-serif)), sans-serif;
       --slide-code-font: var(--slide-web-font-code, var(--slide-os-code-font, ui-monospace)), monospace, serif;
 
       background: var(--slide-background);
       color: var(--slide-text-color);
       color-scheme: light;
-    }
-
-    body {
-      font-family: var(--slide-sans-serif-font);
+      font-family: var(--slide-sans-font);
       font-size: var(--slide-normal-text);
       font-size-adjust: from-font;
       line-height: 1.3;
@@ -277,7 +274,7 @@
     h4,
     h5,
     h6 {
-      font-family: var(--slide-sans-serif-font);
+      font-family: var(--slide-sans-font);
     }
 
     :focus-visible {
