@@ -266,9 +266,8 @@
       font-size: var(--slide-normal-text);
       font-size-adjust: from-font;
       line-height: 1.3;
-    }
 
-    h1,
+      h1,
     h2,
     h3,
     h4,
@@ -361,6 +360,7 @@
     ::selection {
       background-color: var(--slide-active-color) !important;
       color: var(--slide-background) !important;
+    }
     }
   }
 </style>
