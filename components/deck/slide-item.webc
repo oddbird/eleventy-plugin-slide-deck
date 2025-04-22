@@ -78,7 +78,7 @@
     > button[to-slide] {
       font-variant-numeric: lining-nums;
       inset: var(--to-slide-inset, 0 0 auto auto);
-      min-inline-size: 3em;
+      min-inline-size: 3ch;
       padding: 0 0.25em;
       position: absolute;
       translate: var(--to-slide-translate, var(--slide-gap) -50%);
@@ -89,6 +89,10 @@
       &:hover,
       &:active {
         --to-slide-opacity: 1;
+      }
+
+      &:not(:focus, :hover, :active) {
+        filter: grayscale(80%);
       }
 
       &::after {
