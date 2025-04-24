@@ -49,3 +49,40 @@
     </a>
   </browser-support>
 </slide-item>
+
+<style webc:bucket="slides-core">
+@layer slide.base {
+  [slide-content] {
+    browser-support::part(link),
+    browser-support::part(link):visited {
+      --slide-underline-color--default: var(--slide-accent-color);
+      --slide-underline-thickness--default: 0.1em;
+      --slide-underline-offset--default: 0.15em;
+
+      color: var(--slide-link-color, var(--slide-action-color));
+      text-decoration: underline;
+      text-decoration-color: var(--slide-underline-color,
+      var(--slide-underline-color--default));
+      text-decoration-thickness: var(--slide-underline-thickness,
+      var(--slide-underline-thickness--default));
+      text-decoration-skip-ink: auto;
+      text-underline-offset: var(--slide-underline-offset,
+      var(--slide-underline-offset--default));
+      transition: text-decoration-thickness 150ms ease-out;
+    }
+
+    browser-support::part(link):hover,
+    browser-support::part(link):focus {
+      --slide-underline-color: var(--slide-active-color);
+      --slide-underline-thickness: 0.2em;
+
+      color: var(--slide-link-focus, var(--slide-active-color));
+    }
+
+    browser-support::part(link):focus-visible {
+      outline: medium dotted var(--slide-accent-color);
+      outline-offset: 0.25em;
+    }
+  }
+}
+</style>
