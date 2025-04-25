@@ -22,7 +22,7 @@ export default async function(eleventyConfig) {
   // register the slide-deck WebC components
   eleventyConfig.addPlugin(pluginWebc, {
     components: [
-      'npm:@oddbird/eleventy-plugin-slide-deck/*.webc',
+      'npm:@oddbird/eleventy-plugin-slide-deck/**/*.webc',
     ],
   });
 }
@@ -44,6 +44,13 @@ for the plugin:
   to a blank new CodePen.
   Use `newPenTemplates` to optionally register additional
   template shortcuts for generating new CodePens on the fly.
+
+JavaScript for interactivity and loading the baseline `support` content are
+included in the default bundle. Make sure it's included in a template. 
+
+```js
+<script webc:keep @raw="getBundle('js')"></script>
+```
 
 ## Usage
 
