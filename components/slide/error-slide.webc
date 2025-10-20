@@ -1,0 +1,10 @@
+<slide-item
+  @canvas-type="todo"
+  :@slide="this.slide"
+>
+  <h2>Error rendering slide</h2>
+  <pre
+    webc:if="this.slide"
+    @text="JSON.stringify(this.slide, null, '\t')"
+  ></pre>
+</slide-item>

@@ -1,104 +1,16 @@
-<script webc:setup>
-  const knownSlides = $data.knownSlides;
-
-  const getKnown = (slides) => {
-    if (!knownSlides) return slides;
-
-    return slides.map((slide) => {
-      if (knownSlides && slide.known) {
-        const isKnown = knownSlides[slide.known];
-        return {...isKnown, ...slide};
-      }
-      return slide;
-    });
-  }
-</script>
-
 <slide-deck
   webc:import="npm:@oddbird/slide-deck"
   :id="this.id || 'slides'"
-  :@slides="getKnown(this.slides)"
+  :@slides="this.slides"
   slide-view="slideshow"
   key-control
   follow-active
 >
-  <template
+  <render-slide
     webc:nokeep
     webc:for="slide of this.slides"
-  >
-    <todo-slide
-      webc:nokeep
-      webc:if="slide.todo"
-      :@slide="slide"
-    ></todo-slide>
-
-    <split-slide
-      webc:nokeep
-      webc:elseif="slide.img && (slide.md || slide.webc || slide.title)"
-      :@slide="slide"
-    ></split-slide>
-
-    <event-slide
-      webc:nokeep
-      webc:elseif="slide.venue"
-      :@slide="this.slide"
-      :@url="this.page.url"
-    ></event-slide>
-
-    <demo-slide
-      webc:nokeep
-      webc:elseif="slide.demo"
-      :@slide="slide"
-    ></demo-slide>
-
-    <support-slide
-      webc:nokeep
-      webc:elseif="slide.caniuse || slide.support"
-      :@slide="slide"
-    ></support-slide>
-
-    <embed-slide
-      webc:nokeep
-      webc:elseif="slide.video || slide.embed"
-      :@slide="slide"
-    ></embed-slide>
-
-    <img-slide
-      webc:nokeep
-      webc:elseif="slide.img"
-      :@slide="slide"
-    ></img-slide>
-
-    <url-slide
-      webc:nokeep
-      webc:elseif="slide.url"
-      :@slide="slide"
-    ></url-slide>
-
-    <pen-slide
-      webc:nokeep
-      webc:elseif="slide.pen"
-      :@slide="slide"
-    ></pen-slide>
-
-    <code-slide
-      webc:nokeep
-      webc:elseif="slide.html || slide.css || slide.scss || slide.js || slide.code"
-      :@slide="slide"
-    ></code-slide>
-
-    <quote-slide
-      webc:nokeep
-      webc:elseif="slide.quote"
-      :@slide="slide"
-    ></quote-slide>
-
-    <default-slide
-      webc:nokeep
-      webc:else
-      :@slide="slide"
-    ></default-slide>
-  </template>
+    :@slide="slide"
+  ></render-slide>
 
   <slide-controls webc:nokeep></slide-controls>
 </slide-deck>
@@ -248,7 +160,7 @@
       --slide-highlight-color: hsl(330deg 52.857% 27.451%);
       --slide-feature-color: hsl(195.65deg 45.098% 20%);
       --slide-strikeout-color: var(--slide-highlight-color);
-  
+
       /* fonts */
       --slide-os-serif-font: palatino, 'palatino linotype', 'palatino lt std', 'book antiqua',
         georgia;
@@ -295,8 +207,8 @@
 
       pre {
         white-space: pre-wrap;
-        word-break: break-all;
-        word-wrap: break-word;
+        overflow-wrap: break-word;
+        tab-size: 2;
       }
 
       pre,

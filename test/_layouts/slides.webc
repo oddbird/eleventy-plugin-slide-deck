@@ -1,7 +1,11 @@
+---
+layout: base
+---
+
 <build-deck
   webc:nokeep
   id="my-very-good-talk"
-  :slides="this.slides"
+  :@slides="this.slideDeck"
 ></build-deck>
 
 <style webc:keep>

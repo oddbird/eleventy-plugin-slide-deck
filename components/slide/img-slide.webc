@@ -1,11 +1,13 @@
 <slide-item
   content-type="image"
+  webc:if="this.slide"
   :id="this.slide.id"
   :@caption="this.slide.caption"
+  :@cite="this.slide.cite"
   :@note="this.slide.note"
   :@src="this.slide.img"
-  :@cite="this.slide.cite"
-  :style="slideStyles(this.slide, ['background', 'fit', 'position', 'padding'])"
+  :@credit="this.slide.credit"
+  :style="slideStyles(this.slide, ['fit', 'position', 'padding'])"
 >
   <img
     :src="slideImg(this.src)"
@@ -13,10 +15,11 @@
     sizes="100vw"
   >
   <slide-image-credit
-    webc:if="this.cite"
-    @html="`credit: ${slideMDownInline(this.cite)}`"
+    webc:if="this.credit"
+    @html="`credit: ${slideMDownInline(this.credit)}`"
   ></slide-image-credit>
 </slide-item>
+<error-slide webc:else></error-slide>
 
 <style webc:bucket="slides-core">
 @layer slide.type {

@@ -1,3 +1,17 @@
+<script webc:setup>
+  const buildCaption = (caption, cite) => {
+    if (!cite) return slideMDownInline(caption);
+
+    const known = $data[$data.slideDeckConfig.known.slides];
+    const citeLink = slideCiteMDown(cite, known);
+    const result = caption
+      ? `${caption} [${citeLink}]`
+      : citeLink;
+
+    return slideMDownInline(result);
+  }
+</script>
+
 <template
   webc:root
   slide-item="container"
@@ -11,8 +25,8 @@
 
     <figcaption
       slide-caption
-      webc:if="this.caption"
-      @html="slideMDownInline(this.caption)"
+      webc:if="this.caption || this.cite"
+      @html="buildCaption(this.caption, this.cite)"
     ></figcaption>
     <template
       webc:else

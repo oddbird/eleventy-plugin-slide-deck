@@ -36,8 +36,10 @@
 
 <slide-item
   content-type="embed"
+  webc:if="this.slide"
   :id="this.slide.id"
   :@caption="demoCaption(this.slide)"
+  :@cite="this.slide.cite"
   :@note="this.slide.note"
   :@demo="demoPage(this.slide)"
 >
@@ -49,3 +51,4 @@
     frameborder="0"
   ></iframe>
 </slide-item>
+<error-slide webc:else></error-slide>

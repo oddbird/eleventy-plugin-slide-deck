@@ -4,11 +4,17 @@ A plugin to use the `@oddbird/slide-deck`
 web component in eleventy projects --
 and generate decks from data.
 
+Any page with `slides` data
+will be added to the (configurable) `slideDeck` collection,
+and provided with a built-out `slideDeck` data property
+ready for rendering.
+
 ## Config
 
 We rely on the official WebC plugin,
 but don't install it for you.
-
+Configure both plugins,
+and register the provided components:
 
 ```js
 // eleventy config
@@ -16,8 +22,9 @@ import pluginWebc from "@11ty/eleventy-plugin-webc";
 import pluginSlideDeck from "@oddbird/eleventy-plugin-slide-deck";
 
 export default async function(eleventyConfig) {
-
-  eleventyConfig.addPlugin(pluginSlideDeck);
+  eleventyConfig.addPlugin(pluginSlideDeck, {
+    // optional slide deck configuration
+  });
 
   // register the slide-deck WebC components
   eleventyConfig.addPlugin(pluginWebc, {
@@ -28,9 +35,16 @@ export default async function(eleventyConfig) {
 }
 ```
 
-There are several configuration options
-for the plugin:
+There are several (optional) configuration settings
+for this slide deck plugin:
 
+- `collectionName` changes the name of the generated `slideDeck` collection,
+  including every page that has `slides` data.
+- `buildStepFunction` (when provided)
+  will be called on each slide during the build process,
+  after relationships have resolved, but before layout is determined.
+  Use this to set additional layout types
+  or make other slide-data alterations.
 - `markdownIt` is an option object
   passed along to the `markdown-it` package
 - `domain` is a string optionally
@@ -40,17 +54,13 @@ for the plugin:
   for rendering the event date with `toLocaleDateString()`
 - `imgDir` optionally prepends a path
   to all slide image properties (such as `src` and `avatar`)
+- `known.slides` (default `knownSlides`)
+  and `known.series` (default `knownSeries`)
+  establish where to look for slide and series source data.
 - By default a slide with `pen: new` will provide a link
   to a blank new CodePen.
   Use `newPenTemplates` to optionally register additional
   template shortcuts for generating new CodePens on the fly.
-
-JavaScript for interactivity and loading the baseline `support` content are
-included in the default bundle. Make sure it's included in a template. 
-
-```js
-<script webc:keep @raw="getBundle('js')"></script>
-```
 
 ## Usage
 
@@ -66,21 +76,48 @@ slides:
 - img: './my-image.jpg'
   alt: a very tall or short building or not a building at all
 - quote: "This is one of the bests talks I've ever seen"
-  cite: You, Later
+  cite: People who see your talk
 ---
 
-<build-deck webc:nokeep :slides="this.slides" id="if-you-want"></build-deck>
+<build-deck webc:nokeep :slides="this.slideDeck" id="if-you-want"></build-deck>
+```
 
+JavaScript for interactivity
+and loading the baseline `support` content
+are included in the default bundle.
+Make sure it's included in a template:
+
+```js
+<script webc:keep @raw="getBundle('js')"></script>
+```
+
+Along with the core and (optional) theme style bundles:
+
+```html
 <style @raw="getBundle('css', 'slides-layer-order')" webc:keep></style>
 <style @raw="getBundle('css', 'slides-core')" webc:keep></style>
 <!--- Add optional slide theme styles --->
 <style @raw="getBundle('css', 'slides-theme')" webc:keep></style>
 ```
 
-Or build your own, using the provided slide types.
-All of them accept a `slide` object
-with `slide.id`, `slide.caption`, and `slide.note` properties.
-Each slide type also accepts some type-specific properties:
+### Writing slides
+
+Create your slides in structured data,
+using `yaml` or `json` or `js` objects.
+We provide a number of built-in slide layouts
+that accept a variety of properties:
+
+- all slide layouts support…
+  - `slide.id` used for the `id` attribute
+  - `slide.caption` for a caption under the slide
+  - `slide.note` for speaker notes
+  - `slide.source`, `slide.name`, & `slide.url`
+    for providing credit (often appended to the `caption`)
+  - `slide.cite` a reference to known `source`/`name`/`url` data,
+    or a markdown link (often appended to the `caption`).
+    This is useful when you want to provide source data
+    without changing how the slide is rendered otherwise.
+  - `slide.background`, `slide.color`, & `slide.mode` CSS values
 
 - `<event-slide>` -- usually the first/last slides of a deck
   - `slide.pre`, `slide.title`, & `slide.sub` for the talk title block
@@ -95,15 +132,14 @@ Each slide type also accepts some type-specific properties:
 - `<default-slide>` -- titles, bullets, and arbitrary content
   - `slide.pre`, `slide.title`, and `slide.sub` create the title block
   - `slide.md`, and `slide.webc` allow for arbitrary content
-  - `slide.background`, `slide.color`, & `slide.mode` CSS values
 
 - `<img-slide>`
   - `slide.src` and `slide.alt` to embed an image
-  - `slide.cite` for (inline markdown) photo credits
-  - `slide.background`, `slide.fit`, `slide.position`,
-    & `slide.padding` CSS values
+  - `slide.credit` for (inline markdown) photo credits
+  - `slide.fit`, `slide.position`, & `slide.padding` CSS values
 
 - `<split-slide>` -- combo of `image-slide` and `default-slide` props
+- `<source-slide>` -- combo of `image-slide` and `source`/`name`/`url` data
 
 - `<url-slide>` -- screenshot or open-graph image slide, generated from a url
   using the [11ty APIs](https://www.11ty.dev/docs/api-services/)
@@ -112,13 +148,13 @@ Each slide type also accepts some type-specific properties:
   - `slide.size` controls the screenshot size/dimensions
   - `slide.type` can be set to `og` to use the open-graph API instead
   - `slide.title` will be added to the caption (and used as alt-fallback)
-  - `slide.background`, `slide.fit`, `slide.position`,
-    & `slide.padding` CSS values
+  - `slide.fit`, `slide.position`, & `slide.padding` CSS values
 
 - `<quote-slide>`
   - `slide.quote` the (block markdown) text of the blockquote
   - `slide.cite` a (inline markdown) citation after the quote
-  - `slide.avatar` an image next to the quote
+  - `slide.img` or `slide.avatar` an image next to the quote
+  - `slide.alt` optional alt text for the avatar
 
 - `<embed-slide>` -- `slide.embed` for the code to embed (iframe, video, etc)
 - `<demo-slide>` -- embeds and iframe, with a permalink in the caption
@@ -134,13 +170,16 @@ Each slide type also accepts some type-specific properties:
   - `slide.caniuse` feature id for CanIUse
   - `slide.support` feature id for Baseline
 
-All markdown properties also allow `WebC` content.
+All markdown properties also allow `WebC` content as well.
+
+### Known (reusable) slides
 
 Reuse common slides across different decks
 by creating adding a `knownSlides` object
 to the Eleventy data cascade:
 
 ```yaml
+# _data/knownSlides.yml
 start-deck:
   exit: >
     [home](/)
@@ -171,14 +210,82 @@ slides:
   title: New Presentation
   venue: The Best Conference
 - known: yoda
-  fit: contain
-  background: black
-  caption: >
-    I often try, actually
+  note: yoda, with speaker notes
 ```
+
+Re-use an entire series of slides
+with `knownSeries` data:
+
+```yaml
+# _data/knownSeries.yml
+intro:
+- known: start-deck
+  title: New Presentation
+  venue: The Best Conference
+- img: './my-image.jpg'
+  alt: Miriam smiling
+  title: Miriam Suzanne
+  sub: Web developer
+```
+
+```yaml
+slides:
+- series: intro
+- title: More slides…
+```
+
+Change the `known.slides` and `known.series` configuration options
+to store known slide & series data under a different name.
+
+### Rendering the slides
+
+Use the built-in `<build-deck>` component
+to render a slide deck
+using the provided slide layouts:
+
+```html
+<build-deck webc:nokeep :slides="this.slideDeck"></build-deck>
+<!-- be sure to include js and css bundles as needed -->
+```
+
+For more flexibility
+use the `<slide-deck>`,
+`<render-slide>` and `<slide-controls>` components
+to loop through your slide data --
+and optionally add custom layouts…
+
+```html
+<slide-deck
+  webc:import="npm:@oddbird/slide-deck"
+  :id="this.id || 'slides'"
+  :@slides="this.slides"
+  slide-view="slideshow"
+  key-control
+  follow-active
+>
+  <template webc:nokeep webc:for="slide of this.slideDeck">
+    <!-- render custom layouts -->
+    <custom-slide-layout
+      webc:if="slide.layout === 'custom'"
+      :@slide="slide"
+    >
+
+    <!-- fall back to built-in layouts -->
+    <render-slide
+      webc:nokeep
+      webc:else
+      :@slide="slide"
+    ></render-slide>
+  </template>
+
+  <slide-controls webc:nokeep></slide-controls>
+</slide-deck>
+```
+
 ### Theme
-To get started using the provided 
-default theme, add the `slides-theme` 
+
+To get started using the provided
+default theme, add the `slides-theme`
 bundle to your project:
 
 ```html
@@ -186,16 +293,16 @@ bundle to your project:
 ```
 
 The theme in this layer adds settings for colors, basic styling,
-and fonts. 
+and fonts.
 
-In the `slides-theme` layer we list 
-default font stacks for sans-serif 
-(`--slide-os-sans-font`), serif (`--slide-os-serif-font`), 
-and code (`--slide-os-code-font`) fonts. 
+In the `slides-theme` layer we list
+default font stacks for sans-serif
+(`--slide-os-sans-font`), serif (`--slide-os-serif-font`),
+and code (`--slide-os-code-font`) fonts.
 
-To add a main font for each font stack type, manually 
+To add a main font for each font stack type, manually
 add self-hosted or web-based fonts to your project and then set the
-font-family name to the respective custom property for each font. 
+font-family name to the respective custom property for each font.
 
 Example:
 
@@ -203,6 +310,5 @@ Example:
 --slide-web-font-sans: "Recursive Sans Linear";
 --slide-web-font-serif: freight-text-pro;
 ```
-
 
 There's more to document, but this is a start.

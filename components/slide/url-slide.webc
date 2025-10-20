@@ -8,21 +8,24 @@
   }
 
   const imgCaption = (slide) => {
-    const caption = slide.caption || '';
-    const title = slide.title || (new URL(slide.url)).hostname;
-    const link = `[${title}](${slide.url})`
+    const caption = slide.caption;
+    const link = slideSourceMDown(slide);
 
-    return `${caption} [${link}]`;
+    return caption
+      ? `${caption} [${link}]`
+      : link;
   }
 </script>
 
 <slide-item
   content-type="image"
+  webc:if="this.slide"
   :id="this.slide.id"
   :@caption="imgCaption(this.slide)"
+  :@cite="this.slide.cite"
   :@note="this.slide.note"
   :@src="urlSrc(this.slide)"
-  :style="slideStyles(this.slide, ['background', 'fit', 'position', 'padding'])"
+  :style="slideStyles(this.slide, ['fit', 'position', 'padding'])"
 >
   <img
     :src="this.src"
@@ -30,3 +33,4 @@
     sizes="100vw"
   >
 </slide-item>
+<error-slide webc:else></error-slide>

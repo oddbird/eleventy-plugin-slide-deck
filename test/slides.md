@@ -1,4 +1,5 @@
-layout: base
+---
+layout: slides
 event: &event
   title: Test Slide Deck
   venue: Web Directions
@@ -23,22 +24,41 @@ slides:
     - _markdown_
 
 - webc: |
-    <h3>I can put anything in here</h3>
+    <h3>I can put any WebC in here</h3>
     <browser-support webc:import="npm:@oddbird/browser-support" data-feature="container-queries"></browser-support>
 
 # new codepen
 - pen: new
 
+# source slide
+- name: Miriam Suzanne
+  source: Testing Source Slides
+  url: https://miriam.codes/
+  img: mia-89.jpg
+
+- name: Miriam Suzanne
+  source: Explicit slide layout
+  url: https://miriam.codes/
+  img: mia-89.jpg
+  layout: url
+
 # quote slide
 - quote: >
-    I'm not sure what I would say
-    if I had to come up with a quote here.
-  cite: Miriam, [with a source](#)
+    This is a quote
+    with fully fleshed out source info.
+  name: Miriam
+  source: maybe an article
+  url: https://miriam.codes/
+  img: mia-89.jpg
+
+- quote: >
+    This quote just has a _markdown citation_ and **avatar**.
+  cite: Miriam, [somewhere else](https://miriam.codes/)
   avatar: mia-89.jpg
 
 # quote without an avatar
 - quote: >
-    The OpenUI Design System is not yet available, but the following captures the spirit of what this project aims to provide.
+    This quote has no details associated with it.
 
 # dark mode, with an explicit background color
 - title: Hello Dark Mode
@@ -67,6 +87,7 @@ slides:
 
 # url (screenshot) slide
 - url: https://miriam.codes
+  title: Miriam.codes
 
 # image slide
 - img: mia-89.jpg
@@ -76,22 +97,28 @@ slides:
 
 # placeholder image
 - img: computer
-  cite: picsum
+  credit: picsum
 
 # split image/content slide
 - img: mia-89.jpg
   alt: Young miriam
   title: Hello split slide
 
-# arbitrary embeds
+# video & embeds
+- youtube: d8PndpFPL8g
 - embed: >
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/d8PndpFPL8g?si=nV8JtHhEmyZzYBxg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <iframe src="https://oddbird.net" width="1600" height="900"></iframe>
 
 # caniuse image embeds
 - caniuse: flow-root
 
 # baseline browser-support embeds
 - support: display-flow-root
+
+# unknown slide
+- who: nobody
+  what: >
+    knows what this slide is all about.
 
 # event slide
 - <<: *event
@@ -100,3 +127,4 @@ slides:
     [@oddbird@front-end.social](https://front-end.social/@oddbird)
   caption: |
     Bring this workshop to your company!
+---

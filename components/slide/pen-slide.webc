@@ -103,10 +103,11 @@
 ></default-slide>
 
 <slide-item
-  webc:else
+  webc:elseif="this.slide"
   content-type="embed"
   :id="this.slide.id"
   :@caption="slideCaption(this.slide)"
+  :@cite="this.slide.cite"
   :@note="this.slide.note"
   :@embed="buildEmbedSrc(this.slide)"
 >
@@ -123,3 +124,5 @@
     width="100%"
   ></iframe>
 </slide-item>
+
+<error-slide webc:else></error-slide>

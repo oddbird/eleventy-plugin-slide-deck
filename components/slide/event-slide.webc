@@ -1,9 +1,9 @@
 <slide-item
   content-type="event"
+  webc:if="this.slide"
   :id="this.slide.id"
   :@note="this.slide.note"
   :@slide="this.slide"
-  :@url="this.url"
 >
   <div slide-auto="exit"
     webc:if="slide.exit"
@@ -62,6 +62,7 @@
     @html="slideMDownInline(slide.caption)"
   ></figcaption>
 </slide-item>
+<error-slide webc:else></error-slide>
 
 <style webc:bucket="slides-core">
 @layer slide.type {
@@ -89,10 +90,6 @@
     grid-template-columns: fit-content(80cqi);
   }
 
-  /* [slide-auto=detail] {
-
-  } */
-
   [slide-auto=event] {
     margin-block-end: var(--slide-header-margin-block-end, var(--slide-gap));
     padding-block-end: var(--slide-header-padding-block-end, var(--slide-gap));
@@ -111,6 +108,10 @@
       position: absolute;
       rotate: -2deg;
     }
+  }
+
+  [slide-auto=detail] > :only-child {
+    margin: unset;
   }
 
   [slide-auto=event-time] {

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title @text="this.title || this.event.title"></title>
+  <title @text="this.title || this.event?.title || 'eleventy slides'"></title>
   <style @raw="getBundle('css')" webc:keep></style>
 
   <style @raw="getBundle('css', 'slides-layer-order')" webc:keep></style>
@@ -15,7 +15,7 @@
   </style>
 </head>
 <body>
-  <main @html="this.content"></main>
+  <main @raw="this.content"></main>
   <script @raw="getBundle('js')" webc:keep></script>
 </body>
 </html>
