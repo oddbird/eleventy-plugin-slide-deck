@@ -1,8 +1,11 @@
 <slide-item
   @canvas-type="todo"
   :@slide="this.slide"
+  :@caption="this.slide.caption"
+  :@cite="this.slide.cite"
+  :@note="this.slide.note"
 >
-  <h2>Error rendering slide</h2>
+  <h2>Error:</h2>
   <pre
     webc:if="this.slide"
     @text="JSON.stringify(this.slide, null, '\t')"

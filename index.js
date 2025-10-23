@@ -2,12 +2,11 @@ import markdownIt from 'markdown-it';
 import syntaxHighlightPlugin from '@11ty/eleventy-plugin-syntaxhighlight';
 
 import {
-  slideImg,
   slideStyles,
-  slideSourceMDown,
-  slideCiteMDown,
   buildSlides
-} from './slides.js';
+} from './utils/slides.js';
+
+import { slideImg } from './utils/img.js';
 
 export default async function(eleventyConfig, options) {
   options = Object.assign({
@@ -40,8 +39,6 @@ export default async function(eleventyConfig, options) {
   // slides
   eleventyConfig.addFilter('buildSlides', buildSlides);
   eleventyConfig.addFilter('slideStyles', slideStyles);
-  eleventyConfig.addFilter('slideSourceMDown', slideSourceMDown);
-  eleventyConfig.addFilter('slideCiteMDown', slideCiteMDown);
   eleventyConfig.addFilter('slideImg', (src, dir) =>
     slideImg(src, dir || options.imgDir || '')
   );

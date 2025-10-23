@@ -9,6 +9,9 @@ slides:
 # see the knownSlides yaml data
 - known: start-deck
   <<: *event
+  note: |
+    - `<event-slide>`
+    - `known` reference
 
 # the default slide
 - pre: hello world
@@ -16,66 +19,69 @@ slides:
   sub: with a subtitle
   caption: and a caption
   note: |
-    This is a _note_.
+    - `<default-slide>`
+    - `pre`, `title`, and `sub`
 
 - md: |
+    ## Put markdown in here
     - some
     - arbitrary
     - _markdown_
+  note: |
+    - `<default-slide>`
+    - `md`-only
 
 - webc: |
-    <h3>I can put any WebC in here</h3>
-    <browser-support webc:import="npm:@oddbird/browser-support" data-feature="container-queries"></browser-support>
+    <h3>Put WebC in here…</h3>
+    <oddbird-logo style="fill: deepPink"></oddbird-logo>
+  note: |
+    - `<default-slide>`
+    - `webc`-only
 
-# new codepen
+# codepen
 - pen: new
+  note: |
+    - 'new' `<pen-slide>`
 
-# source slide
-- name: Miriam Suzanne
-  source: Testing Source Slides
-  url: https://miriam.codes/
-  img: mia-89.jpg
+- pen: https://codepen.io/miriamsuzanne/pen/YzmMapj
+  live: https://codepen.io/miriamsuzanne/pen/YzmMapj
+  title: You Tell Me Clock
+  note: |
+    - `<pen-slide>`
+    - both `pen` and `live` links
+    - as well as a `title`
 
-- name: Miriam Suzanne
-  source: Explicit slide layout
-  url: https://miriam.codes/
-  img: mia-89.jpg
-  layout: url
+# series
+- series: mia
 
 # quote slide
 - quote: >
     This is a quote
-    with fully fleshed out source info.
-  name: Miriam
-  source: maybe an article
-  url: https://miriam.codes/
-  img: mia-89.jpg
+    with structured source info.
+  known: miriam-codes
 
 - quote: >
-    This quote just has a _markdown citation_ and **avatar**.
+    This quote just has
+    a _markdown citation_ and **avatar**.
   cite: Miriam, [somewhere else](https://miriam.codes/)
-  avatar: mia-89.jpg
+  known: mia
 
-# quote without an avatar
 - quote: >
     This quote has no details associated with it.
 
 # dark mode, with an explicit background color
-- title: Hello Dark Mode
+- title: Slide styles
+  sub: (dark mode)
   mode: dark
   background: maroon
+  caption: Basic title slide, but dark mode and maroon
 
 # code slides
-- caption: something -- else
+- caption: a code slide
   css: |
     * { box-sizing: border-box; }
   html: |
     <p>lorem stuff</p>
-
-# codepen embeds
-- pen: https://codepen.io/miriamsuzanne/pen/YzmMapj
-  live: https://codepen.io/miriamsuzanne/pen/YzmMapj
-  title: name this pen
 
 # embed local demo pages
 - demo: test
@@ -84,25 +90,30 @@ slides:
 - todo: |
     - finish building this
     - ship it
+  caption: a `todo` slide
 
 # url (screenshot) slide
 - url: https://miriam.codes
   title: Miriam.codes
+  caption: A `url` slide
 
 # image slide
 - img: mia-89.jpg
   alt: Young miriam
-  cite: mom or dad, maybe?
+  credit: mom or dad, maybe?
   position: center
+  caption: An `image` slide
 
 # placeholder image
 - img: computer
   credit: picsum
+  caption: A placeholder image
 
 # split image/content slide
 - img: mia-89.jpg
   alt: Young miriam
-  title: Hello split slide
+  title: Split Slide
+  pre: This is a…
 
 # video & embeds
 - youtube: d8PndpFPL8g

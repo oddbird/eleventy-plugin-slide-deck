@@ -16,3 +16,19 @@ start-deck:
       (<kbd>Cmd/Ctr-k</kbd> for settings)
     </span>
     </event-caption>
+
+mia:
+  avatar: mia-89.jpg
+  name: Miriam Suzanne
+  caption: Default to `source` layout
+
+miriam-codes:
+  known: mia
+  url: https://miriam.codes/
+  caption: Default to `url` layout
+
+miriam-art:
+  known: mia
+  url: https://art.miriamsuzanne.com/
+  source: Handmade in Denver
+  caption: Default to `url` layout

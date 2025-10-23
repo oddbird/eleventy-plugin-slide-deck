@@ -3,25 +3,29 @@
 - Breaking: Image slides use `slide.credit` rather than `slide.cite`
   for displaying photo credit.
 - Add `slideDeck` collection (name can be configured).
-- Support explicit slide layouts with `layout` property.
-- Support series references with `series` property
-  (similar to `known` but for referencing multiple slides).
+- Support explicit slide layouts with `slide.layout` property.
+- Support series references with `slide.series` property
+  (similar to `slide.known` but for referencing multiple slides).
 - Pre-build slide data into `$data.slideDeck`
   with known slides/series references resolved,
-  and slide layout determined
-  (can be configured with additional build steps).
+  and slide layout determined (when not provided).
+  This can be configured with an additional build function.
 - Add `<render-slide>` component for rendering slide data
   with a built-in layout.
-- More slide types use `source`/`title`, `url`, and `name`
-  do display links to source material
-  (these properties can also be nested under `cite`).
-- Quote slides will use either `img` or `avatar` data
+- All slide types accept a markdown `slide.cite` property.
+- Slides that have `slide.source`, `slide.name`, or `slide.url`
+  will generate default `slide.cite` data
+  if not provided explicitly.
+- Quote slides will use either `slide.img` or `slide.avatar` data
   for rendering an avatar next to the quote.
-- Add `source-slide` to display a resource link with an image
-- `<default-slide>` will render `JSON.stringify(slide)` output
-  when no properties are recognized for output.
+- Add `<source-slide>` to display a resource with optional avatar/image.
+  Since source information is allowed on all slide layouts,
+  this is only the default when no other data is provided.
 - Add `<error-slide>` to stop build failures
-  when a slide component is rendered without `slide` data.
+  when a slide component is rendered without `slide` data,
+  and to render a json string when the data isn't recognized.
+- Default slide deck theme supports both light and dark modes out of the box,
+  using `light-dark()` so that control is left to the page.
 
 Configuration Options…
 
@@ -39,8 +43,6 @@ Provided filters…
 
 - Remove `placeHolder()` (use `slideImg()` without a path).
 - Add `buildSlides()` for building out slide decks from any slide data.
-- Add `slideSourceMDown()` and `slideCiteMDown()`
-  for converting source/cite data into a markdown link.
 - Change `slideStyles()` so that `color`, `background`, and `mode`
   are always allowed.
 

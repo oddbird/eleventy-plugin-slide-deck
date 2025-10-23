@@ -17,13 +17,6 @@
   <p slide-title="sub" webc:if="this.slide.sub" @html="slideMDownInline(this.slide.sub)"></p>
   <div webc:if="this.slide.md" @html="slideMDownBlock(this.slide.md)"></div>
   <div webc:if="this.slide.webc" @html="this.slide.webc"></div>
-
-  <!-- unknown slide -->
-  <pre webc:if="!(
-    this.slide.title || this.slide.pre ||
-    this.slide.sub ||
-    this.slide.md || this.slide.webc
-  )" @text="JSON.stringify(this.slide, null, '\t')"></pre>
 </slide-item>
 <error-slide webc:else></error-slide>
 

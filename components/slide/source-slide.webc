@@ -1,24 +1,35 @@
 <script webc:setup>
   const buildSrcSlide = (slide) => {
-    const source = `[${slide.source}](${slide.url})`;
-    const title = slide.title ? source : null;
-    const date = slide.date ? `${slide.date}` : null;
-    const caption = title && date
-      ? `${title}, ${date}`
-      : title || date;
+    if (!slide.title) {
+      const title = slide.source || slide.name;
 
-    slide.title = slide.title || source;
-    slide.pre = slide.pre || slide.name;
-    slide.caption = slide.caption && caption
-      ? `${slide.caption} [${caption}]`
-      : caption;
+      slide.title = slide.url
+        ? `[${title}](${slide.url})`
+        : title;
+
+      if (!slide.pre) slide.cite = null;
+    }
+
+    if (!slide.pre) {
+      slide.pre = slide.source && slide.name
+        ? slide.name
+        : null;
+    }
+
+    slide.img = slide.img || slide.avatar;
 
     return slide;
   }
 </script>
 
+<error-slide
+  webc:if="!this.slide"
+></error-slide>
 <split-slide
-  webc:if="this.slide"
+  webc:elseif="slide.img || slide.avatar"
   :@slide="buildSrcSlide(this.slide)"
 ></split-slide>
-<error-slide webc:else></error-slide>
+<default-slide
+  webc:else
+  :@slide="buildSrcSlide(this.slide)"
+></default-slide>

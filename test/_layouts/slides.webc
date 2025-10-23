@@ -1,5 +1,5 @@
 ---
-layout: base
+layout: page
 ---
 
 <build-deck
@@ -8,7 +8,7 @@ layout: base
   :@slides="this.slideDeck"
 ></build-deck>
 
-<style webc:keep>
+<style>
   html {
     block-size: 100%;
     scroll-snap-type: block proximity;

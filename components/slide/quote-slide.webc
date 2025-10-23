@@ -1,23 +1,14 @@
-<script webc:setup>
-  const quoteSource = (slide) => {
-    const known = $data[$data.slideDeckConfig.known.slides];
-    return slideSourceMDown(slide) || slideCiteMDown(slide.cite, known);
-  }
-</script>
-
 <slide-item
   content-type="quote"
   webc:if="this.slide"
   :id="this.slide.id"
   :@caption="this.slide.caption"
   :@note="this.slide.note"
-  :@avatar="this.slide.avatar || this.slide.img"
-  :@quote-source="quoteSource(this.slide)"
 >
   <slide-quote-marker>
     <img
-      webc:if="this.avatar"
-      :src="slideImg(this.avatar)"
+      webc:if="this.slide.img || this.slide.avatar"
+      :src="slideImg(this.slide.img || this.slide.avatar)"
       :alt="this.slide.alt || 'avatar'"
       sizes="96w"
       :width="[180]"
@@ -36,8 +27,8 @@
   <slide-quote>
     <blockquote @html="slideMDownBlock(this.slide.quote)"></blockquote>
     <slide-quote-cite
-      webc:if="this.quoteSource"
-      @html="slideMDownInline(`--- ${this.quoteSource}`)">
+      webc:if="this.slide.cite"
+      @html="slideMDownInline(`--- ${this.slide.cite}`)">
     </slide-quote-cite>
   </slide-quote>
 </slide-item>

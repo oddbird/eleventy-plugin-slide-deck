@@ -6,22 +6,13 @@
       ? `https://v1.opengraph.11ty.dev/${url}/${size}/`
       : `https://v1.screenshot.11ty.dev/${url}/${size}/`;
   }
-
-  const imgCaption = (slide) => {
-    const caption = slide.caption;
-    const link = slideSourceMDown(slide);
-
-    return caption
-      ? `${caption} [${link}]`
-      : link;
-  }
 </script>
 
 <slide-item
   content-type="image"
   webc:if="this.slide"
   :id="this.slide.id"
-  :@caption="imgCaption(this.slide)"
+  :@caption="this.slide.caption"
   :@cite="this.slide.cite"
   :@note="this.slide.note"
   :@src="urlSrc(this.slide)"
