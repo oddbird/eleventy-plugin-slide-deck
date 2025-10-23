@@ -3,13 +3,17 @@
 - Breaking: Image slides use `slide.credit` rather than `slide.cite`
   for displaying photo credit.
 - Add `slideDeck` collection (name can be configured).
-- Support explicit slide layouts with `slide.layout` property.
-- Support series references with `slide.series` property
-  (similar to `slide.known` but for referencing multiple slides).
 - Pre-build slide data into `$data.slideDeck`
   with known slides/series references resolved,
   and slide layout determined (when not provided).
   This can be configured with an additional build function.
+- Pre-build cited resources and CodePen demos into
+  `$data.slideResources.cite` and `$data.slideResources.pens`.
+  Both are filtered to include unique links,
+  and return an array of inline markdown strings.
+- Support explicit slide layouts with `slide.layout` property.
+- Support series references with `slide.series` property
+  (similar to `slide.known` but for referencing multiple slides).
 - Add `<render-slide>` component for rendering slide data
   with a built-in layout.
 - All slide types accept a markdown `slide.cite` property.

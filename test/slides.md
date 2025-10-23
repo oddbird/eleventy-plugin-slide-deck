@@ -1,7 +1,8 @@
 ---
 layout: slides
+title: &title Test Slide Deck
 event: &event
-  title: Test Slide Deck
+  title: *title
   venue: Web Directions
   date: 2024-11-20
 
@@ -93,7 +94,7 @@ slides:
   caption: a `todo` slide
 
 # url (screenshot) slide
-- url: https://miriam.codes
+- url: https://miriam.codes/
   title: Miriam.codes
   caption: A `url` slide
 

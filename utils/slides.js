@@ -92,6 +92,29 @@ export const buildSlides = (slides, known, series, buildStepFn) =>
   }, []
 );
 
+export const getSlideResources = (deck) => {
+  const seen = [];
+  const mdUrl = /(?<=\]\()(https?:\/\/[^\s]+)(?=\))/g;
+
+  return deck.reduce((all, slide) => {
+    if (slide.cite?.includes('://')) {
+      let citeLink = slide.cite.match(mdUrl)[0].trim();
+
+      if (!seen.includes(citeLink)) {
+        seen.push(citeLink);
+        all.cite.push(slide.cite);
+      }
+    }
+
+    if (slide.pen?.includes('://') && !seen.includes(slide.pen)) {
+      seen.push(slide.pen);
+      all.pens.push(`[${slide.title || 'CodePen'}](${slide.pen})`);
+    }
+
+    return all;
+  }, { pens: [], cite: [] });
+}
+
 export const slideStyles = (slide, allow = []) => {
   const props = ['background', 'color', 'mode', ...allow];
   const style = [];

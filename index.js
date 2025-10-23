@@ -3,7 +3,8 @@ import syntaxHighlightPlugin from '@11ty/eleventy-plugin-syntaxhighlight';
 
 import {
   slideStyles,
-  buildSlides
+  buildSlides,
+  getSlideResources,
 } from './utils/slides.js';
 
 import { slideImg } from './utils/img.js';
@@ -68,6 +69,7 @@ export default async function(eleventyConfig, options) {
           item.data[options.known.series],
           options.buildStepFunction
         );
+        item.data.slideResources = getSlideResources(item.data.slideDeck);
         return item;
       });
   });
