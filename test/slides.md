@@ -40,10 +40,6 @@ slides:
     - `webc`-only
 
 # codepen
-- pen: new
-  note: |
-    - 'new' `<pen-slide>`
-
 - pen: https://codepen.io/miriamsuzanne/pen/YzmMapj
   live: https://codepen.io/miriamsuzanne/pen/YzmMapj
   title: You Tell Me Clock
@@ -51,6 +47,9 @@ slides:
     - `<pen-slide>`
     - both `pen` and `live` links
     - as well as a `title`
+
+- pen: https://codepen.io/editor/miriamsuzanne/pen/019a0d25-32ee-7322-a0ce-b5b9b8b71e7c
+  title: Pen version 2
 
 # series
 - series: mia

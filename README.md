@@ -57,10 +57,6 @@ for this slide deck plugin:
 - `known.slides` (default `knownSlides`)
   and `known.series` (default `knownSeries`)
   establish where to look for slide and series source data.
-- By default a slide with `pen: new` will provide a link
-  to a blank new CodePen.
-  Use `newPenTemplates` to optionally register additional
-  template shortcuts for generating new CodePens on the fly.
 
 ## Usage
 
@@ -163,6 +159,7 @@ that accept a variety of properties:
   - `slide.pen` URL of the CodePen
   - `slide.title` name of the pen, added to the caption
   - `slide.live` link a live-code version of the demo, if different
+  - `slide.preview` (boolean) set `true` for click-to-load behavior
 - `<code-slide>`
   - `slide.<language>` (for `html`, `css`, `scss`, or `js`)
   - or `slide.code` and `slide.lang` for any other languages

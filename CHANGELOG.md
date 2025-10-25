@@ -2,6 +2,8 @@
 
 - Breaking: Image slides use `slide.credit` rather than `slide.cite`
   for displaying photo credit.
+- Breaking: Remove new pen templates and `pen: new` behavior,
+  since the use-case is simple to handle with known pens.
 - Add `slideDeck` collection (name can be configured).
 - Pre-build slide data into `$data.slideDeck`
   with known slides/series references resolved,
@@ -16,6 +18,8 @@
   (similar to `slide.known` but for referencing multiple slides).
 - Add `<render-slide>` component for rendering slide data
   with a built-in layout.
+- Simplify `<pen-slide>` to remove extra (never-documented) features,
+  and add support for CodePen 2.0 pens.
 - All slide types accept a markdown `slide.cite` property.
 - Slides that have `slide.source`, `slide.name`, or `slide.url`
   will generate default `slide.cite` data
