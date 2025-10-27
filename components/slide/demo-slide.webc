@@ -24,31 +24,34 @@
       : found;
   };
 
-  const demoCaption = (slide) => {
-    const page = demoPage(slide);
-    const title = slide.title || page.title;
+  const cite = (slide, demo) => {
+    const title = slide.title || demo.title;
     const linkText = slide.caption
       ? title || 'permalink'
       : 'permalink';
-    return `${slide.caption || title} [[${linkText}](${page.url})]`;
+    return `${slide.cite || title}: [${linkText}](${demo.url})`;
+  }
+
+  const demoEmbed = (demo) => {
+    return `<iframe
+      src="${demo.url}"
+      title="${demo.title || 'demo embed'}"
+      width="${demo.width || '100%'}"
+      height="${demo.height || 600}"
+      frameborder="0"
+    ></iframe>`;
+  }
+
+  const buildEmbedSlide = (slide) => {
+    const demo = demoPage(slide);
+    slide.embed = demoEmbed(demo);
+    slide.cite = cite(slide, demo);
+    return slide;
   }
 </script>
 
-<slide-item
-  content-type="embed"
+<embed-slide
   webc:if="this.slide"
-  :id="this.slide.id"
-  :@caption="demoCaption(this.slide)"
-  :@cite="this.slide.cite"
-  :@note="this.slide.note"
-  :@demo="demoPage(this.slide)"
->
-  <iframe
-    :src="demo.url"
-    :title="demo.title || 'demo embed'"
-    :width="demo.width || '100%'"
-    :height="demo.height || 600"
-    frameborder="0"
-  ></iframe>
-</slide-item>
+  :@slide="buildEmbedSlide(this.slide)"
+></embed-slide>
 <error-slide webc:else></error-slide>

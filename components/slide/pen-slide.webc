@@ -50,7 +50,7 @@
     return pre ? `${pre}: ${links}` : links;
   }
 
-  const buildEmbedSrc = (slide) => {
+  const penSrc = (slide) => {
     const details = penDetails(slide);
 
     const params = new URLSearchParams({
@@ -61,29 +61,31 @@
 
     return `${details.embed}?${params.toString()}`;
   }
+
+  const penEmbed = (slide) => {
+    return `<iframe code-pen
+      src="${penSrc(slide)}"
+      height="600"
+      title="${slide.title || 'CodePen Embed'}"
+      allowfullscreen="true"
+      allowtransparency="true"
+      frameborder="0"
+      loading="lazy"
+      scrolling="no"
+      width="100%"
+    ></iframe>`;
+  }
+
+  const buildEmbedSlide = (slide) => {
+    slide.embed = penEmbed(slide);
+    slide.cite = cite(slide);
+    return slide;
+  }
 </script>
 
-<slide-item
+<embed-slide
   webc:if="this.slide"
-  content-type="embed"
-  :id="this.slide.id"
-  :@caption="this.slide.caption"
-  :@cite="cite(this.slide)"
-  :@note="this.slide.note"
-  :@embed="buildEmbedSrc(this.slide)"
->
-  <iframe
-    code-pen
-    :src="this.embed"
-    :height="600"
-    :title="this.slide.title || 'CodePen Embed'"
-    allowfullscreen="true"
-    allowtransparency="true"
-    frameborder="0"
-    loading="lazy"
-    scrolling="no"
-    width="100%"
-  ></iframe>
-</slide-item>
+  :@slide="buildEmbedSlide(this.slide)"
+></embed-slide>
 
 <error-slide webc:else></error-slide>

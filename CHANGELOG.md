@@ -4,6 +4,9 @@
   for displaying photo credit.
 - Breaking: Remove new pen templates and `pen: new` behavior,
   since the use-case is simple to handle with known pens.
+- Fix bug where `<pen-slide>` and `<demo-slide>`
+  now extend `<embed-slide>` directly,
+  including necessary styles.
 - Add `slideDeck` collection (name can be configured).
 - Pre-build slide data into `$data.slideDeck`
   with known slides/series references resolved,
