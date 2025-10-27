@@ -110,10 +110,6 @@
     }
   }
 
-  [slide-auto=detail] > :only-child {
-    margin: unset;
-  }
-
   [slide-auto=event-time] {
     font-size: var(--slide-small-text);
   }
