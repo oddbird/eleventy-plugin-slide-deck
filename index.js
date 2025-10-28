@@ -18,7 +18,7 @@ export default async function(eleventyConfig, options) {
     },
 
     // imgDir: (path relative to content folder),
-    // buildStepFunction: (function),
+    // buildFunction: (function),
     // newPenTemplates: { new: 'https://pen.new' }
     collectionName: 'slideDeck',
     known: {
@@ -63,12 +63,12 @@ export default async function(eleventyConfig, options) {
       .getAll()
       .filter((item) => item.data.slides)
       .map((item) => {
-        item.data.slideDeck = buildSlides(
-          item.data.slides,
-          item.data[options.known.slides],
-          item.data[options.known.series],
-          options.buildStepFunction
-        );
+        item.data.slideDeck = buildSlides({
+          slides: item.data.slides,
+          knownSlides: item.data[options.known.slides],
+          knownSeries: item.data[options.known.series],
+          buildFn: [options.buildFunction],
+        });
         item.data.slideResources = getSlideResources(item.data.slideDeck);
         return item;
       });

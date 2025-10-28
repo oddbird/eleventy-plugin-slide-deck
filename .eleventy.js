@@ -3,7 +3,7 @@ import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
 import pluginSlideDeck from "./index.js";
 import yaml from "js-yaml";
 
-const buildStepFunction = (slide) => {
+const buildFunction = (slide) => {
   if (slide.youtube) {
     const bg = `background-image: url('https://v1.opengraph.11ty.dev/https%3A%2F%2Fyoutube.com%2Fwatch%3Fv%3D${slide.youtube}/auto/jpeg/');`;
     slide.layout = slide.layout || 'embed';
@@ -23,7 +23,7 @@ export default async function(eleventyConfig) {
     domain: 'example.oddbird.net',
     imgDir: '/_img/',
 
-    buildStepFunction,
+    buildFunction,
   });
 
   eleventyConfig.addPlugin(pluginWebc, {

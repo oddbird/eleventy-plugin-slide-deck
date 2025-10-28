@@ -42,7 +42,7 @@ Configuration Options…
 
 - `collectionName` changes the name of the `slideDeck` collection,
   including every page with `slides` data.
-- `buildStepFunction` (when provided)
+- `buildFunction` (when provided)
   will be called on each slide during the build process.
   Use this to set additional layout types
   or make other slide-data alterations.

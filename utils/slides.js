@@ -70,18 +70,18 @@ const slideCitation = (slide) => {
     : link;
 }
 
-export const buildSlides = (slides, known, series, buildStepFn) =>
+export const buildSlides = ({slides, knownSlides, knownSeries, buildFn}) =>
   slides.reduce((all, item) => {
     const expanded = item.series
-      ? getItem(series, item.series)
+      ? getItem(knownSeries, item.series)
       : [item];
 
     const merged = expanded.map((item) => {
       let slide = (item.known)
-        ? mergeFromSource(known, item, 'known')
+        ? mergeFromSource(knownSlides, item, 'known')
         : item;
 
-      if (typeof buildStepFn === 'function') slide = buildStepFn(slide);
+      if (typeof buildFn === 'function') slide = buildFn(slide);
       if (!slide.layout) slide.layout = slideType(slide);
       if (!slide.cite) slide.cite = slideCitation(slide);
       return slide;
@@ -89,8 +89,7 @@ export const buildSlides = (slides, known, series, buildStepFn) =>
 
     all.push(...merged);
     return all;
-  }, []
-);
+  }, []);
 
 export const getSlideResources = (deck) => {
   const seen = [];
@@ -125,7 +124,5 @@ export const slideStyles = (slide, allow = []) => {
     }
   });
 
-  return style
-    ? style.join('')
-    : null;
+  return style.join('');
 }

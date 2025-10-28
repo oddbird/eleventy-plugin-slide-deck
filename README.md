@@ -40,7 +40,7 @@ for this slide deck plugin:
 
 - `collectionName` changes the name of the generated `slideDeck` collection,
   including every page that has `slides` data.
-- `buildStepFunction` (when provided)
+- `buildFunction` (when provided)
   will be called on each slide during the build process,
   after relationships have resolved, but before layout is determined.
   Use this to set additional layout types
