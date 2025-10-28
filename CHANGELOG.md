@@ -1,4 +1,4 @@
-## v0.3.0 - unreleased
+## v0.3.0 - 2025-10-28
 
 - Breaking: Image slides use `slide.credit` rather than `slide.cite`
   for displaying photo credit.
