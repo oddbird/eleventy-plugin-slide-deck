@@ -1,6 +1,14 @@
 import markdownIt from 'markdown-it';
 import syntaxHighlightPlugin from '@11ty/eleventy-plugin-syntaxhighlight';
 
+import {
+  slideStyles,
+  buildSlides,
+  getSlideResources,
+} from './utils/slides.js';
+
+import { slideImg } from './utils/img.js';
+
 export default async function(eleventyConfig, options) {
   options = Object.assign({
     markdownIt: {
@@ -9,9 +17,16 @@ export default async function(eleventyConfig, options) {
       typographer: true,
     },
 
-    // imgDir: '',
+    // imgDir: (path relative to content folder),
+    // buildFunction: (function),
     // newPenTemplates: { new: 'https://pen.new' }
+    collectionName: 'slideDeck',
+    known: {
+      slides: 'knownSlides',
+      series: 'knownSeries',
+    },
 
+    // eventDateLocale: (locale),
     eventDateFormat: {
       year: 'numeric',
       month: 'long',
@@ -19,48 +34,43 @@ export default async function(eleventyConfig, options) {
     },
   }, options);
 
-  // images
-  const placeHolder = (img) => {
-    return `https://picsum.photos/seed/${img || 'any'}/800/450?blur`;
-  };
-
-  const slideImg = (src, dir) => {
-    if (src.includes('://')) { return src; }
-
-    return src.includes('.')
-      ? `${dir || options.imgDir || ''}${src}`
-      : placeHolder(src);
-  }
-
-  eleventyConfig.addFilter('placeHolder', placeHolder);
-  eleventyConfig.addFilter('slideImg', slideImg);
-
   // data
   eleventyConfig.addGlobalData("slideDeckConfig", options);
 
+  // slides
+  eleventyConfig.addFilter('buildSlides', buildSlides);
+  eleventyConfig.addFilter('slideStyles', slideStyles);
+  eleventyConfig.addFilter('slideImg', (src, dir) =>
+    slideImg(src, dir || options.imgDir || '')
+  );
+
   // markdown
+  eleventyConfig.addPlugin(syntaxHighlightPlugin);
   const mdIt = markdownIt(options.markdownIt).disable('code');
 
-  const block = (content) => mdIt.render(content);
-  const inline = (content) => mdIt.renderInline(content);
+  eleventyConfig.addFilter(
+    'slideMDownBlock',
+    (content) => mdIt.render(content)
+  );
+  eleventyConfig.addFilter(
+    'slideMDownInline',
+    (content) => mdIt.renderInline(content)
+  );
 
-  eleventyConfig.addFilter('slideMDownBlock', block);
-  eleventyConfig.addFilter('slideMDownInline', inline);
-  eleventyConfig.addPlugin(syntaxHighlightPlugin);
-
-  // slide styles
-  eleventyConfig.addFilter('slideStyles', (slide, allow) => {
-    const props = allow || ['background', 'color'];
-    const style = [];
-
-    props.forEach((prop) => {
-      if (slide[prop]) {
-        style.push(`--slide-${prop}: ${slide[prop]};`);
-      }
-    });
-
-    return style
-      ? style.join('')
-      : null;
+  // collection
+  eleventyConfig.addCollection(options.collectionName, (collectionApi) => {
+    return collectionApi
+      .getAll()
+      .filter((item) => item.data.slides)
+      .map((item) => {
+        item.data.slideDeck = buildSlides({
+          slides: item.data.slides,
+          knownSlides: item.data[options.known.slides],
+          knownSeries: item.data[options.known.series],
+          buildFn: [options.buildFunction],
+        });
+        item.data.slideResources = getSlideResources(item.data.slideDeck);
+        return item;
+      });
   });
 }

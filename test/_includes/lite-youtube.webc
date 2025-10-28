@@ -1,0 +1,7 @@
+<script src="../../node_modules/lite-youtube-embed/src/lite-yt-embed.js"></script>
+<link rel="stylesheet" href="../../node_modules/lite-youtube-embed/src/lite-yt-embed.css" />
+<style webc:keep>
+  lite-youtube {
+    max-width: unset;
+  }
+</style>

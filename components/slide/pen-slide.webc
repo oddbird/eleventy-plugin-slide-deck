@@ -1,16 +1,10 @@
 <script webc:setup>
-  const codePenTemplates = Object.assign({
-    'new': 'https://pen.new',
-  }, $data.slideDeckConfig.newPenTemplates);
-
-  const newPen = (slide) => ({
-    pre: 'Live demo…',
-    title: `[New CodePen](${codePenTemplates[slide.pen]})`,
-    ...slide,
-  });
+  const isPen2 = (url) => url.includes('/editor/');
 
   const penParts = (url) => {
-    const partKeys = [null, 'user', null, 'hash'];
+    const partKeys = isPen2(url)
+      ? [null, null, 'user', null, 'hash']
+      : [null, 'user', null, 'hash'];
     const parts = {};
 
     url
@@ -24,36 +18,17 @@
       return parts;
   }
 
-  const penUrl = (pen, user) => {
-    const userPath = user ? `${user}/` : '';
-    return `https://cdpn.io/${userPath}pen/${pen}`;
-  }
-
   const penDetails = (slide) => {
-    const details = {
-      user: slide.user || $data.slideDeckConfig.codePenUser,
-    };
+    const penVersion = isPen2(slide.pen) ? 2 : 1;
+    const details = {};
 
-    if (slide.pen.includes('://')) {
-      const parts = penParts(slide.pen);
-      details.url = slide.pen;
-      details.hash = parts.hash;
-      details.user = parts.user;
-    } else {
-      details.hash = slide.pen;
-      details.url = penUrl(slide.pen, details.user);
-    }
-
-    const pres = `https://cdpn.io/pen/pres/${details.hash}`;
-    details.editors = slide.editors || $data.slideDeckConfig.codePenEditors || '1110';
-    details.layout = slide.layout || $data.slideDeckConfig.codePenLayout || 'left';
-    details.pres = `${pres}?editors=${details.editors}&layout=${details.layout}`;
-
-    details.debug = `https://cdpn.io/pen/debug/${details.hash}`;
+    details.url = slide.pen;
     details.live = slide.live;
 
-    const embed = slide.preview ? 'embed/preview' : 'embed';
-    details.embed = `https://codepen.io/${details.user}/${embed}/${details.hash}`;
+    const embed = slide.preview ? '/embed/preview/' : '/embed/';
+    details.embed = details.url.replace('/pen/', embed);
+    details.pres = details.url.replace('/pen/', '/pres/');
+    details.debug = details.url.replace('/pen/', '/debug/');
 
     return details;
   }
@@ -62,64 +37,55 @@
 
   const slideLinks = (pen) => {
     return [
-      getLink('live code', pen.live),
+      getLink('live', pen.live),
       getLink('present', pen.pres),
       getLink('debug', pen.debug),
     ].filter(item => item).join(', ');
   }
 
-  const slideCaption = (slide) => {
-    const pre = slide.caption || slide.title || '';
+  const cite = (slide) => {
+    const pre = slide.cite || slide.title;
     const details = penDetails(slide);
-    return `${pre} [${slideLinks(details)}]`;
+    const links = slideLinks(details);
+    return pre ? `${pre}: ${links}` : links;
   }
 
-  const filterObject = (obj) => {
-    Object
-      .keys(obj)
-      .forEach((key) => obj[key] === undefined && delete obj[key]);
-    return obj;
-  }
-
-  const buildEmbedSrc = (slide) => {
+  const penSrc = (slide) => {
     const details = penDetails(slide);
 
     const params = new URLSearchParams({
       'embed-version': 2,
-      'default-tab': slide.tab || 'result',
-      user: details.user,
-      editable: slide.editable || 'true',
-      editors: details.editors,
-      layout: details.layout,
+      'default-tab': 'result',
+      editable: 'true',
     });
 
     return `${details.embed}?${params.toString()}`;
   }
+
+  const penEmbed = (slide) => {
+    return `<iframe code-pen
+      src="${penSrc(slide)}"
+      height="600"
+      title="${slide.title || 'CodePen Embed'}"
+      allowfullscreen="true"
+      allowtransparency="true"
+      frameborder="0"
+      loading="lazy"
+      scrolling="no"
+      width="100%"
+    ></iframe>`;
+  }
+
+  const buildEmbedSlide = (slide) => {
+    slide.embed = penEmbed(slide);
+    slide.cite = cite(slide);
+    return slide;
+  }
 </script>
 
-<default-slide
-  webc:if="codePenTemplates[this.slide.pen]"
-  :@slide="newPen(this.slide)"
-></default-slide>
+<embed-slide
+  webc:if="this.slide"
+  :@slide="buildEmbedSlide(this.slide)"
+></embed-slide>
 
-<slide-item
-  webc:else
-  content-type="embed"
-  :id="this.slide.id"
-  :@caption="slideCaption(this.slide)"
-  :@note="this.slide.note"
-  :@embed="buildEmbedSrc(this.slide)"
->
-  <iframe
-    code-pen
-    :src="this.embed"
-    :height="600"
-    :title="this.slide.title || 'Codepen Embed'"
-    allowfullscreen="true"
-    allowtransparency="true"
-    frameborder="0"
-    loading="lazy"
-    scrolling="no"
-    width="100%"
-  ></iframe>
-</slide-item>
+<error-slide webc:else></error-slide>

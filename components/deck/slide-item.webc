@@ -1,3 +1,15 @@
+<script webc:setup>
+  const buildCaption = (caption, cite) => {
+    const result = cite && caption
+      ? `${caption} [${cite}]`
+      : caption || cite;
+
+    return result
+      ? slideMDownInline(result)
+      : null;
+  }
+</script>
+
 <template
   webc:root
   slide-item="container"
@@ -11,8 +23,8 @@
 
     <figcaption
       slide-caption
-      webc:if="this.caption"
-      @html="slideMDownInline(this.caption)"
+      webc:if="this.caption || this.cite"
+      @html="buildCaption(this.caption, this.cite)"
     ></figcaption>
     <template
       webc:else
@@ -115,7 +127,7 @@
   }
 
   [slide-caption] {
-    background: var(--slide-caption, aliceBlue);
+    background: var(--slide-caption, var(--slide-callout-color));
     color: var(--slide-caption-text, currentColor);
     padding: var(--slide-half-gap) var(--slide-gap);
     font-size: var(--slide-small-text);
@@ -130,6 +142,7 @@
   img,
   svg {
     block-size: auto;
+    fill: currentColor;
     max-inline-size: 100%;
     vertical-align: middle;
   }

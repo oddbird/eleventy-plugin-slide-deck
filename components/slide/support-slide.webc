@@ -16,7 +16,7 @@
 </script>
 
 <slide-item
-  webc:if="this.slide.caniuse"
+  webc:if="this.slide?.caniuse"
   style="--slide-fit: contain; --slide-background: #db5602;"
   content-type="image"
   :id="this.slide.id"
@@ -31,7 +31,7 @@
 </slide-item>
 
 <slide-item
-  webc:else
+  webc:elseif="this.slide"
   content-type="default"
   :id="this.slide.id"
   :@caption="this.slide.caption"
@@ -42,13 +42,15 @@
     webc:import="npm:@oddbird/browser-support"
     :@link="link"
   >
-    <h2 slot="title" @text="this.slide.support"></h2>
+    <h2 slot="title" @raw="slideMDownInline(this.slide.support)"></h2>
     <a :href="link">
       Browser support for
       <code @text="this.slide.support"></code>
     </a>
   </browser-support>
 </slide-item>
+
+<error-slide webc:else></error-slide>
 
 <style webc:bucket="slides-core">
 @layer slide.base {

@@ -1,7 +1,9 @@
 <slide-item
   @canvas-type="todo"
+  webc:if="this.slide"
   :id="this.slide.id"
   :@caption="this.slide.caption"
+  :@cite="this.slide.cite"
   :@note="this.slide.note"
   :@slide="this.slide"
 >
@@ -10,6 +12,7 @@
     @html="slideMDownBlock(this.slide.todo || this.slide)"
   ></div>
 </slide-item>
+<error-slide webc:else></error-slide>
 
 <style webc:bucket="slides-core">
 @layer slide.type {

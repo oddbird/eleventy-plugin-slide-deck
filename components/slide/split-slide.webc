@@ -1,11 +1,13 @@
 <slide-item
   content-type="split"
+  webc:if="this.slide"
   :id="this.slide.id"
   :@caption="this.slide.caption"
+  :@cite="this.slide.cite"
   :@note="this.slide.note"
   :@src="this.slide.img"
-  :@credit="this.slide.cite"
-  :style="slideStyles(this.slide, ['background', 'fit', 'position', 'padding'])"
+  :@credit="this.slide.credit"
+  :style="slideStyles(this.slide, ['fit', 'position', 'padding'])"
 >
   <div slide-content="image">
     <img
@@ -14,12 +16,12 @@
       sizes="50vw"
     >
     <photo-credit
-      webc:if="this.cite"
-      @html="`photo: ${slideMDownInline(this.cite)}`"
+      webc:if="this.credit"
+      @html="`photo: ${slideMDownInline(this.credit)}`"
     ></photo-credit>
   </div>
   <div slide-content="default">
-    <h2 webc:if="this.slide.title">
+    <h2 webc:if="this.slide.title || this.slide.pre">
       <slide-title
         webc:nokeep
         :@pre="this.slide.pre"
@@ -31,6 +33,7 @@
     <div webc:if="this.slide.webc" @html="this.slide.webc"></div>
   </div>
 </slide-item>
+<error-slide webc:else></error-slide>
 
 <style webc:bucket="slides-core">
 @layer slide.type {

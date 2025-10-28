@@ -1,104 +1,16 @@
-<script webc:setup>
-  const knownSlides = $data.knownSlides;
-
-  const getKnown = (slides) => {
-    if (!knownSlides) return slides;
-
-    return slides.map((slide) => {
-      if (knownSlides && slide.known) {
-        const isKnown = knownSlides[slide.known];
-        return {...isKnown, ...slide};
-      }
-      return slide;
-    });
-  }
-</script>
-
 <slide-deck
   webc:import="npm:@oddbird/slide-deck"
   :id="this.id || 'slides'"
-  :@slides="getKnown(this.slides)"
+  :@slides="this.slides"
   slide-view="slideshow"
   key-control
   follow-active
 >
-  <template
+  <render-slide
     webc:nokeep
     webc:for="slide of this.slides"
-  >
-    <todo-slide
-      webc:nokeep
-      webc:if="slide.todo"
-      :@slide="slide"
-    ></todo-slide>
-
-    <split-slide
-      webc:nokeep
-      webc:elseif="slide.img && (slide.md || slide.webc || slide.title)"
-      :@slide="slide"
-    ></split-slide>
-
-    <event-slide
-      webc:nokeep
-      webc:elseif="slide.venue"
-      :@slide="this.slide"
-      :@url="this.page.url"
-    ></event-slide>
-
-    <demo-slide
-      webc:nokeep
-      webc:elseif="slide.demo"
-      :@slide="slide"
-    ></demo-slide>
-
-    <support-slide
-      webc:nokeep
-      webc:elseif="slide.caniuse || slide.support"
-      :@slide="slide"
-    ></support-slide>
-
-    <embed-slide
-      webc:nokeep
-      webc:elseif="slide.video || slide.embed"
-      :@slide="slide"
-    ></embed-slide>
-
-    <img-slide
-      webc:nokeep
-      webc:elseif="slide.img"
-      :@slide="slide"
-    ></img-slide>
-
-    <url-slide
-      webc:nokeep
-      webc:elseif="slide.url"
-      :@slide="slide"
-    ></url-slide>
-
-    <pen-slide
-      webc:nokeep
-      webc:elseif="slide.pen"
-      :@slide="slide"
-    ></pen-slide>
-
-    <code-slide
-      webc:nokeep
-      webc:elseif="slide.html || slide.css || slide.scss || slide.js || slide.code"
-      :@slide="slide"
-    ></code-slide>
-
-    <quote-slide
-      webc:nokeep
-      webc:elseif="slide.quote"
-      :@slide="slide"
-    ></quote-slide>
-
-    <default-slide
-      webc:nokeep
-      webc:else
-      :@slide="slide"
-    ></default-slide>
-  </template>
+    :@slide="slide"
+  ></render-slide>
 
   <slide-controls webc:nokeep></slide-controls>
 </slide-deck>
@@ -231,24 +143,66 @@
   @layer slide.theme {
 
     slide-deck {
+      --slide-light-color: hsl(200deg 12% 95%);
+      --slide-dark-color: hsl(200deg 12% 5%);
+      --slide-fade-light-color: hsl(193deg 28% 87%);
+      --slide-fade-dark-color: hsl(193deg 28% 15%);
+
+      --slide-accent-dark-color: hsl(330deg 68% 43%);
+      --slide-accent-light-color: hsl(337 99% 79%);
+
+      --slide-action-dark-color: hsl(195deg 53% 27%);
+      --slide-action-light-color: hsl(196 77% 80%);
+
+      --slide-active-dark-color: hsl(330deg 53% 27%);
+      --slide-active-light-color: hsl(330 52.857% 87%);
 
       /* background colors */
-      --slide-background: hsl(200 12% 95.098%);
-      --slide-callout-color: hsl(193deg 28% 87%);
-      --slide-mark-bg-color: var(--slide-callout-color);
+      --slide-background: var(--slide-light-color, Canvas);
+      --slide-callout-color: var(--slide-fade-light-color);
 
       /* content colors */
-      --slide-text-color: hsl(200deg 12% 4.902%);
-      --slide-text-light-color: hsl(192.86deg 10% 27.451%);
-      --slide-accent-color: hsl(330.2deg 67.742% 42.549%);
+      --slide-color: var(--slide-dark-color, CanvasText);
+      --slide-accent-color: var(--slide-accent-dark-color);
+      --slide-action-color: var(--slide-action-dark-color);
+      --slide-active-color: var(--slide-active-dark-color);
       --slide-border-color: hsl(195deg 10% 50%);
-      --slide-shadow-color: hsl(195deg 30.769% 94.902% / 0.4);
-      --slide-action-color: hsl(195deg 53% 27%);
-      --slide-active-color: hsl(330deg 52.857% 27.451%);
-      --slide-highlight-color: hsl(330deg 52.857% 27.451%);
-      --slide-feature-color: hsl(195.65deg 45.098% 20%);
-      --slide-strikeout-color: var(--slide-highlight-color);
-  
+
+      /* aliased/relative colors */
+      --slide-mark-bg-color: var(--slide-callout-color);
+      --slide-strikeout-color: var(--slide-accent-color);
+      --slide-shadow-color: var(--slide-fade-dark-color);
+
+      /* progressive color enhancements */
+      @supports (color: hsl(from red / 1)) {
+        --slide-shadow-color: hsl(from var(--slide-fade-dark-color) / 0.4);
+      }
+
+      /* light and dark schemes */
+      @supports (color: light-dark(red, green)) {
+        /* background colors */
+        --slide-background: light-dark(
+          var(--slide-light-color), var(--slide-dark-color)
+        );
+        --slide-callout-color: light-dark(
+          var(--slide-fade-light-color), var(--slide-fade-dark-color)
+        );
+
+        /* content colors */
+        --slide-color: light-dark(
+          var(--slide-dark-color), var(--slide-light-color)
+        );
+        --slide-accent-color: light-dark(
+          var(--slide-accent-dark-color), var(--slide-accent-light-color)
+        );
+        --slide-action-color: light-dark(
+          var(--slide-action-dark-color), var(--slide-action-light-color)
+        );
+        --slide-active-color: light-dark(
+          var(--slide-active-dark-color), var(--slide-active-light-color)
+        );
+      }
+
       /* fonts */
       --slide-os-serif-font: palatino, 'palatino linotype', 'palatino lt std', 'book antiqua',
         georgia;
@@ -260,8 +214,7 @@
       --slide-code-font: var(--slide-web-font-code, var(--slide-os-code-font, ui-monospace)), monospace, serif;
 
       background: var(--slide-background);
-      color: var(--slide-text-color);
-      color-scheme: light;
+      color: var(--slide-color);
       font-family: var(--slide-sans-font);
       font-size: var(--slide-normal-text);
       font-size-adjust: from-font;
@@ -295,8 +248,8 @@
 
       pre {
         white-space: pre-wrap;
-        word-break: break-all;
-        word-wrap: break-word;
+        overflow-wrap: break-word;
+        tab-size: 2;
       }
 
       pre,

@@ -3,19 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title @text="this.title || this.event.title"></title>
-  <style @raw="getBundle('css')" webc:keep></style>
+  <title @text="this.title || this.event?.title || 'eleventy slides'"></title>
 
+  <style webc:keep>
+    @layer base, theme;  /* {} <- syntax highlighting fix, lol */
+    @import url('/css/prism.css') layer(base);
+    @import url('/css/fonts.css') layer(theme);
+  </style>
+  <style @raw="getBundle('css')" webc:keep></style>
   <style @raw="getBundle('css', 'slides-layer-order')" webc:keep></style>
   <style @raw="getBundle('css', 'slides-core')" webc:keep></style>
   <style @raw="getBundle('css', 'slides-theme')" webc:keep></style>
-  <style webc:keep>
-    @import url('/css/fonts.css') layer(theme);
-    @import url('/css/prism.css') layer(base);
-  </style>
 </head>
 <body>
-  <main @html="this.content"></main>
+  <div webc:nokeep @raw="this.content"></div>
   <script @raw="getBundle('js')" webc:keep></script>
 </body>
 </html>
