@@ -26,8 +26,9 @@ slides:
 - md: |
     ## Put markdown in here
     - some
-    - arbitrary
-    - _markdown_
+    - **arbitrary**
+    - _markdown_ -- like this
+    - ==including a local markdown plugin==
   note: |
     - `<default-slide>`
     - `md`-only

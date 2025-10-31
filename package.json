@@ -35,6 +35,7 @@
     "@11ty/eleventy-img": "^5.0.0",
     "@11ty/eleventy-plugin-webc": "^0.11.2",
     "js-yaml": "^4.1.0",
-    "lite-youtube-embed": "^0.3.3"
+    "lite-youtube-embed": "^0.3.3",
+    "markdown-it-mark": "^4.0.0"
   }
 }

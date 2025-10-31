@@ -17,7 +17,7 @@
     >
     <photo-credit
       webc:if="this.credit"
-      @html="`photo: ${slideMDownInline(this.credit)}`"
+      @html="`photo: ${slideMarkdownInline(this.credit)}`"
     ></photo-credit>
   </div>
   <div slide-content="default">
@@ -28,8 +28,8 @@
         :@title="this.slide.title"
       ></slide-title>
     </h2>
-    <p class="sub" webc:if="this.slide.sub" @html="slideMDownInline(this.slide.sub)"></p>
-    <div webc:if="this.slide.md" @html="slideMDownBlock(this.slide.md)"></div>
+    <p class="sub" webc:if="this.slide.sub" @html="slideMarkdownInline(this.slide.sub)"></p>
+    <div webc:if="this.slide.md" @html="slideMarkdownBlock(this.slide.md)"></div>
     <div webc:if="this.slide.webc" @html="this.slide.webc"></div>
   </div>
 </slide-item>

@@ -1,3 +1,12 @@
+## v0.4.0 - 2025-10-31
+
+- Add optional `markdownFunctions.block` & `markdownFunctions.inline`
+  configuration options. This allows you to use a custom markdown parser
+  for rendering slides (beyond setting basic `markdownIt` options).
+- Breaking: rename slide markdown filters
+  `slideMDownBlock()` to `slideMarkdownBlock()` &
+  `slideMDownInline()` to `slideMarkdownInline()` for clarity.
+
 ## v0.3.0 - 2025-10-28
 
 - Breaking: Image slides use `slide.credit` rather than `slide.cite`

@@ -14,8 +14,8 @@
       :@title="this.slide.title"
     ></slide-title>
   </h2>
-  <p slide-title="sub" webc:if="this.slide.sub" @html="slideMDownInline(this.slide.sub)"></p>
-  <div webc:if="this.slide.md" @html="slideMDownBlock(this.slide.md)"></div>
+  <p slide-title="sub" webc:if="this.slide.sub" @html="slideMarkdownInline(this.slide.sub)"></p>
+  <div webc:if="this.slide.md" @html="slideMarkdownBlock(this.slide.md)"></div>
   <div webc:if="this.slide.webc" @html="this.slide.webc"></div>
 </slide-item>
 <error-slide webc:else></error-slide>

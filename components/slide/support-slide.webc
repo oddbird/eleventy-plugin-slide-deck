@@ -42,7 +42,7 @@
     webc:import="npm:@oddbird/browser-support"
     :@link="link"
   >
-    <h2 slot="title" @raw="slideMDownInline(this.slide.support)"></h2>
+    <h2 slot="title" @raw="slideMarkdownInline(this.slide.support)"></h2>
     <a :href="link">
       Browser support for
       <code @text="this.slide.support"></code>
