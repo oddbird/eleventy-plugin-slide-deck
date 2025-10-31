@@ -6,6 +6,7 @@
 - Breaking: rename slide markdown filters
   `slideMDownBlock()` to `slideMarkdownBlock()` &
   `slideMDownInline()` to `slideMarkdownInline()` for clarity.
+- Update dependencies
 
 ## v0.3.0 - 2025-10-28
 
