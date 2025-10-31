@@ -25,14 +25,14 @@
   </slide-quote-marker>
 
   <slide-quote>
-    <blockquote @html="slideMDownBlock(this.slide.quote)"></blockquote>
+    <blockquote @html="slideMarkdownBlock(this.slide.quote)"></blockquote>
     <slide-quote-cite
       webc:if="this.slide.cite"
-      @html="slideMDownInline(`--- ${this.slide.cite}`)">
+      @html="slideMarkdownInline(`--- ${this.slide.cite}`)">
     </slide-quote-cite>
   </slide-quote>
 </slide-item>
-<error-slide webc:else></error-slide>
+<error-slide webc:nokeep webc:else></error-slide>
 
 <style webc:bucket="slides-core">
 @layer slide.type {

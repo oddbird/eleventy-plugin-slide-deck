@@ -47,6 +47,9 @@ for this slide deck plugin:
   or make other slide-data alterations.
 - `markdownIt` is an option object
   passed along to the `markdown-it` package
+- `markdownFunctions.inline` & `markdownFunctions.block` allow
+  replacing the markdown parser entirely,
+  in case you want to add plugins or use a different library.
 - `domain` is a string optionally
   prepended to the page url on event slides,
   to show the URL of the slide deck

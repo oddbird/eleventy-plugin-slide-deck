@@ -22,14 +22,13 @@
   }
 </script>
 
-<error-slide
-  webc:if="!this.slide"
-></error-slide>
 <split-slide
-  webc:elseif="slide.img || slide.avatar"
+  webc:if="slide.img || slide.avatar"
+  webc:nokeep
   :@slide="buildSrcSlide(this.slide)"
 ></split-slide>
 <default-slide
   webc:else
+  webc:nokeep
   :@slide="buildSrcSlide(this.slide)"
 ></default-slide>

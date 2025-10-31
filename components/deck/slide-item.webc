@@ -5,7 +5,7 @@
       : caption || cite;
 
     return result
-      ? slideMDownInline(result)
+      ? slideMarkdownInline(result)
       : null;
   }
 </script>
@@ -37,7 +37,7 @@
   <div
     slide-note
     webc:if="this.note"
-    @html="slideMDownBlock(this.note)"
+    @html="slideMarkdownBlock(this.note)"
   ></div>
 </template>
 

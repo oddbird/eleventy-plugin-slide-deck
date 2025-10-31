@@ -84,8 +84,6 @@
 </script>
 
 <embed-slide
-  webc:if="this.slide"
+  webc:nokeep
   :@slide="buildEmbedSlide(this.slide)"
 ></embed-slide>
-
-<error-slide webc:else></error-slide>
