@@ -1,12 +1,15 @@
 ## v0.4.0 - 2025-10-31
 
-- Add optional `markdownFunctions.block` & `markdownFunctions.inline`
+- New: optional `markdownFunctions.block` & `markdownFunctions.inline`
   configuration options. This allows you to use a custom markdown parser
   for rendering slides (beyond setting basic `markdownIt` options).
 - Breaking: rename slide markdown filters
   `slideMDownBlock()` to `slideMarkdownBlock()` &
   `slideMDownInline()` to `slideMarkdownInline()` for clarity.
-- Update dependencies
+- Breaking: Update dependencies
+- New: Show progress bar in speaker view
+- Fix: Maintain slide aspect ratios in portrait mode slideshow view
+- Fix: Remove extra wrapper elements on some slide types
 
 ## v0.3.0 - 2025-10-28
 
