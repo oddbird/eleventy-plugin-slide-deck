@@ -37,7 +37,7 @@ export default async function(eleventyConfig) {
     markdownFunctions: {
       block: (content) => mdOverride.render(content),
       inline: (content) => mdOverride.renderInline(content),
-    }
+    },
   });
 
   eleventyConfig.setLibrary('md', mdOverride);

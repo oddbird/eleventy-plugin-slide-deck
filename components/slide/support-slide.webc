@@ -50,7 +50,7 @@
   </browser-support>
 </slide-item>
 
-<error-slide webc:else></error-slide>
+<error-slide webc:nokeep webc:else></error-slide>
 
 <style webc:bucket="slides-core">
 @layer slide.base {

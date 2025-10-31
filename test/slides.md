@@ -33,6 +33,20 @@ slides:
     - `<default-slide>`
     - `md`-only
 
+    Test with a much longer note.
+    Test with a much longer note.
+    Test with a much longer note.
+    Test with a much longer note.
+    Test with a much longer note.
+    Test with a much longer note.
+    Test with a much longer note.
+    Test with a much longer note.
+    Test with a much longer note.
+    Test with a much longer note.
+    Test with a much longer note.
+    Test with a much longer note.
+    Test with a much longer note.
+
 - webc: |
     <h3>Put WebC in here…</h3>
     <oddbird-logo style="fill: deepPink"></oddbird-logo>

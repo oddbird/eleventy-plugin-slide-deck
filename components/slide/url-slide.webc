@@ -6,22 +6,14 @@
       ? `https://v1.opengraph.11ty.dev/${url}/${size}/`
       : `https://v1.screenshot.11ty.dev/${url}/${size}/`;
   }
+  const buildImgSlide = (slide) => {
+    slide.img = urlSrc(slide);
+    slide.alt = slide.alt || slide.title || '';
+    return slide;
+  }
 </script>
 
-<slide-item
-  content-type="image"
-  webc:if="this.slide"
-  :id="this.slide.id"
-  :@caption="this.slide.caption"
-  :@cite="this.slide.cite"
-  :@note="this.slide.note"
-  :@src="urlSrc(this.slide)"
-  :style="slideStyles(this.slide, ['fit', 'position', 'padding'])"
->
-  <img
-    :src="this.src"
-    :alt="this.slide.alt || this.slide.title || ''"
-    sizes="100vw"
-  >
-</slide-item>
-<error-slide webc:else></error-slide>
+<img-slide
+  webc:nokeep
+  :@slide="buildImgSlide(this.slide)"
+></img-slide>

@@ -80,7 +80,7 @@ export default async function(eleventyConfig, options) {
           slides: item.data.slides,
           knownSlides: item.data[options.known.slides],
           knownSeries: item.data[options.known.series],
-          buildFn: [options.buildFunction],
+          buildFn: options.buildFunction,
         });
         item.data.slideResources = getSlideResources(item.data.slideDeck);
         return item;
