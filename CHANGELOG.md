@@ -1,4 +1,4 @@
-## v0.4.0 - 2025-10-31
+## v0.4.0 - 2025-11-04
 
 - New: optional `markdownFunctions.block` & `markdownFunctions.inline`
   configuration options. This allows you to use a custom markdown parser
