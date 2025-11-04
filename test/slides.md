@@ -26,11 +26,26 @@ slides:
 - md: |
     ## Put markdown in here
     - some
-    - arbitrary
-    - _markdown_
+    - **arbitrary**
+    - _markdown_ -- like this
+    - ==including a local markdown plugin==
   note: |
     - `<default-slide>`
     - `md`-only
+
+    Test with a much longer note.
+    Test with a much longer note.
+    Test with a much longer note.
+    Test with a much longer note.
+    Test with a much longer note.
+    Test with a much longer note.
+    Test with a much longer note.
+    Test with a much longer note.
+    Test with a much longer note.
+    Test with a much longer note.
+    Test with a much longer note.
+    Test with a much longer note.
+    Test with a much longer note.
 
 - webc: |
     <h3>Put WebC in here…</h3>

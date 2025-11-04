@@ -17,9 +17,13 @@ export default async function(eleventyConfig, options) {
       typographer: true,
     },
 
+    // markdownFunctions: {
+    //   inline: (function),
+    //   block: (function),
+    // },
     // imgDir: (path relative to content folder),
     // buildFunction: (function),
-    // newPenTemplates: { new: 'https://pen.new' }
+
     collectionName: 'slideDeck',
     known: {
       slides: 'knownSlides',
@@ -34,6 +38,15 @@ export default async function(eleventyConfig, options) {
     },
   }, options);
 
+  if (!options.markdownFunctions) {
+    const mdDefault = markdownIt(options.markdownIt).disable('code');
+
+    options.markdownFunctions = {
+      inline: (content) => mdDefault.renderInline(content),
+      block: (content) => mdDefault.render(content),
+    };
+  }
+
   // data
   eleventyConfig.addGlobalData("slideDeckConfig", options);
 
@@ -46,15 +59,14 @@ export default async function(eleventyConfig, options) {
 
   // markdown
   eleventyConfig.addPlugin(syntaxHighlightPlugin);
-  const mdIt = markdownIt(options.markdownIt).disable('code');
 
   eleventyConfig.addFilter(
-    'slideMDownBlock',
-    (content) => mdIt.render(content)
+    'slideMarkdownBlock',
+    options.markdownFunctions.block
   );
   eleventyConfig.addFilter(
-    'slideMDownInline',
-    (content) => mdIt.renderInline(content)
+    'slideMarkdownInline',
+    options.markdownFunctions.inline
   );
 
   // collection
@@ -67,7 +79,7 @@ export default async function(eleventyConfig, options) {
           slides: item.data.slides,
           knownSlides: item.data[options.known.slides],
           knownSeries: item.data[options.known.series],
-          buildFn: [options.buildFunction],
+          buildFn: options.buildFunction,
         });
         item.data.slideResources = getSlideResources(item.data.slideDeck);
         return item;

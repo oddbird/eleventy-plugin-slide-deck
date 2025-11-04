@@ -17,7 +17,7 @@ layout: page
     <ul>
       <li
         webc:for="penLink of slidePage.data.slideResources.pens"
-        @html="slideMDownInline(penLink)"
+        @html="slideMarkdownInline(penLink)"
       ></li>
     </ul>
   </div>
@@ -27,7 +27,7 @@ layout: page
     <ul>
       <li
         webc:for="penLink of slidePage.data.slideResources.cite"
-        @html="slideMDownInline(penLink)"
+        @html="slideMarkdownInline(penLink)"
       ></li>
     </ul>
   </div>

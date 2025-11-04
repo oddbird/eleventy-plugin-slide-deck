@@ -1,7 +1,7 @@
 {
   "name": "@oddbird/eleventy-plugin-slide-deck",
   "description": "Build customizable presentations in eleventy",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "type": "module",
   "main": "index.js",
   "publishConfig": {
@@ -26,15 +26,16 @@
   },
   "homepage": "https://github.com/oddbird/eleventy-plugin-slide-deck#readme",
   "dependencies": {
-    "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.0",
-    "@oddbird/browser-support": "^0.1.0",
-    "@oddbird/slide-deck": "^0.2.0-rc.1"
+    "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.2",
+    "@oddbird/browser-support": "^0.1.1",
+    "@oddbird/slide-deck": "^0.2.0"
   },
   "devDependencies": {
-    "@11ty/eleventy": "^3.0.0",
-    "@11ty/eleventy-img": "^5.0.0",
+    "@11ty/eleventy": "^3.1.2",
+    "@11ty/eleventy-img": "^6.0.4",
     "@11ty/eleventy-plugin-webc": "^0.11.2",
     "js-yaml": "^4.1.0",
-    "lite-youtube-embed": "^0.3.3"
+    "lite-youtube-embed": "^0.3.3",
+    "markdown-it-mark": "^4.0.0"
   }
 }
