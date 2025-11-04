@@ -18,10 +18,9 @@ export default async function(eleventyConfig, options) {
     },
 
     // markdownFunctions: {
-    //   inline: mdDefault.renderInline(),
-    //   block: mdDefault.render(),
+    //   inline: (function),
+    //   block: (function),
     // },
-
     // imgDir: (path relative to content folder),
     // buildFunction: (function),
 
