@@ -157,7 +157,7 @@
       content: '';
       background: linear-gradient(
         to right,
-        accentColor var(--slide-deck-progress, 0),
+       var(--slide-accent-color) var(--slide-deck-progress, 0),
         canvas var(--slide-deck-progress, 0)
         );
       block-size: 1lh;
