@@ -6,13 +6,17 @@
   key-control
   follow-active
 >
+  <slot></slot>
   <render-slide
     webc:nokeep
     webc:for="slide of this.slides"
     :@slide="slide"
   ></render-slide>
 
-  <slide-controls webc:nokeep></slide-controls>
+  <slot name="after"></slot>
+  <slot name="controls">
+    <slide-controls webc:nokeep></slide-controls>
+  </slot>
 </slide-deck>
 
 <style webc:bucket="slides-layer-order">
@@ -265,10 +269,10 @@
       }
 
       button {
-        background-color: var(--slide-button-state-color, var(--slide-accent-color));
+        background-color: var(--slide-button-state-color, var(--slide-color));
         border: thick double;
         border-radius: 0.25em;
-        color: canvas;
+        color: var(--slide-background);
         font: inherit;
       }
 

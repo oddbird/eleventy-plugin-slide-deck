@@ -1,12 +1,37 @@
 ---
-layout: page
+layout: template
 ---
 
 <build-deck
   webc:nokeep
   id="my-very-good-talk"
   :@slides="this.slideDeck"
-></build-deck>
+>
+  <default-slide :@slide="({
+    pre: 'inserted',
+    title: '**before** slides',
+  })"></default-slide>
+
+  <div slot="after" webc:nokeep>
+    <default-slide :@slide="({
+      pre: 'inserted',
+      title: '**after** slides',
+    })"></default-slide>
+  </div>
+
+  <slide-controls
+    webc:nokeep
+    slot="controls"
+  >
+    <h2>Theming (extra controls)</h2>
+    <label for="color-scheme">Color Scheme</label>
+    <select id="color-scheme">
+      <option value="auto-mode">Auto</option>
+      <option value="light-mode">Light</option>
+      <option value="dark-mode">Dark</option>
+    </select>
+  </slide-controls>
+</build-deck>
 
 <style>
   html {

@@ -50,6 +50,37 @@
     padding: 0;
     position: relative;
     scroll-margin-block: var(--slide-target-margin);
+
+    &:target { scroll-margin-block: var(--target-margin); }
+
+    [role=list] { list-style: none; }
+    picture { display: contents; }
+    source { display: none; }
+
+    img {
+      display: block;
+      block-size: auto;
+      max-inline-size: 100%;
+    }
+
+    svg { fill: currentColor; }
+
+    textarea:not([rows]) { min-height: 5lh; }
+    [hidden] { display: none !important; }
+
+    visually-hidden,
+    [visually-hidden] {
+      &:not(:focus, :active, :focus-within) {
+        clip: rect(1px, 1px, 1px, 1px);
+        -webkit-clip-path: inset(1px 1px 1px 1px);
+        clip-path: inset(1px 1px 1px 1px);
+        height: 1px;
+        overflow: hidden;
+        pointer-events: none;
+        position: absolute;
+        width: 1px;
+      }
+    }
   }
 
   [slide-item][aria-current] {
@@ -135,54 +166,26 @@
 }
 
 @layer slide.content {
-  [role=list] { list-style: none; }
-  picture { display: contents; }
-  source { display: none; }
-
-  img,
-  svg {
-    block-size: auto;
-    fill: currentColor;
-    max-inline-size: 100%;
-    vertical-align: middle;
-  }
-
-  textarea:not([rows]) { min-height: 10lh; }
-  :target { scroll-margin-block: var(--target-margin); }
-  [hidden] { display: none !important; }
-
-  visually-hidden,
-  [visually-hidden] {
-    &:not(:focus, :active, :focus-within) {
-      clip: rect(1px, 1px, 1px, 1px);
-      -webkit-clip-path: inset(1px 1px 1px 1px);
-      clip-path: inset(1px 1px 1px 1px);
-      height: 1px;
-      overflow: hidden;
-      pointer-events: none;
-      position: absolute;
-      width: 1px;
+  [slide-canvas] {
+    h1, h2, h3, h4, h5, h6 {
+      text-wrap: balance;
+      margin-block: unset;
     }
-  }
 
-  h1, h2, h3, h4, h5, h6 {
-    text-wrap: balance;
-    margin-block: unset;
-  }
+    slide-title {
+      font-size: var(--slide-title-text);
+    }
 
-  slide-title {
-    font-size: var(--slide-title-text);
-  }
+    [slide-title=pre] {
+      display: block;
+      font-style: italic;
+      font-weight: lighter;
+      margin: unset;
+    }
 
-  [slide-title=pre] {
-    display: block;
-    font-style: italic;
-    font-weight: lighter;
-    margin: unset;
-  }
-
-  [slide-title=sub] {
-    margin: unset;
+    [slide-title=sub] {
+      margin: unset;
+    }
   }
 
   [slide-content] {

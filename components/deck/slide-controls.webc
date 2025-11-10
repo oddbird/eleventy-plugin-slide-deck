@@ -1,20 +1,28 @@
 <dialog slot="control-panel">
-  <div class="panel-header">
+  <div slide-dialog="header">
     <strong>SlideDeck Controls</strong>
     <form method="dialog">
       <button close-dialog>close</button>
     </form>
   </div>
-  <div class="panel-controls">
-    <h2>View:</h2>
-    <button set-view>grid</button>
-    <button set-view>slideshow</button>
-    <button set-view>speaker</button>
+  <div slide-dialog="contents">
+    <button slide-event="resume">slideshow</button>
+    <button slide-event="join-as-speaker">speaker view</button>
+    <button set-view="grid">thumbnails</button>
+    <details webc:if="!this.hideShortcuts">
+      <summary>Keyboard shortcuts</summary>
+      <dl>
+        <dt><kbd>cmd/ctrl-shift-enter</kbd>:</dt>
+        <dd>Start presentation (first slide)</dd>
 
-    <h2>Controls</h2>
-    <button slide-event="start">start presentation</button>
-    <button slide-event="join-as-speaker">join as speaker</button>
-    <button slide-event="key-control">navigation controls</button>
+        <dt><kbd>cmd/ctrl-enter</kbd>:</dt>
+        <dd>Resume presentation (active slide)</dd>
+
+        <dt><kbd>alt-enter</kbd>:</dt>
+        <dd>Resume in speaker view (active slide)</dd>
+      </dl>
+    </details>
+    <slot></slot>
   </div>
 </dialog>
 
@@ -28,13 +36,20 @@
     min-width: min(50ch, 100%);
     padding: 0;
 
-    h2 {
-      font-size: inherit !important;
-      margin-block: unset;
+    &::backdrop {
+      background-color: oklch(from black l c h / 0.5);
+      backdrop-filter: blur(2px);
     }
+
+    h2 {
+      font-size: inherit;
+      margin-block-start: 1lh;
+    }
+
+    details { margin-block-start: 1lh; }
   }
 
-  .panel-header {
+  [slide-dialog=header] {
     align-items: center;
     border-block-end: thin solid var(--slide-border-color);
     display: flex;
@@ -46,7 +61,7 @@
     form { margin: unset; }
   }
 
-  .panel-controls {
+  [slide-dialog=contents] {
     padding: var(--slide-gap);
   }
 

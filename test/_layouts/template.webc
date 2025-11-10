@@ -1,0 +1,28 @@
+---
+layout: base
+---
+
+<main @raw="this.content"></main>
+<footer>
+  <label for="color-scheme">Color Scheme</label>
+  <select id="color-scheme">
+    <option value="auto-mode">Auto</option>
+    <option value="light-mode">Light</option>
+    <option value="dark-mode">Dark</option>
+  </select>
+</footer>
+
+<style>
+  html {
+    color-scheme: light dark;
+
+    &:has(option[value=light-mode]:checked) {
+      color-scheme: light;
+    }
+
+    &:has(option[value=dark-mode]:checked) {
+      color-scheme: dark;
+    }
+  }
+  footer { padding: 1em; }
+</style>
