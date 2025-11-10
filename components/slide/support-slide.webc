@@ -1,54 +1,52 @@
 <script webc:setup>
   const canILink = (feature) => `https://caniuse.com/#feat=${feature}`;
 
-  const canICaption = (slide) => {
-    const text = `Can I Use ${slide.caniuse}`;
-    const permalink = `[[${text}](${canILink(slide.caniuse)})]`;
-
-    return slide.caption
-      ? `${slide.caption} ${permalink}`
-      : permalink;
+  const canICite = (slide) => {
+    const name = slide.title || `CanIUse ${slide.caniuse}`
+    const link = `https://caniuse.com/#feat=${slide.caniuse}`;
+    return `[${name}](${link})`;
   }
 
   const exploreLink = (feature) => (
     `https://web-platform-dx.github.io/web-features-explorer/features/${feature}`
   );
+
+  const buildImgSlide = (slide) => {
+    slide.title = slide.title || `CanIUse ${slide.caniuse}`;
+    slide.img = `https://caniuse.bitsofco.de/image/${slide.caniuse}.jpg`;
+    slide.alt = slide.alt || slide.title;
+    slide.credit = '[caniuse.bitsofco.de](https://caniuse.bitsofco.de)';
+    slide.cite = slide.cite || canICite(slide);
+    slide.background = slide.background || '#db5602';
+    slide.fit = 'contain';
+    slide.position = 'center';
+    return slide;
+  }
+
+  const buildEmbedSlide = (slide) => {
+    slide.title = slide.title || slide.support;
+    slide.embed = `
+      <browser-support webc:import="npm:@oddbird/browser-support">
+        <h2 slot="title">${slideMarkdownInline(slide.title)}</h2>
+        <a href="${exploreLink(slide.support)}">
+          Browser support for <code>${slide.title}</code>
+        </a>
+      </browser-support>
+    `;
+    slide['place-content'] = slide['place-content'] || 'safe center';
+    return slide;
+  }
 </script>
 
-<slide-item
+<img-slide
   webc:if="this.slide?.caniuse"
-  style="--slide-fit: contain; --slide-background: #db5602;"
-  content-type="image"
-  :id="this.slide.id"
-  :@caption="canICaption(this.slide)"
-  :@note="this.slide.note"
->
-  <img
-    :src="`https://caniuse.bitsofco.de/image/${this.slide.caniuse}.jpg`"
-    :alt="`Support data from CanIUse.com on the ${this.slide.caniuse} feature`"
-    sizes="100vw"
-  >
-</slide-item>
+  :@slide="buildImgSlide(this.slide)"
+></img-slide>
 
-<slide-item
+<embed-slide
   webc:elseif="this.slide"
-  content-type="default"
-  :id="this.slide.id"
-  :@caption="this.slide.caption"
-  :@note="this.slide.note"
-  :@link="exploreLink(this.slide.support)"
->
-  <browser-support
-    webc:import="npm:@oddbird/browser-support"
-    :@link="link"
-  >
-    <h2 slot="title" @raw="slideMarkdownInline(this.slide.support)"></h2>
-    <a :href="link">
-      Browser support for
-      <code @text="this.slide.support"></code>
-    </a>
-  </browser-support>
-</slide-item>
+  :@slide="buildEmbedSlide(slide)"
+></embed-slide>
 
 <error-slide webc:nokeep webc:else></error-slide>
 

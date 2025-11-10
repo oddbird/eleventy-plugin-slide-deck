@@ -1,3 +1,16 @@
+## v0.5.0 - unreleased
+
+- Breaking/Fix: `<support-slide>` extends
+  `<img-slide>` when `slide.caniuse` is present,
+  or `<embed-slide>` when checking `slide.support`.
+  This ensures support for placement and style properties,
+  and bundling of required styles.
+- Breaking/Fix: `<embed-slide>` only overrides the natural dimensions
+  of `<iframe>` and `<video>` embeds.
+- New: `<embed-slide>` accepts `slide.place-content` and `slide.place-items`
+  for managing placement of embeds.
+
+
 ## v0.4.0 - 2025-11-04
 
 - New: optional `markdownFunctions.block` & `markdownFunctions.inline`
