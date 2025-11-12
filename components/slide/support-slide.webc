@@ -51,7 +51,7 @@
 <error-slide webc:nokeep webc:else></error-slide>
 
 <style webc:bucket="slides-core">
-@layer slide.base {
+@layer slide.type {
   [slide-content] {
     browser-support::part(link),
     browser-support::part(link):visited {

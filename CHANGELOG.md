@@ -11,12 +11,18 @@
   are renamed from `.panel-header`/`.panel-controls` to
   `[slide-dialog=header]`/`[slide-dialog=contents]`.
 - Breaking: Re-arrange and renamed default controls.
+- Breaking: Remove unnecessary `slide-caption` slot.
 - New: Provide list of basic keyboard shortcuts in control panel.
-  Remove with the `hide-shortcuts` property.
 - New: `<slide-controls>` default slot for appending additional controls.
 - Fix: `<error-slide>` won't fail when missing slide data.
-- Styles: Buttons are inverted from their surrounding colors by default.
+- Styles: Slide-focus buttons no longer use absolute positioning.
+- Styles: Move image credit to the left,
+  avoiding conflicts with slide-focus button
+- Styles: Buttons are inverted from their surrounding colors by default,
+  use the `--slide-accent` color for focus/hover,
+  and the `--slide-active` color when pressed.
 - Styles: Resets are moved from `slides.contents` to `slides.base` layer.
+- Styles: Move `@layer slide.theme` near bottom of the layer order
 - Styles: `<slide-controls>` backdrop is darker with a blurred backdrop-filter.- New: `<embed-slide>` accepts `slide.place-content` and `slide.place-items`
   for managing placement of embeds.
 - New: `<build-deck>` has a default `<slot>` rendered before the slides,

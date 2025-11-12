@@ -21,17 +21,17 @@
       :slide-content="this.contentType || 'default'"
     ><slot></slot></div>
 
-    <figcaption
-      slide-caption
-      webc:if="this.caption || this.cite"
-      @html="buildCaption(this.caption, this.cite)"
-    ></figcaption>
-    <template
-      webc:else
-      webc:nokeep
-    ><slot name="slide-caption"></slot></template>
+    <slide-caption-wrapper>
+      <figcaption
+        slide-caption
+        webc:if="this.caption || this.cite"
+        @html="buildCaption(this.caption, this.cite)"
+      ></figcaption>
 
-    <button to-slide><visually-hidden>focus slide </visually-hidden></button>
+      <button to-slide slide-focus-button>
+        <visually-hidden>focus slide </visually-hidden>
+      </button>
+    </slide-caption-wrapper>
   </figure>
 
   <div
@@ -91,78 +91,6 @@
       --slide-animation-active: none;
     }
   }
-
-  [slide-canvas] {
-    --step-n1: clamp(0.625rem, 0.4859rem + 0.7418cqi, 1.0608rem);
-    --step-0: clamp(0.75rem, 0.5106rem + 1.2766cqi, 1.5rem);
-    --step-1: clamp(0.9rem, 0.5103rem + 2.0783cqi, 2.121rem);
-    --step-2: clamp(1.08rem, 0.4675rem + 3.2665cqi, 2.9991rem);
-    --step-3: clamp(1.296rem, 0.3562rem + 5.0123cqi, 4.2407rem);
-
-    --slide-small-text: var(--step-0);
-    --slide-normal-text: var(--step-1);
-    --slide-large-text: var(--step-2);
-    --slide-xlarge-text: var(--step-3);
-    --slide-title-text: var(--slide-xlarge-text);
-
-    aspect-ratio: var(--slide-ratio);
-    border: var(--slide-canvas-border, thin solid);
-    container: slide-canvas / inline-size;
-    display: grid;
-    grid-template: 'content' 1fr 'caption' auto / minmax(0, 1fr);
-    margin: 0;
-    position: relative;
-
-    [slide-item]:target & {
-      outline: var(--slide-target-outline) var(--slide-accent-color);
-      outline-offset: var(--slide-target-outline-offset);
-    }
-
-    > button[to-slide] {
-      font-variant-numeric: lining-nums;
-      inset: var(--to-slide-inset, 0 0 auto auto);
-      min-inline-size: 3ch;
-      padding: 0 0.25em;
-      position: absolute;
-      translate: var(--to-slide-translate, var(--slide-gap) -50%);
-      text-align: center;
-      opacity: var(--to-slide-opacity, 1);
-
-      &:focus,
-      &:hover,
-      &:active {
-        --to-slide-opacity: 1;
-      }
-
-      &:not(:focus, :hover, :active) {
-        filter: grayscale(80%);
-      }
-
-      &::after {
-        content: var(--slide-index-string);
-      }
-    }
-  }
-
-  [slide-content] {
-    background: var(--slide-background, Canvas);
-    color: var(--slide-color, CanvasText);
-    color-scheme: var(--slide-mode);
-    display: grid;
-
-    [style*='--slide-mode'] & {
-      --slide-accent-color: AccentColor;
-      --action: LinkColor;
-      --active: ActiveText;
-    }
-  }
-
-  [slide-caption] {
-    background: var(--slide-caption, var(--slide-callout-color));
-    color: var(--slide-caption-text, currentColor);
-    padding: var(--slide-half-gap) var(--slide-gap);
-    font-size: var(--slide-small-text);
-  }
 }
 
 @layer slide.content {
@@ -190,6 +118,101 @@
 
   [slide-content] {
     font-size: var(--slide-normal-text);
+  }
+}
+
+@layer slide.theme {
+  [slide-canvas] {
+    --step-n1: clamp(0.625rem, 0.4859rem + 0.7418cqi, 1.0608rem);
+    --step-0: clamp(0.75rem, 0.5106rem + 1.2766cqi, 1.5rem);
+    --step-1: clamp(0.9rem, 0.5103rem + 2.0783cqi, 2.121rem);
+    --step-2: clamp(1.08rem, 0.4675rem + 3.2665cqi, 2.9991rem);
+    --step-3: clamp(1.296rem, 0.3562rem + 5.0123cqi, 4.2407rem);
+
+    --slide-small-text: var(--step-0);
+    --slide-normal-text: var(--step-1);
+    --slide-large-text: var(--step-2);
+    --slide-xlarge-text: var(--step-3);
+    --slide-title-text: var(--slide-xlarge-text);
+
+    aspect-ratio: var(--slide-ratio);
+    border: var(--slide-canvas-border, thin solid);
+    container: slide-canvas / inline-size;
+    display: grid;
+    grid-template:
+      'content content' 1fr
+      'caption to-slide' auto
+      / minmax(0, 1fr) auto;
+    margin: 0;
+    position: relative;
+
+    [slide-item]:target & {
+      outline: var(--slide-target-outline) var(--slide-accent-color);
+      outline-offset: var(--slide-target-outline-offset);
+    }
+
+    &:not(:has([slide-caption])) {
+      --slide-content-grid-area: 1 / 1 / -1 / -1;
+    }
+  }
+
+  [slide-content] {
+    background: var(--slide-background, Canvas);
+    color: var(--slide-color, CanvasText);
+    color-scheme: var(--slide-mode);
+    display: grid;
+    grid-area: var(--slide-content-grid-area, content);
+
+    [style*='--slide-mode'] & {
+      --slide-accent-color: AccentColor;
+      --action: LinkColor;
+      --active: ActiveText;
+    }
+  }
+
+  slide-caption-wrapper {
+    display: contents;
+    font-size: var(--slide-small-text);
+
+    &:has([slide-caption]) {
+      align-items: center;
+      background: var(--slide-caption, var(--slide-callout-color));
+      color: var(--slide-caption-text, currentColor);
+      display: grid;
+      grid-area: caption / caption / to-slide / to-slide;
+      grid-template: subgrid / subgrid;
+    }
+  }
+
+  [slide-caption] {
+    grid-area: caption;
+    padding: var(--slide-half-gap) var(--slide-gap);
+  }
+
+  button[slide-focus-button] {
+    --slide-button-color: transparent;
+    --slide-button-text: currentColor;
+    border: thin solid transparent;
+    border-radius: 0;
+    font-variant-numeric: lining-nums;
+    grid-area: to-slide;
+    opacity: var(--to-slide-opacity, 0.5);
+    padding: var(--slide-half-gap) var(--slide-gap);
+    position: relative;
+    transition: opacity 200ms;
+    z-index: 2;
+
+    &:focus,
+    &:hover,
+    &:active {
+      --to-slide-opacity: 1;
+      --slide-button-state-color: var(--slide-active-color);
+      --slide-button-state-text: var(--slide-background);
+    }
+
+    &::after {
+      content: var(--slide-index-string);
+    }
   }
 }
 </style>

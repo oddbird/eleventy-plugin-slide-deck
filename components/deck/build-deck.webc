@@ -7,6 +7,7 @@
   follow-active
 >
   <slot></slot>
+
   <render-slide
     webc:nokeep
     webc:for="slide of this.slides"
@@ -20,7 +21,7 @@
 </slide-deck>
 
 <style webc:bucket="slides-layer-order">
-  @layer slide.base, slide.content, slide.views, slide.type, slide.theme;
+  @layer slide.base, slide.theme, slide.content, slide.views, slide.type;
 </style>
 
 <style webc:bucket="slides-core">
@@ -75,10 +76,6 @@
   }
 
   [slide-view=slideshow] {
-    --to-slide-inset: auto calc(var(--slide-half-gap) / 2) calc(var(--slide-half-gap) / 2) auto;
-    --to-slide-opacity: 0.05;
-    --to-slide-translate: 0 0;
-
     @media (orientation: landscape) {
       --slide-ratio: unset;
       grid-auto-rows: 100svh;
@@ -207,6 +204,9 @@
       --slide-strikeout-color: var(--slide-accent-color);
       --slide-shadow-color: var(--slide-fade-dark-color);
 
+      --slide-button-color: var(--slide-color);
+      --slide-button-text: var(--slide-background);
+
       /* progressive color enhancements */
       @supports (color: hsl(from red / 1)) {
         --slide-shadow-color: hsl(from var(--slide-fade-dark-color) / 0.4);
@@ -269,11 +269,17 @@
       }
 
       button {
-        background-color: var(--slide-button-state-color, var(--slide-color));
+        background-color: var(--slide-button-state-color, var(--slide-button-color));
         border: thick double;
         border-radius: 0.25em;
-        color: var(--slide-background);
+        color: var(--slide-button-state-text, var(--slide-button-text));
         font: inherit;
+
+        &:focus,
+        &:hover,
+        &:active {
+          --slide-button-state-color: var(--slide-accent-color);
+        }
       }
 
       [aria-pressed=true] {
@@ -300,7 +306,6 @@
       }
 
       a {
-
         &:where(:link),
         &:where(:visited) {
           --slide-underline-color--default: var(--slide-accent-color);

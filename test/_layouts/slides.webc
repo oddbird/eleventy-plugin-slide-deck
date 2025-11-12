@@ -7,15 +7,20 @@ layout: template
   id="my-very-good-talk"
   :@slides="this.slideDeck"
 >
-  <default-slide :@slide="({
-    pre: 'inserted',
-    title: '**before** slides',
-  })"></default-slide>
+  <default-slide
+    webc:nokeep
+    :@slide="({
+      pre: 'inserted',
+      title: '**before** slide loop',
+      caption: 'Using the `<build-deck>` default `<slot>`',
+    })"
+  ></default-slide>
 
   <div slot="after" webc:nokeep>
     <default-slide :@slide="({
       pre: 'inserted',
-      title: '**after** slides',
+      title: '**after** slide loop',
+      caption: 'Using the `<build-deck>` `<slot name=after>`',
     })"></default-slide>
   </div>
 
@@ -48,6 +53,7 @@ layout: template
 
   event-caption {
     align-items: center;
+    justify-items: start;
     display: grid;
     grid-template-columns: auto 1fr auto;
     gap: var(--slide-gap);

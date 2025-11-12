@@ -24,7 +24,9 @@
 <style webc:bucket="slides-core">
 @layer slide.type {
   [slide-content~=embed] {
+    --slide-content-grid-area: content;
     container: video / size;
+    overflow: clip;
     place-content: var(--slide-place-content);
     place-items: var(--slide-place-items);
 

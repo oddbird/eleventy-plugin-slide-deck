@@ -44,7 +44,7 @@
       color: CanvasText;
       font-size: var(--slide-small-text, smaller);
       font-style: italic;
-      inset: auto 0 0 auto;
+      inset: auto auto 0 0;
       margin: var(--slide-half-gap);
       padding-inline: var(--slide-half-gap);
       position: absolute;

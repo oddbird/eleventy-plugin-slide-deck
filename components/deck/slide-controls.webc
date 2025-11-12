@@ -1,4 +1,4 @@
-<dialog slot="control-panel">
+<dialog slot="control-panel" id="slide-controls">
   <div slide-dialog="header">
     <strong>SlideDeck Controls</strong>
     <form method="dialog">
@@ -6,23 +6,38 @@
     </form>
   </div>
   <div slide-dialog="contents">
-    <button slide-event="resume">slideshow</button>
-    <button slide-event="join-as-speaker">speaker view</button>
+    <h2>View</h2>
+    <button set-view="slideshow">slideshow</button>
     <button set-view="grid">thumbnails</button>
-    <details webc:if="!this.hideShortcuts">
+    <button set-view="speaker">speaker</button>
+
+    <slot></slot>
+
+    <details slide-shortcuts webc:if="!this.hideShortcuts">
       <summary>Keyboard shortcuts</summary>
       <dl>
+        <dt><kbd>cmd/ctrl-k</kbd>:</dt>
+        <dd>Toggle this control dialog</dd>
+
         <dt><kbd>cmd/ctrl-shift-enter</kbd>:</dt>
-        <dd>Start presentation (first slide)</dd>
+        <dd>
+          <button slide-event="start">Start</button>
+          presentation (from first slide)
+        </dd>
 
         <dt><kbd>cmd/ctrl-enter</kbd>:</dt>
-        <dd>Resume presentation (active slide)</dd>
+        <dd>
+          <button slide-event="resume">Resume</button>
+          presentation (from active slide)
+        </dd>
 
         <dt><kbd>alt-enter</kbd>:</dt>
-        <dd>Resume in speaker view (active slide)</dd>
+        <dd>
+          <button slide-event="join-as-speaker">Join</button>
+          in speaker view (following active slide)
+        </dd>
       </dl>
     </details>
-    <slot></slot>
   </div>
 </dialog>
 
@@ -43,10 +58,18 @@
 
     h2 {
       font-size: inherit;
-      margin-block-start: 1lh;
-    }
+      margin-block: 1lh 0;
 
-    details { margin-block-start: 1lh; }
+      &:first-child {
+        margin-block-start: unset;
+      }
+    }
+  }
+
+  [slide-shortcuts] {
+    border-block-start: thin dotted;
+    margin-block-start: 1lh;
+    padding-block-start: var(--slide-gap);
   }
 
   [slide-dialog=header] {
