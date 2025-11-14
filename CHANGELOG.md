@@ -23,7 +23,8 @@
   and the `--slide-active` color when pressed.
 - Styles: Resets are moved from `slides.contents` to `slides.base` layer.
 - Styles: Move `@layer slide.theme` near bottom of the layer order
-- Styles: `<slide-controls>` backdrop is darker with a blurred backdrop-filter.- New: `<embed-slide>` accepts `slide.place-content` and `slide.place-items`
+- Styles: `<slide-controls>` backdrop is darker with a blurred backdrop-filter.
+- New: `<embed-slide>` accepts `slide.place-content` and `slide.place-items`
   for managing placement of embeds.
 - New: `<build-deck>` has a default `<slot>` rendered before the slides,
   `<slot name='after'>` after the slides,
