@@ -1,8 +1,11 @@
 # Eleventy Slide-Deck Plugin
 
-A plugin to use the `@oddbird/slide-deck`
+A plugin to use the
+[`@oddbird/slide-deck`](https://github.com/oddbird/slide-deck)
 web component in eleventy projects --
 and generate decks from data.
+
+[Demo](https://eleventy-plugin-slide-deck.netlify.app/)
 
 Any page with `slides` data
 will be added to the (configurable) `slideDeck` collection,

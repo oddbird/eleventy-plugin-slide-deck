@@ -12,9 +12,7 @@ start-deck:
     <a href="https://front-end.social/@mia">
       @mia@front-end.social
     </a>
-    <span>
-      (<kbd>Cmd/Ctr-k</kbd> for settings)
-    </span>
+    <button commandFor="slide-controls" command="show-modal">controls</button>
     </event-caption>
 
 mia:

@@ -2,8 +2,9 @@
   content-type="event"
   webc:if="this.slide"
   :id="this.slide.id"
-  :@note="this.slide.note"
   :@slide="this.slide"
+  :@caption="this.slide.caption"
+  :@note="this.slide.note"
 >
   <div slide-auto="exit"
     webc:if="slide.exit"
@@ -54,13 +55,6 @@
       ></a>
     </div>
   </div>
-
-  <figcaption
-    slide-caption
-    slot="slide-caption"
-    webc:if="slide.caption"
-    @html="slideMarkdownInline(slide.caption)"
-  ></figcaption>
 </slide-item>
 <error-slide webc:nokeep webc:else></error-slide>
 

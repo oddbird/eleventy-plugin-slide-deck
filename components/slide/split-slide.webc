@@ -45,6 +45,10 @@
     );
     display: grid;
     grid-template-columns: minmax(25%, 0.5fr) 1fr;
+
+    [slide-content] {
+      grid-area: unset;
+    }
   }
 }
 </style>
