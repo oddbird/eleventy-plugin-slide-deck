@@ -136,7 +136,10 @@
     --slide-title-text: var(--slide-xlarge-text);
 
     aspect-ratio: var(--slide-ratio);
+    background: var(--slide-background, Canvas);
     border: var(--slide-canvas-border, thin solid);
+    color: var(--slide-color, CanvasText);
+    color-scheme: var(--slide-mode);
     container: slide-canvas / inline-size;
     display: grid;
     grid-template:
@@ -157,17 +160,8 @@
   }
 
   [slide-content] {
-    background: var(--slide-background, Canvas);
-    color: var(--slide-color, CanvasText);
-    color-scheme: var(--slide-mode);
     display: grid;
     grid-area: var(--slide-content-grid-area, content);
-
-    [style*='--slide-mode'] & {
-      --slide-accent-color: AccentColor;
-      --action: LinkColor;
-      --active: ActiveText;
-    }
   }
 
   slide-caption-wrapper {
