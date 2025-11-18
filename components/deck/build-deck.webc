@@ -304,7 +304,7 @@
       }
     }
 
-    [slide-deck],
+    slide-deck,
     [slide-canvas] {
       /* background colors */
       --slide-background: var(--slide-light-color, Canvas);
