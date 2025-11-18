@@ -1,3 +1,38 @@
+## v0.5.0 - unreleased
+
+- Breaking/Fix: `<support-slide>` extends
+  `<img-slide>` when `slide.caniuse` is present,
+  or `<embed-slide>` when checking `slide.support`.
+  This ensures support for placement and style properties,
+  and bundling of required styles.
+- Breaking/Fix: `<embed-slide>` only overrides the natural dimensions
+  of `<iframe>` and `<video>` embeds.
+- Breaking: The `<slide-controls>` dialog header and content areas
+  are renamed from `.panel-header`/`.panel-controls` to
+  `[slide-dialog=header]`/`[slide-dialog=contents]`.
+- Breaking: Re-arrange and renamed default controls.
+- Breaking: Remove unnecessary `slide-caption` slot.
+- New: Provide list of basic keyboard shortcuts in control panel.
+- New: `<slide-controls>` default slot for appending additional controls.
+- New: `<embed-slide>` accepts `slide.place-content` and `slide.place-items`
+  for managing placement of embeds.
+- New: `<build-deck>` has a default `<slot>` rendered before the slides,
+  `<slot name='after'>` after the slides,
+  and `<slot name='controls'>` for overriding the default `<slide-controls>`.
+- Fix: `<error-slide>` won't fail when missing slide data.
+- Styles: All slide color variables are re-calculated on `[slide-canvas]`
+  based on the color-scheme of the slide.
+- Styles: Slide-focus buttons are part of the layout,
+  rather than being absolutely positioned over top.
+- Styles: Move image credit to the left,
+  avoiding conflicts with slide-focus button.
+- Styles: Buttons are inverted from their surrounding colors by default,
+  use the `--slide-accent` color for focus/hover,
+  and the `--slide-active` color when pressed.
+- Styles: Resets are moved from `slides.contents` to `slides.base` layer.
+- Styles: Move `@layer slide.theme` near bottom of the layer order
+- Styles: `<slide-controls>` backdrop is darker with a blurred backdrop-filter.
+
 ## v0.4.0 - 2025-11-04
 
 - New: optional `markdownFunctions.block` & `markdownFunctions.inline`

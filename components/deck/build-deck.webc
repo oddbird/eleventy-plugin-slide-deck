@@ -6,17 +6,22 @@
   key-control
   follow-active
 >
+  <slot></slot>
+
   <render-slide
     webc:nokeep
     webc:for="slide of this.slides"
     :@slide="slide"
   ></render-slide>
 
-  <slide-controls webc:nokeep></slide-controls>
+  <slot name="after"></slot>
+  <slot name="controls">
+    <slide-controls webc:nokeep></slide-controls>
+  </slot>
 </slide-deck>
 
 <style webc:bucket="slides-layer-order">
-  @layer slide.base, slide.content, slide.views, slide.type, slide.theme;
+  @layer slide.base, slide.theme, slide.content, slide.views, slide.type;
 </style>
 
 <style webc:bucket="slides-core">
@@ -71,10 +76,6 @@
   }
 
   [slide-view=slideshow] {
-    --to-slide-inset: auto calc(var(--slide-half-gap) / 2) calc(var(--slide-half-gap) / 2) auto;
-    --to-slide-opacity: 0.05;
-    --to-slide-translate: 0 0;
-
     @media (orientation: landscape) {
       --slide-ratio: unset;
       grid-auto-rows: 100svh;
@@ -171,7 +172,6 @@
 
 <style webc:bucket="slides-theme">
   @layer slide.theme {
-
     slide-deck {
       --slide-light-color: hsl(200deg 12% 95%);
       --slide-dark-color: hsl(200deg 12% 5%);
@@ -186,52 +186,6 @@
 
       --slide-active-dark-color: hsl(330deg 53% 27%);
       --slide-active-light-color: hsl(330 52.857% 87%);
-
-      /* background colors */
-      --slide-background: var(--slide-light-color, Canvas);
-      --slide-callout-color: var(--slide-fade-light-color);
-
-      /* content colors */
-      --slide-color: var(--slide-dark-color, CanvasText);
-      --slide-accent-color: var(--slide-accent-dark-color);
-      --slide-action-color: var(--slide-action-dark-color);
-      --slide-active-color: var(--slide-active-dark-color);
-      --slide-border-color: hsl(195deg 10% 50%);
-
-      /* aliased/relative colors */
-      --slide-mark-bg-color: var(--slide-callout-color);
-      --slide-strikeout-color: var(--slide-accent-color);
-      --slide-shadow-color: var(--slide-fade-dark-color);
-
-      /* progressive color enhancements */
-      @supports (color: hsl(from red / 1)) {
-        --slide-shadow-color: hsl(from var(--slide-fade-dark-color) / 0.4);
-      }
-
-      /* light and dark schemes */
-      @supports (color: light-dark(red, green)) {
-        /* background colors */
-        --slide-background: light-dark(
-          var(--slide-light-color), var(--slide-dark-color)
-        );
-        --slide-callout-color: light-dark(
-          var(--slide-fade-light-color), var(--slide-fade-dark-color)
-        );
-
-        /* content colors */
-        --slide-color: light-dark(
-          var(--slide-dark-color), var(--slide-light-color)
-        );
-        --slide-accent-color: light-dark(
-          var(--slide-accent-dark-color), var(--slide-accent-light-color)
-        );
-        --slide-action-color: light-dark(
-          var(--slide-action-dark-color), var(--slide-action-light-color)
-        );
-        --slide-active-color: light-dark(
-          var(--slide-active-dark-color), var(--slide-active-light-color)
-        );
-      }
 
       /* fonts */
       --slide-os-serif-font: palatino, 'palatino linotype', 'palatino lt std', 'book antiqua',
@@ -265,11 +219,17 @@
       }
 
       button {
-        background-color: var(--slide-button-state-color, var(--slide-accent-color));
+        background-color: var(--slide-button-state-color, var(--slide-button-color));
         border: thick double;
         border-radius: 0.25em;
-        color: canvas;
+        color: var(--slide-button-state-text, var(--slide-button-text));
         font: inherit;
+
+        &:focus,
+        &:hover,
+        &:active {
+          --slide-button-state-color: var(--slide-accent-color);
+        }
       }
 
       [aria-pressed=true] {
@@ -296,7 +256,6 @@
       }
 
       a {
-
         &:where(:link),
         &:where(:visited) {
           --slide-underline-color--default: var(--slide-accent-color);
@@ -342,6 +301,58 @@
       ::selection {
         background-color: var(--slide-active-color) !important;
         color: var(--slide-background) !important;
+      }
+    }
+
+    slide-deck,
+    [slide-canvas] {
+      /* background colors */
+      --slide-background: var(--slide-light-color, Canvas);
+      --slide-callout-color: var(--slide-fade-light-color);
+
+      /* content colors */
+      --slide-color: var(--slide-dark-color, CanvasText);
+      --slide-accent-color: var(--slide-accent-dark-color);
+      --slide-action-color: var(--slide-action-dark-color);
+      --slide-active-color: var(--slide-active-dark-color);
+      --slide-border-color: hsl(195deg 10% 50%);
+
+      /* aliased/relative colors */
+      --slide-mark-bg-color: var(--slide-callout-color);
+      --slide-strikeout-color: var(--slide-accent-color);
+      --slide-shadow-color: var(--slide-fade-dark-color);
+
+      --slide-button-color: var(--slide-color);
+      --slide-button-text: var(--slide-background);
+
+      /* progressive color enhancements */
+      @supports (color: hsl(from red / 1)) {
+        --slide-shadow-color: hsl(from var(--slide-fade-dark-color) / 0.4);
+      }
+
+      /* light and dark schemes */
+      @supports (color: light-dark(red, green)) {
+        /* background colors */
+        --slide-background: light-dark(
+          var(--slide-light-color), var(--slide-dark-color)
+        );
+        --slide-callout-color: light-dark(
+          var(--slide-fade-light-color), var(--slide-fade-dark-color)
+        );
+
+        /* content colors */
+        --slide-color: light-dark(
+          var(--slide-dark-color), var(--slide-light-color)
+        );
+        --slide-accent-color: light-dark(
+          var(--slide-accent-dark-color), var(--slide-accent-light-color)
+        );
+        --slide-action-color: light-dark(
+          var(--slide-action-dark-color), var(--slide-action-light-color)
+        );
+        --slide-active-color: light-dark(
+          var(--slide-active-dark-color), var(--slide-active-light-color)
+        );
       }
     }
   }

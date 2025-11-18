@@ -5,6 +5,7 @@
   :@caption="this.slide.caption"
   :@cite="this.slide.cite"
   :@note="this.slide.note"
+  :style="slideStyles(this.slide, ['place-content', 'place-items'])"
 >
   <video
     webc:if="this.slide.video"
@@ -23,10 +24,14 @@
 <style webc:bucket="slides-core">
 @layer slide.type {
   [slide-content~=embed] {
+    --slide-content-grid-area: content;
     container: video / size;
-    place-items: stretch;
+    overflow: clip;
+    place-content: var(--slide-place-content);
+    place-items: var(--slide-place-items);
 
-    > * {
+    > iframe,
+    > video {
       contain: size;
       height: 100cqh;
       width: 100cqw;

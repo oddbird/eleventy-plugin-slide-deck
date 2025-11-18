@@ -54,6 +54,16 @@ slides:
     - `<default-slide>`
     - `webc`-only
 
+# light and dark
+- pre: a slide in
+  title: >
+    **Light** Mode
+  mode: light
+- pre: a slide in
+  title: >
+    **Dark** Mode
+  mode: dark
+
 # codepen
 - pen: https://codepen.io/miriamsuzanne/pen/YzmMapj
   live: https://codepen.io/miriamsuzanne/pen/YzmMapj
@@ -140,6 +150,7 @@ slides:
 
 # baseline browser-support embeds
 - support: display-flow-root
+  title: Display flow-root
 
 # unknown slide
 - who: nobody
