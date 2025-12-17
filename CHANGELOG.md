@@ -1,4 +1,4 @@
-## v0.5.0 - unreleased
+## v0.5.0 - 2025-12-17
 
 - Breaking/Fix: `<support-slide>` extends
   `<img-slide>` when `slide.caniuse` is present,
@@ -10,7 +10,7 @@
 - Breaking: The `<slide-controls>` dialog header and content areas
   are renamed from `.panel-header`/`.panel-controls` to
   `[slide-dialog=header]`/`[slide-dialog=contents]`.
-- Breaking: Re-arrange and renamed default controls.
+- Breaking: Re-arrange and rename default controls.
 - Breaking: Remove unnecessary `slide-caption` slot.
 - New: Provide list of basic keyboard shortcuts in control panel.
 - New: `<slide-controls>` default slot for appending additional controls.
