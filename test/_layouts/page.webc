@@ -1,0 +1,8 @@
+---
+layout: template
+---
+
+<template webc:nokeep @raw="this.content"></template>
+<style>
+  main { margin: 1em; }
+</style>

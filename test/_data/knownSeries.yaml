@@ -1,0 +1,21 @@
+mia:
+- known: mia
+  note: |
+    - `known: mia` reference
+    - part of the `mia` series
+    - implicit `layout: source`??
+- known: miriam-codes
+  note: |
+    - `known: miriam-codes` reference
+    - part of the `mia` series
+- known: miriam-art
+  layout: source
+  note: |
+    - `known: miriam-art` reference
+    - part of the `mia` series
+    - explicit `layout: source`
+- name: Miriam Again
+  source: Something I Said
+  note: |
+    - Implicit `layout: source`
+    - But there's no `avatar`

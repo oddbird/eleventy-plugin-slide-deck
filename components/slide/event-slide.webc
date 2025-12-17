@@ -1,13 +1,14 @@
 <slide-item
   content-type="event"
+  webc:if="this.slide"
   :id="this.slide.id"
-  :@note="this.slide.note"
   :@slide="this.slide"
-  :@url="this.url"
+  :@caption="this.slide.caption"
+  :@note="this.slide.note"
 >
   <div slide-auto="exit"
     webc:if="slide.exit"
-    @html="slideMDownInline(slide.exit)"
+    @html="slideMarkdownInline(slide.exit)"
   ></div>
 
   <div slide-auto="main">
@@ -37,7 +38,7 @@
       <p
         webc:if="slide.sub"
         slide-auto="sub"
-        @html="slideMDownInline(slide.sub)"
+        @html="slideMarkdownInline(slide.sub)"
       ></p>
     </header>
 
@@ -45,7 +46,7 @@
       <template
         webc:nokeep
         webc:if="slide.detail"
-        @html="slideMDownBlock(slide.detail)"
+        @html="slideMarkdownBlock(slide.detail)"
       ></template>
       <a
         webc:elseif="$data.slideDeckConfig.domain"
@@ -54,14 +55,8 @@
       ></a>
     </div>
   </div>
-
-  <figcaption
-    slide-caption
-    slot="slide-caption"
-    webc:if="slide.caption"
-    @html="slideMDownInline(slide.caption)"
-  ></figcaption>
 </slide-item>
+<error-slide webc:nokeep webc:else></error-slide>
 
 <style webc:bucket="slides-core">
 @layer slide.type {
@@ -88,10 +83,6 @@
     gap: var(--slide-gap);
     grid-template-columns: fit-content(80cqi);
   }
-
-  /* [slide-auto=detail] {
-
-  } */
 
   [slide-auto=event] {
     margin-block-end: var(--slide-header-margin-block-end, var(--slide-gap));

@@ -1,0 +1,83 @@
+<todo-slide
+  webc:if="this.slide.layout === 'todo'"
+  webc:nokeep
+  :@slide="this.slide"
+></todo-slide>
+
+<event-slide
+  webc:if="this.slide.layout === 'event'"
+  webc:nokeep
+  :@slide="this.slide"
+></event-slide>
+
+<demo-slide
+  webc:elseif="this.slide.layout === 'demo'"
+  webc:nokeep
+  :@slide="this.slide"
+></demo-slide>
+
+<support-slide
+  webc:elseif="this.slide.layout === 'support'"
+  webc:nokeep
+  :@slide="this.slide"
+></support-slide>
+
+<embed-slide
+  webc:elseif="this.slide.layout === 'embed'"
+  webc:nokeep
+  :@slide="this.slide"
+></embed-slide>
+
+<quote-slide
+  webc:elseif="this.slide.layout === 'quote'"
+  webc:nokeep
+  :@slide="this.slide"
+></quote-slide>
+
+<pen-slide
+  webc:elseif="this.slide.layout === 'pen'"
+  webc:nokeep
+  :@slide="this.slide"
+></pen-slide>
+
+<code-slide
+  webc:elseif="this.slide.layout === 'code'"
+  webc:nokeep
+  :@slide="this.slide"
+></code-slide>
+
+<source-slide
+  webc:elseif="this.slide.layout === 'source'"
+  webc:nokeep
+  :@slide="this.slide"
+></source-slide>
+
+<url-slide
+  webc:elseif="this.slide.layout === 'url'"
+  webc:nokeep
+  :@slide="this.slide"
+></url-slide>
+
+<split-slide
+  webc:elseif="this.slide.layout === 'split'"
+  webc:nokeep
+  :@slide="this.slide"
+></split-slide>
+
+<img-slide
+  webc:elseif="this.slide.layout === 'image'"
+  webc:nokeep
+  :@slide="this.slide"
+></img-slide>
+
+<default-slide
+  webc:elseif="this.slide.layout === 'default'"
+  webc:nokeep
+  :@slide="this.slide"
+></default-slide>
+
+<error-slide
+  webc:else
+  webc:nokeep
+  :@slide="this.slide"
+></error-slide>

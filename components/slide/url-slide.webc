@@ -6,27 +6,14 @@
       ? `https://v1.opengraph.11ty.dev/${url}/${size}/`
       : `https://v1.screenshot.11ty.dev/${url}/${size}/`;
   }
-
-  const imgCaption = (slide) => {
-    const caption = slide.caption || '';
-    const title = slide.title || (new URL(slide.url)).hostname;
-    const link = `[${title}](${slide.url})`
-
-    return `${caption} [${link}]`;
+  const buildImgSlide = (slide) => {
+    slide.img = urlSrc(slide);
+    slide.alt = slide.alt || slide.title || '';
+    return slide;
   }
 </script>
 
-<slide-item
-  content-type="image"
-  :id="this.slide.id"
-  :@caption="imgCaption(this.slide)"
-  :@note="this.slide.note"
-  :@src="urlSrc(this.slide)"
-  :style="slideStyles(this.slide, ['background', 'fit', 'position', 'padding'])"
->
-  <img
-    :src="this.src"
-    :alt="this.slide.alt || this.slide.title || ''"
-    sizes="100vw"
-  >
-</slide-item>
+<img-slide
+  webc:nokeep
+  :@slide="buildImgSlide(this.slide)"
+></img-slide>

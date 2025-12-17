@@ -3,11 +3,45 @@ import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
 import pluginSlideDeck from "./index.js";
 import yaml from "js-yaml";
 
+import markdownIt from 'markdown-it';
+import mdMark from 'markdown-it-mark';
+
+const mdOverride = markdownIt({
+    html: true,
+    breaks: false,
+    typographer: true,
+  }).disable('code')
+  .use(mdMark);
+
+const buildFunction = (slide) => {
+  if (slide.youtube) {
+    const bg = `background-image: url('https://v1.opengraph.11ty.dev/https%3A%2F%2Fyoutube.com%2Fwatch%3Fv%3D${slide.youtube}/auto/jpeg/');`;
+    slide.layout = slide.layout || 'embed';
+    slide.embed = `
+      <lite-youtube
+        videoid="${slide.youtube}"
+        style="${bg}"
+        @text="${slide.title}"
+      ></lite-youtube>
+    `;
+  }
+  return slide;
+};
+
 export default async function(eleventyConfig) {
   eleventyConfig.addPlugin(pluginSlideDeck, {
     domain: 'example.oddbird.net',
     imgDir: '/_img/',
+
+    buildFunction,
+    markdownFunctions: {
+      block: (content) => mdOverride.render(content),
+      inline: (content) => mdOverride.renderInline(content),
+    },
   });
+
+  eleventyConfig.setLibrary('md', mdOverride);
+  eleventyConfig.addDataExtension("yaml", (contents) => yaml.load(contents));
 
   eleventyConfig.addPlugin(pluginWebc, {
     components: [
@@ -15,9 +49,6 @@ export default async function(eleventyConfig) {
       'test/_includes/**/*.webc',
     ],
   });
-
-
-  eleventyConfig.addDataExtension("yaml", (contents) => yaml.load(contents));
 
   eleventyConfig.addPlugin(eleventyImageTransformPlugin, {
     // output image formats

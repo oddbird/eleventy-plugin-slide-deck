@@ -1,20 +1,43 @@
-<dialog slot="control-panel">
-  <div class="panel-header">
+<dialog slot="control-panel" id="slide-controls">
+  <div slide-dialog="header">
     <strong>SlideDeck Controls</strong>
     <form method="dialog">
       <button close-dialog>close</button>
     </form>
   </div>
-  <div class="panel-controls">
-    <h2>View:</h2>
-    <button set-view>grid</button>
-    <button set-view>slideshow</button>
-    <button set-view>speaker</button>
+  <div slide-dialog="contents">
+    <h2>View</h2>
+    <button set-view="slideshow">slideshow</button>
+    <button set-view="grid">thumbnails</button>
+    <button set-view="speaker">speaker</button>
 
-    <h2>Controls</h2>
-    <button slide-event="start">start presentation</button>
-    <button slide-event="join-as-speaker">join as speaker</button>
-    <button slide-event="key-control">navigation controls</button>
+    <slot></slot>
+
+    <details slide-shortcuts webc:if="!this.hideShortcuts">
+      <summary>Keyboard shortcuts</summary>
+      <dl>
+        <dt><kbd>cmd/ctrl-k</kbd>:</dt>
+        <dd>Toggle this control dialog</dd>
+
+        <dt><kbd>cmd/ctrl-shift-enter</kbd>:</dt>
+        <dd>
+          <button slide-event="start">Start</button>
+          presentation (from first slide)
+        </dd>
+
+        <dt><kbd>cmd/ctrl-enter</kbd>:</dt>
+        <dd>
+          <button slide-event="resume">Resume</button>
+          presentation (from active slide)
+        </dd>
+
+        <dt><kbd>alt-enter</kbd>:</dt>
+        <dd>
+          <button slide-event="join-as-speaker">Join</button>
+          in speaker view (following active slide)
+        </dd>
+      </dl>
+    </details>
   </div>
 </dialog>
 
@@ -28,13 +51,28 @@
     min-width: min(50ch, 100%);
     padding: 0;
 
+    &::backdrop {
+      background-color: oklch(from black l c h / 0.5);
+      backdrop-filter: blur(2px);
+    }
+
     h2 {
-      font-size: inherit !important;
-      margin-block: unset;
+      font-size: inherit;
+      margin-block: 1lh 0;
+
+      &:first-child {
+        margin-block-start: unset;
+      }
     }
   }
 
-  .panel-header {
+  [slide-shortcuts] {
+    border-block-start: thin dotted;
+    margin-block-start: 1lh;
+    padding-block-start: var(--slide-gap);
+  }
+
+  [slide-dialog=header] {
     align-items: center;
     border-block-end: thin solid var(--slide-border-color);
     display: flex;
@@ -46,7 +84,7 @@
     form { margin: unset; }
   }
 
-  .panel-controls {
+  [slide-dialog=contents] {
     padding: var(--slide-gap);
   }
 

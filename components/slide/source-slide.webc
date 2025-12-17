@@ -1,0 +1,34 @@
+<script webc:setup>
+  const buildSrcSlide = (slide) => {
+    if (!slide.title) {
+      const title = slide.source || slide.name;
+
+      slide.title = slide.url
+        ? `[${title}](${slide.url})`
+        : title;
+
+      if (!slide.pre) slide.cite = null;
+    }
+
+    if (!slide.pre) {
+      slide.pre = slide.source && slide.name
+        ? slide.name
+        : null;
+    }
+
+    slide.img = slide.img || slide.avatar;
+
+    return slide;
+  }
+</script>
+
+<split-slide
+  webc:if="slide.img || slide.avatar"
+  webc:nokeep
+  :@slide="buildSrcSlide(this.slide)"
+></split-slide>
+<default-slide
+  webc:else
+  webc:nokeep
+  :@slide="buildSrcSlide(this.slide)"
+></default-slide>

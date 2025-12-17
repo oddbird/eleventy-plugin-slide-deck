@@ -20,8 +20,10 @@
 
 <slide-item
   content-type="code"
+  webc:if="this.slide"
   :id="this.slide.id"
   :@caption="this.slide.caption"
+  :@cite="this.slide.cite"
   :@note="this.slide.note"
   :@code="getCode(this.slide)"
 >
@@ -37,6 +39,7 @@
     ></template>
   </slide-code-block>
 </slide-item>
+<error-slide webc:nokeep webc:else></error-slide>
 
 <style webc:bucket="slides-core">
 @layer slide.type {

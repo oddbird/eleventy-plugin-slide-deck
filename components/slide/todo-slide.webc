@@ -1,15 +1,18 @@
 <slide-item
   @canvas-type="todo"
+  webc:if="this.slide"
   :id="this.slide.id"
   :@caption="this.slide.caption"
+  :@cite="this.slide.cite"
   :@note="this.slide.note"
   :@slide="this.slide"
 >
   <h2>Todo:</h2>
   <div
-    @html="slideMDownBlock(this.slide.todo || this.slide)"
+    @html="slideMarkdownBlock(this.slide.todo || this.slide)"
   ></div>
 </slide-item>
+<error-slide webc:nokeep webc:else></error-slide>
 
 <style webc:bucket="slides-core">
 @layer slide.type {

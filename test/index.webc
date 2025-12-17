@@ -1,0 +1,34 @@
+---
+layout: page
+---
+
+<h1>Test Setup for Slide Decks</h1>
+
+<section webc:for="slidePage of collections.slideDeck">
+  <h2>
+    <a
+      :href="slidePage.url"
+      @raw="slidePage.data.title || slidePage.filePathStem"
+    ></a>
+  </h2>
+
+  <div webc:if="slidePage.data.slideResources.pens">
+    <h3>CodePen Demos</h3>
+    <ul>
+      <li
+        webc:for="penLink of slidePage.data.slideResources.pens"
+        @html="slideMarkdownInline(penLink)"
+      ></li>
+    </ul>
+  </div>
+
+  <div webc:if="slidePage.data.slideResources.cite">
+    <h3>Links Cited</h3>
+    <ul>
+      <li
+        webc:for="penLink of slidePage.data.slideResources.cite"
+        @html="slideMarkdownInline(penLink)"
+      ></li>
+    </ul>
+  </div>
+</section>
