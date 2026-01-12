@@ -211,8 +211,12 @@ quote: >
 caption: a code slide
 css: |
   * { box-sizing: border-box; }
+  html { --from: 'oddbird'; }
 html: |
-  <p>lorem stuff</p>
+  <p data-attr="test">lorem stuff</p>
+js: |
+  const year = 2008;
+  const myName = (name) => name || 'Mia';
 -->
 
 HTML and CSS.

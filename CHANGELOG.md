@@ -16,6 +16,7 @@
   (especially useful in the `*.11tydata.slides` data format)
 - New: Lorem Picsum credit is added to placeholder images by default
 - New: Add `slide-view=article` for reading slide-decks
+- New: Include basic light/dark prism theme with slide theme styles
 
 ## v0.5.0 - 2025-12-17
 

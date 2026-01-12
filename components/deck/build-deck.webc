@@ -385,5 +385,71 @@
         );
       }
     }
+
+    /* default prism styles */
+    /* not confined to code-slide, since code can appear in other layouts */
+    pre[class*="language-"] {
+      display: block;
+      overflow-x: auto;
+      padding: 1lh 1em;
+      color: var(--slide-color);
+      background: var(--slide-background);
+      tab-size: 2;
+
+      .token {
+        &.comment {
+          color: var(--slide-accent-color);
+          font-style: italic;
+        }
+
+        &.keyword {
+          font-style: italic;
+        }
+
+        &.parameter {
+          color: oklch(from var(--slide-accent-color) l c calc(h + 90 * 3));
+        }
+
+        &.prolog,
+        &.doctype,
+        &.cdata,
+        &.punctuation {
+          opacity: 0.5;
+        }
+
+        &.string,
+        &.regex,
+        &.number,
+        &.literal {
+          color: oklch(from var(--slide-accent-color) l c calc(h + 90));
+        }
+
+        &.rule,
+        &.selector,
+        &.keyword + .function {
+          color: oklch(from var(--slide-accent-color) l c calc(h + 90 * 2));
+          font-weight: bold;
+        }
+
+        &.deleted {
+          background-color: #ffdddd;
+          color: #434343;
+        }
+
+        &.inserted {
+          background-color: #ddffdd;
+          color: #434343;
+        }
+
+        &.bold {
+          font-weight: bold;
+        }
+
+        &.important,
+        &.italic {
+          font-style: italic;
+        }
+      }
+    }
   }
 </style>

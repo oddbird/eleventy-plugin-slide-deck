@@ -7,7 +7,6 @@
 
   <style webc:keep>
     @layer base, theme;  /* {} <- syntax highlighting fix, lol */
-    @import url('/css/prism.css') layer(base);
     @import url('/css/fonts.css') layer(theme);
   </style>
   <style @raw="getBundle('css')" webc:keep></style>
