@@ -54,7 +54,8 @@
 
 @layer slide.views {
   [slide-view=grid],
-  [slide-view=speaker] {
+  [slide-view=speaker],
+  [slide-view=article] {
     --target-margin: var(--slide-gap);
     --slide-target-outline: medium dotted;
     --slide-target-outline-offset: calc(var(--slide-gap) * 0.5);
@@ -166,6 +167,35 @@
       position: fixed;
       z-index: 12;
     }
+  }
+
+  [slide-view=article] {
+    --slide-article-measure: 65ch;
+    container: slide-deck / inline-size;
+    justify-content: center;
+
+    [slide-item] {
+      grid:
+        'canvas' auto
+        'note' auto
+        / minmax(0, var(--slide-article-measure))
+      ;
+      gap: var(--slide-gap);
+
+      @container (inline-size > 50em) {
+        grid:
+          'canvas note' auto
+          / minmax(15em, 30em) minmax(0, var(--slide-article-measure))
+        ;
+      }
+    }
+
+    [slide-canvas] {
+      --slide-normal-text: var(--slide-small-text);
+      grid-column: canvas;
+    }
+
+    [slide-note] { grid-column: note; }
   }
 }
 </style>

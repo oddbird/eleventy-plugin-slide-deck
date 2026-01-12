@@ -16,13 +16,15 @@ layout: template
     })"
   ></default-slide>
 
-  <div slot="after" webc:nokeep>
-    <default-slide :@slide="({
+  <default-slide
+    webc:nokeep
+    slot="after"
+    :@slide="({
       pre: 'inserted',
       title: '**after** slide loop',
       caption: 'Using the `<build-deck>` `<slot name=after>`',
-    })"></default-slide>
-  </div>
+    })"
+  ></default-slide>
 
   <slide-controls
     webc:nokeep
