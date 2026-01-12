@@ -28,7 +28,8 @@
   "dependencies": {
     "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.2",
     "@oddbird/browser-support": "^0.1.1",
-    "@oddbird/slide-deck": "^0.2.0"
+    "@oddbird/slide-deck": "^0.2.0",
+    "doxray": "^0.10.1"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.2",

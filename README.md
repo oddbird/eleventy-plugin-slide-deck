@@ -104,9 +104,29 @@ Along with the core and (optional) theme style bundles:
 
 ### Writing slides
 
-Create your slides in structured data,
-using `yaml` or `json` or `js` objects.
-We provide a number of built-in slide layouts
+Create your slides in any data format
+supported by Eleventy,
+[or add your own](https://www.11ty.dev/docs/data-custom/).
+This package adds a `.slides` data format to Eleventy,
+that is a markdown script
+with yaml comments for the slides:
+
+```md
+<!-- @slide
+title: Hello World
+background: mediumVioletRed
+mode: dark
+-->
+
+The stuff inside the comment
+is structured YAML
+that describes the slide itself,
+while this bit of _markdown_
+will be used for speaker notes
+(the `slide.note` property described below).
+```
+
+We provide several built-in slide layouts
 that accept a variety of properties:
 
 - all slide layouts support…
@@ -115,9 +135,8 @@ that accept a variety of properties:
   - `slide.note` for speaker notes
   - `slide.source`, `slide.name`, & `slide.url`
     for providing credit (often appended to the `caption`)
-  - `slide.cite` a reference to known `source`/`name`/`url` data,
-    or a markdown link (often appended to the `caption`).
-    This is useful when you want to provide source data
+  - `slide.cite` Markdown text, often appended to the `caption`.
+    This is useful when you want to provide links to more info
     without changing how the slide is rendered otherwise.
   - `slide.background`, `slide.color`, & `slide.mode` CSS values
 

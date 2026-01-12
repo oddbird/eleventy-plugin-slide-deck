@@ -1,14 +1,35 @@
 <script webc:setup>
   const langs = ['html', 'css', 'scss', 'js', 'code'];
 
+  const escapeHtml = (str) => {
+    if (typeof str !== 'string') return '';
+
+    const escapeCharacter = (match) => {
+      switch (match) {
+        case '&': return '&amp;';
+        case '<': return '&lt;';
+        case '>': return '&gt;';
+        case '"': return '&quot;';
+        case '\'': return '&#039;';
+        case '`': return '&#096;';
+        default: return match;
+      }
+    };
+
+    return str.replace(/[&<>"'`]/g, escapeCharacter);
+  }
+
   const getCode = (slide) => {
     const code = {};
 
     langs.forEach((lang) => {
       if (!slide[lang]) { return; }
 
+
       if (lang === 'code') {
-        code[slide.lang || 'code'] = slide.code;
+        code[slide.lang || 'code'] = slide.escapeHtml
+          ? escapeHtml(slide.code)
+          : slide.code;
       } else {
         code[lang] = slide[lang];
       }

@@ -1,0 +1,367 @@
+<!-- @ignore
+.########.##.....##.########.##....##.########
+.##.......##.....##.##.......###...##....##...
+.##.......##.....##.##.......####..##....##...
+.######...##.....##.######...##.##.##....##...
+.##........##...##..##.......##..####....##...
+.##.........##.##...##.......##...###....##...
+.########....###....########.##....##....##...
+-->
+
+<!-- @slide (see the knownSlides yaml data)
+known: start-deck
+title: Test Slide Deck
+venue: Web Directions
+date: 2024-11-20
+-->
+
+- `<event-slide>`
+- `known` reference
+
+<!-- @ignore
+.########..########.########....###....##.....##.##.......########
+.##.....##.##.......##.........##.##...##.....##.##..........##...
+.##.....##.##.......##........##...##..##.....##.##..........##...
+.##.....##.######...######...##.....##.##.....##.##..........##...
+.##.....##.##.......##.......#########.##.....##.##..........##...
+.##.....##.##.......##.......##.....##.##.....##.##..........##...
+.########..########.##.......##.....##..#######..########....##...
+-->
+
+<!-- @slide (the default slide)
+pre: hello world
+title: This is a Title
+sub: with a subtitle
+caption: and a caption
+-->
+
+- `<default-slide>`
+- `pre`, `title`, and `sub`
+
+<!-- @slide
+md: |
+  ## Put markdown in here
+  - some
+  - **arbitrary**
+  - _markdown_ -- like this
+  - ==including a local markdown plugin==
+-->
+
+- `<default-slide>`
+- `md`-only
+
+We can put basically anything we want
+into the `slide.note` field.
+
+<!-- @slide
+webc: |
+  <h3>Put WebC in here…</h3>
+  <oddbird-logo style="fill: deepPink"></oddbird-logo>
+-->
+
+- `<default-slide>`
+- `webc`-only
+
+<!-- @slide
+todo: |
+  - finish building this
+  - ship it
+caption: a `todo` slide
+-->
+
+ToDo slides accept arbitrary markdown.
+These are mostly provided as a placeholder
+while writing a talk,
+but could also be used to talk about
+things that need to get done!
+
+<!-- @ignore
+.##.....##..#######..########..########..######.
+.###...###.##.....##.##.....##.##.......##....##
+.####.####.##.....##.##.....##.##.......##......
+.##.###.##.##.....##.##.....##.######....######.
+.##.....##.##.....##.##.....##.##.............##
+.##.....##.##.....##.##.....##.##.......##....##
+.##.....##..#######..########..########..######.
+-->
+
+<!-- @slide (light and dark modes)
+pre: a slide in
+title: >
+  **Light** Mode
+mode: light
+-->
+
+<!-- @slide (light and dark modes)
+pre: a slide in
+title: >
+  **Dark** Mode
+mode: dark
+-->
+
+<!-- @slide (dark mode, with an explicit background color)
+title: Slide styles
+sub: (dark mode)
+mode: dark
+background: maroon
+caption: Basic title slide, but dark mode and maroon
+-->
+
+This dark mode slide
+defines an explicit background color.
+
+<!-- @ignore
+..######...#######..########..########.########..########.##....##
+.##....##.##.....##.##.....##.##.......##.....##.##.......###...##
+.##.......##.....##.##.....##.##.......##.....##.##.......####..##
+.##.......##.....##.##.....##.######...########..######...##.##.##
+.##.......##.....##.##.....##.##.......##........##.......##..####
+.##....##.##.....##.##.....##.##.......##........##.......##...###
+..######...#######..########..########.##........########.##....##
+-->
+
+<!-- @slide (codepen)
+pen: https://codepen.io/miriamsuzanne/pen/YzmMapj
+live: https://codepen.io/miriamsuzanne/pen/YzmMapj
+title: You Tell Me Clock
+-->
+
+- `<pen-slide>`
+- both `pen` and `live` links
+- as well as a `title`
+
+<!-- @slide
+pen: https://codepen.io/editor/miriamsuzanne/pen/019a0d25-32ee-7322-a0ce-b5b9b8b71e7c
+title: Pen version 2
+-->
+
+Pen slide using a Codepen 2.0 embed
+
+<!-- @ignore
+..######..########.########..####.########..######.
+.##....##.##.......##.....##..##..##.......##....##
+.##.......##.......##.....##..##..##.......##......
+..######..######...########...##..######....######.
+.......##.##.......##...##....##..##.............##
+.##....##.##.......##....##...##..##.......##....##
+..######..########.##.....##.####.########..######.
+-->
+
+<!-- @slide
+series: mia
+-->
+
+Series notes come from the individual slides.
+This note will be ignored
+
+<!-- @slide
+series:
+- title: Slide one in a series
+  note: |
+    A series can be added directly in YAML
+    without any external reference.
+- title: Slide **two** in a series
+  note: |
+    This can be used as a shorthand
+    for putting multiple slides in a single comment
+    when using the `*.11tydata.slides` data format.
+-->
+
+<!-- @ignore
+..#######..##.....##..#######..########.########..######.
+.##.....##.##.....##.##.....##....##....##.......##....##
+.##.....##.##.....##.##.....##....##....##.......##......
+.##.....##.##.....##.##.....##....##....######....######.
+.##..##.##.##.....##.##.....##....##....##.............##
+.##....##..##.....##.##.....##....##....##.......##....##
+..#####.##..#######...#######.....##....########..######.
+-->
+
+<!-- @slide
+quote: >
+  This is a quote
+  with structured source info.
+known: miriam-codes
+-->
+
+<!-- @slide
+quote: >
+  This quote just has
+  a _markdown citation_ and **avatar**.
+cite: Miriam, [somewhere else](https://miriam.codes/)
+known: mia
+-->
+
+<!-- @slide
+quote: >
+  This quote has no details associated with it.
+-->
+
+<!-- @ignore
+..######...#######..########..########
+.##....##.##.....##.##.....##.##......
+.##.......##.....##.##.....##.##......
+.##.......##.....##.##.....##.######..
+.##.......##.....##.##.....##.##......
+.##....##.##.....##.##.....##.##......
+..######...#######..########..########
+-->
+
+<!-- @slide
+caption: a code slide
+css: |
+  * { box-sizing: border-box; }
+html: |
+  <p>lorem stuff</p>
+-->
+
+HTML and CSS.
+JS is also supported as a property,
+if you're into that kind of thing.
+
+<!-- @slide
+escapeHtml: true
+lang: www-styles
+code: |
+  12
+  Normal <P> 0 Helvetica 12.0   1
+         90 90    14.0 3.0  0  0 14    0
+-->
+
+Allow escaping HTML of unknown code
+with the `slide.escapeHtml` property.
+
+<!-- @ignore
+.####.##.....##....###.....######...########..######.
+..##..###...###...##.##...##....##..##.......##....##
+..##..####.####..##...##..##........##.......##......
+..##..##.###.##.##.....##.##...####.######....######.
+..##..##.....##.#########.##....##..##.............##
+..##..##.....##.##.....##.##....##..##.......##....##
+.####.##.....##.##.....##..######...########..######.
+-->
+
+<!-- @slide
+img: mia-89.jpg
+alt: Young miriam
+credit: mom or dad, maybe?
+position: center
+caption: An `image` slide
+-->
+
+Image slides can provide
+an image credit
+that is distinct from any
+source/citation credit for the slide.
+
+<!-- @slide (image placeholder)
+img: computer
+caption: A placeholder image
+-->
+
+Placeholder images are currently
+retrieved from [Lorem Picsum](https://picsum.photos/).
+Maybe we can make this customizable?
+
+<!-- @slide
+img: mia-89.jpg
+alt: Young miriam
+title: Split Slide
+pre: This is a…
+-->
+
+Providing an image
+along with default-slide content
+will create a split slide.
+
+<!-- @slide
+url: https://miriam.codes/
+title: Miriam.codes
+caption: A `url` slide
+-->
+
+Screenshot any url,
+using the 11ty API.
+
+<!-- @ignore
+.########.##.....##.########..########.########...######.
+.##.......###...###.##.....##.##.......##.....##.##....##
+.##.......####.####.##.....##.##.......##.....##.##......
+.######...##.###.##.########..######...##.....##..######.
+.##.......##.....##.##.....##.##.......##.....##.......##
+.##.......##.....##.##.....##.##.......##.....##.##....##
+.########.##.....##.########..########.########...######.
+-->
+
+<!-- @slide
+embed: >
+  <iframe src="https://oddbird.net" width="1600" height="900"></iframe>
+-->
+
+Embed any arbitrary `iframe`, `video`,
+or similar media.
+
+<!-- @slide
+demo: test
+-->
+
+Embed a local 11ty page
+that has a `demo` page data
+with the requested slug.
+
+<!-- @slide (youtube)
+youtube: d8PndpFPL8g
+-->
+
+Embed videos directly from YouTube,
+using the
+[lite-youtube-embed](https://github.com/paulirish/lite-youtube-embed)
+web component from
+Paul Irish.
+
+<!-- @ignore
+..######..##.....##.########..########...#######..########..########
+.##....##.##.....##.##.....##.##.....##.##.....##.##.....##....##...
+.##.......##.....##.##.....##.##.....##.##.....##.##.....##....##...
+..######..##.....##.########..########..##.....##.########.....##...
+.......##.##.....##.##........##........##.....##.##...##......##...
+.##....##.##.....##.##........##........##.....##.##....##.....##...
+..######...#######..##........##.........#######..##.....##....##...
+-->
+
+<!-- @slide (caniuse image)
+caniuse: flow-root
+-->
+
+Embeds of CanIUse data
+come from
+[Ire Aderinokun](https://caniuse.bitsofco.de) --
+but don't support many recent features.
+
+<!-- @slide (oddbird baseline)
+support: display-flow-root
+title: Display flow-root
+-->
+
+OddBird's Baseline support web component
+uses the the API provided by the
+[Web platform features explorer](https://web-platform-dx.github.io/web-features-explorer/).
+
+<!-- @ignore
+.########.########..########...#######..########.
+.##.......##.....##.##.....##.##.....##.##.....##
+.##.......##.....##.##.....##.##.....##.##.....##
+.######...########..########..##.....##.########.
+.##.......##...##...##...##...##.....##.##...##..
+.##.......##....##..##....##..##.....##.##....##.
+.########.##.....##.##.....##..#######..##.....##
+-->
+
+<!-- @slide
+who: nobody
+what: >
+  knows what this slide is all about.
+-->
+
+This slide doesn't contain
+any recognized data.

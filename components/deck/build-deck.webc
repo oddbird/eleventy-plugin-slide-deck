@@ -305,7 +305,7 @@
     }
 
     slide-deck,
-    [slide-canvas] {
+    [slide-item] {
       /* background colors */
       --slide-background: var(--slide-light-color, Canvas);
       --slide-callout-color: var(--slide-fade-light-color);

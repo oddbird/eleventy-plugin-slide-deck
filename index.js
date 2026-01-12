@@ -2,6 +2,7 @@ import markdownIt from 'markdown-it';
 import syntaxHighlightPlugin from '@11ty/eleventy-plugin-syntaxhighlight';
 
 import {
+  slideDataType,
   slideStyles,
   buildSlides,
   getSlideResources,
@@ -48,6 +49,7 @@ export default async function(eleventyConfig, options) {
   }
 
   // data
+  eleventyConfig.addDataExtension("slides", slideDataType);
   eleventyConfig.addGlobalData("slideDeckConfig", options);
 
   // slides
