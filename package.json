@@ -27,7 +27,7 @@
   "homepage": "https://github.com/oddbird/eleventy-plugin-slide-deck#readme",
   "dependencies": {
     "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.2",
-    "@oddbird/browser-support": "^0.1.1",
+    "@oddbird/browser-support": "^0.1.2",
     "@oddbird/slide-deck": "^0.2.0",
     "doxray": "^0.10.1"
   },
