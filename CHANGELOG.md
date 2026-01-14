@@ -1,4 +1,4 @@
-## v0.5.1 - UNRELEASED
+## v0.5.1 - 2026-01-14
 
 - Fix: Explicit slide colors override default slide-mode colors
 - Fix: Use `webc-slide` for `browser-support` component,
