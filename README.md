@@ -5,7 +5,7 @@ A plugin to use the
 web component in eleventy projects --
 and generate decks from data.
 
-[Demo](https://eleventy-plugin-slide-deck.netlify.app/)
+[Demo](https://11ty-slide-deck.netlify.app/)
 
 Any page with `slides` data
 will be added to the (configurable) `slideDeck` collection,
