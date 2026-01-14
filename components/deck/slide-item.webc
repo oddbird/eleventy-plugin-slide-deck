@@ -155,13 +155,18 @@
     }
 
     &:not(:has([slide-caption])) {
-      --slide-content-grid-area: 1 / 1 / -1 / -1;
+      --to-slide-area: content;
+      --to-slide-placement: end;
+      grid-template:
+        'content content' 1fr
+        / minmax(0, 1fr) auto
+      ;
     }
   }
 
   [slide-content] {
     display: grid;
-    grid-area: var(--slide-content-grid-area, content);
+    grid-area: content;
   }
 
   slide-caption-wrapper {
@@ -189,9 +194,10 @@
     border: thin solid transparent;
     border-radius: 0;
     font-variant-numeric: lining-nums;
-    grid-area: to-slide;
+    grid-area: var(--to-slide-area, to-slide);
     opacity: var(--to-slide-opacity, 0.5);
     padding: var(--slide-half-gap) var(--slide-gap);
+    place-self: var(--to-slide-placement);
     position: relative;
     transition: opacity 200ms;
     z-index: 2;

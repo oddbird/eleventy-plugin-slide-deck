@@ -1,3 +1,35 @@
+import doxray from "doxray";
+
+const doxOptions = {
+  regex: {
+    slides: {
+      opening: /<!--\s*@slide[^\n]*\n/m,
+      closing: /-->/,
+      comment: /<!--\s*@slide(?:[^-]|[\r\n]|-[^-]|--[^>])*-->/gm,
+      ignore: /<!--\s*@ignore[\s\S]*/gm
+    }
+  }
+};
+
+export const slideDataType = {
+  parser: (filePath) => {
+    const data = doxray(filePath, doxOptions);
+
+    data.patterns.map((slide) => {
+      slide.note = slide.slides;
+      delete slide.slides;
+      delete slide.filename;
+      return slide;
+    });
+
+    return {slides: data.patterns};
+  },
+
+  // defaults are shown:
+  read: false,
+  encoding: "utf8",
+};
+
 const getItem = (source, key) => {
   if (!source) return;
 
@@ -72,9 +104,9 @@ const slideCitation = (slide) => {
 
 export const buildSlides = ({slides, knownSlides, knownSeries, buildFn}) =>
   slides.reduce((all, item) => {
-    const expanded = item.series
+    const expanded = typeof item.series === 'string'
       ? getItem(knownSeries, item.series)
-      : [item];
+      : item.series || [item];
 
     const merged = expanded.map((item) => {
       let slide = (item.known)

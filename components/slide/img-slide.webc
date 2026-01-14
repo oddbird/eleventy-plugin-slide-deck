@@ -5,18 +5,22 @@
   :@caption="this.slide.caption"
   :@cite="this.slide.cite"
   :@note="this.slide.note"
-  :@src="this.slide.img"
+  :@src="slideImg(this.slide.img)"
   :@credit="this.slide.credit"
   :style="slideStyles(this.slide, ['fit', 'position', 'padding'])"
 >
   <img
-    :src="slideImg(this.src)"
+    :src="this.src"
     :alt="this.slide.alt || ''"
     sizes="100vw"
   >
   <slide-image-credit
     webc:if="this.credit"
     @html="`credit: ${slideMarkdownInline(this.credit)}`"
+  ></slide-image-credit>
+  <slide-image-credit
+    webc:elseif="this.src.includes('picsum')"
+    @html="`credit: ${slideMarkdownInline('[Lorem Picsum](https://picsum.photos/)')}`"
   ></slide-image-credit>
 </slide-item>
 <error-slide webc:nokeep webc:else></error-slide>

@@ -1,3 +1,23 @@
+## v0.5.1 - UNRELEASED
+
+- Fix: Explicit slide colors override default slide-mode colors
+- Fix: Use `webc-slide` for `browser-support` component,
+  to avoid overflow issues
+- Fix: Ensure that slide webc wrappers are removed
+- Allow slides to resize when overflowing
+- Docs: Correct the description of `slide.cite` in the README
+- New: Boolean `slide.escapeHtml` property
+  allows escaping HTML characters
+  in unrecognized `slide.code` languages
+- New: Add `*.11tydata.slides` format with yaml-structured comments
+  in markdown (used for the `slide.note` property)
+- New: A `slide.series` can either be a reference to known series data,
+  or a directly nested series of slides
+  (especially useful in the `*.11tydata.slides` data format)
+- New: Lorem Picsum credit is added to placeholder images by default
+- New: Add `slide-view=article` for reading slide-decks
+- New: Include basic light/dark prism theme with slide theme styles
+
 ## v0.5.0 - 2025-12-17
 
 - Breaking/Fix: `<support-slide>` extends

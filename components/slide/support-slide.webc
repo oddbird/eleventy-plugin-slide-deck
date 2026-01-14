@@ -23,30 +23,34 @@
     return slide;
   }
 
-  const buildEmbedSlide = (slide) => {
-    slide.title = slide.title || slide.support;
-    slide.embed = `
+  const buildWebCSlide = (slide) => {
+    const name = slide.title || slide.support;
+    delete slide.title;
+
+    slide.webc = `
       <browser-support webc:import="npm:@oddbird/browser-support">
-        <h2 slot="title">${slideMarkdownInline(slide.title)}</h2>
+        <h2 slot="title">${slideMarkdownInline(name)}</h2>
         <a href="${exploreLink(slide.support)}">
-          Browser support for <code>${slide.title}</code>
+          Browser support for <code>${name}</code>
         </a>
       </browser-support>
     `;
-    slide['place-content'] = slide['place-content'] || 'safe center';
+
     return slide;
   }
 </script>
 
 <img-slide
   webc:if="this.slide?.caniuse"
+  webc:nokeep
   :@slide="buildImgSlide(this.slide)"
 ></img-slide>
 
-<embed-slide
+<default-slide
   webc:elseif="this.slide"
-  :@slide="buildEmbedSlide(slide)"
-></embed-slide>
+  webc:nokeep
+  :@slide="buildWebCSlide(slide)"
+></default-slide>
 
 <error-slide webc:nokeep webc:else></error-slide>
 

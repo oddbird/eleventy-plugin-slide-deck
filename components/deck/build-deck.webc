@@ -54,7 +54,8 @@
 
 @layer slide.views {
   [slide-view=grid],
-  [slide-view=speaker] {
+  [slide-view=speaker],
+  [slide-view=article] {
     --target-margin: var(--slide-gap);
     --slide-target-outline: medium dotted;
     --slide-target-outline-offset: calc(var(--slide-gap) * 0.5);
@@ -166,6 +167,35 @@
       position: fixed;
       z-index: 12;
     }
+  }
+
+  [slide-view=article] {
+    --slide-article-measure: 65ch;
+    container: slide-deck / inline-size;
+    justify-content: center;
+
+    [slide-item] {
+      grid:
+        'canvas' auto
+        'note' auto
+        / minmax(0, var(--slide-article-measure))
+      ;
+      gap: var(--slide-gap);
+
+      @container (inline-size > 50em) {
+        grid:
+          'canvas note' auto
+          / minmax(15em, 30em) minmax(0, var(--slide-article-measure))
+        ;
+      }
+    }
+
+    [slide-canvas] {
+      --slide-normal-text: var(--slide-small-text);
+      grid-column: canvas;
+    }
+
+    [slide-note] { grid-column: note; }
   }
 }
 </style>
@@ -305,7 +335,7 @@
     }
 
     slide-deck,
-    [slide-canvas] {
+    [slide-item] {
       /* background colors */
       --slide-background: var(--slide-light-color, Canvas);
       --slide-callout-color: var(--slide-fade-light-color);
@@ -353,6 +383,72 @@
         --slide-active-color: light-dark(
           var(--slide-active-dark-color), var(--slide-active-light-color)
         );
+      }
+    }
+
+    /* default prism styles */
+    /* not confined to code-slide, since code can appear in other layouts */
+    pre[class*="language-"] {
+      display: block;
+      overflow-x: auto;
+      padding: 1lh 1em;
+      color: var(--slide-color);
+      background: var(--slide-background);
+      tab-size: 2;
+
+      .token {
+        &.comment {
+          color: var(--slide-accent-color);
+          font-style: italic;
+        }
+
+        &.keyword {
+          font-style: italic;
+        }
+
+        &.parameter {
+          color: oklch(from var(--slide-accent-color) l c calc(h + 90 * 3));
+        }
+
+        &.prolog,
+        &.doctype,
+        &.cdata,
+        &.punctuation {
+          opacity: 0.5;
+        }
+
+        &.string,
+        &.regex,
+        &.number,
+        &.literal {
+          color: oklch(from var(--slide-accent-color) l c calc(h + 90));
+        }
+
+        &.rule,
+        &.selector,
+        &.keyword + .function {
+          color: oklch(from var(--slide-accent-color) l c calc(h + 90 * 2));
+          font-weight: bold;
+        }
+
+        &.deleted {
+          background-color: #ffdddd;
+          color: #434343;
+        }
+
+        &.inserted {
+          background-color: #ddffdd;
+          color: #434343;
+        }
+
+        &.bold {
+          font-weight: bold;
+        }
+
+        &.important,
+        &.italic {
+          font-style: italic;
+        }
       }
     }
   }
