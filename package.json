@@ -29,7 +29,7 @@
     "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.2",
     "@oddbird/browser-support": "^0.1.2",
     "@oddbird/slide-deck": "^0.2.1",
-    "doxray": "github:oddbird/doxray#upgrade-deps"
+    "doxray": "^0.11.0"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.2",
