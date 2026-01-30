@@ -25,7 +25,6 @@
     langs.forEach((lang) => {
       if (!slide[lang]) { return; }
 
-
       if (lang === 'code') {
         code[slide.lang || 'code'] = slide.escapeHtml
           ? escapeHtml(slide.code)

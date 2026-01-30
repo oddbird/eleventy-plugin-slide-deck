@@ -3,6 +3,9 @@
 - New: The `*.deck` template uses the `*.11tydata.slides` format,
   returning markdown content of the notes,
   with any slides added to the data cascade
+- Fix: Slide/deck format parser replaces `--\>` with `-->`
+  inside `slide.html` and `slide.code` properties,
+  so that it's possible to include HTML-shaped code comments
 - New: Add basic HTML highlighting to the prism defaults
 
 ## v0.5.1 - 2026-01-14

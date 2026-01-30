@@ -107,9 +107,10 @@ Along with the core and (optional) theme style bundles:
 Create your slides in any data format
 supported by Eleventy,
 [or add your own](https://www.11ty.dev/docs/data-custom/).
-This package adds a `.slides` data format to Eleventy,
-that is a markdown script
-with yaml comments for the slides:
+This package adds a `*.deck` template format
+and matching `*.slides` data format to Eleventy.
+Slide notes are provided as top-level markdown,
+with slide content as YAML in the comments:
 
 ```md
 <!-- @slide
@@ -125,6 +126,11 @@ while this bit of _markdown_
 will be used for speaker notes
 (the `slide.note` property described below).
 ```
+
+The `*.deck` template language allows template front-matter
+using the same syntax as any other Eleventy template language.
+Slides are added to the data cascade,
+and the parsed markdown is returned as template content.
 
 We provide several built-in slide layouts
 that accept a variety of properties:

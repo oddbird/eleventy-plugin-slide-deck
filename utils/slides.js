@@ -15,6 +15,8 @@ const doxOptions = {
   }
 };
 
+const unescapeHtmlComments = (content) => content.replace('--\\\>', '-->');
+
 export const slideDataParser = (filePath, format = 'slides') => {
   const data = doxray(filePath, doxOptions);
 
@@ -22,6 +24,11 @@ export const slideDataParser = (filePath, format = 'slides') => {
     slide.note = slide[format];
     delete slide[format];
     delete slide.filename;
+
+    ['html', 'code'].forEach((lang) => {
+      if (slide[lang]) slide[lang] = unescapeHtmlComments(slide[lang]);
+    });
+
     return slide;
   });
 
