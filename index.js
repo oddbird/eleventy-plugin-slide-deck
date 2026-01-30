@@ -2,7 +2,7 @@ import markdownIt from 'markdown-it';
 import syntaxHighlightPlugin from '@11ty/eleventy-plugin-syntaxhighlight';
 
 import {
-  slideDataType,
+  slideDataParser,
   slideStyles,
   buildSlides,
   getSlideResources,
@@ -49,8 +49,21 @@ export default async function(eleventyConfig, options) {
   }
 
   // data
-  eleventyConfig.addDataExtension("slides", slideDataType);
   eleventyConfig.addGlobalData("slideDeckConfig", options);
+  eleventyConfig.addDataExtension("slides", {
+    parser: slideDataParser,
+    read: false,
+    encoding: "utf8",
+  });
+
+  eleventyConfig.addTemplateFormats("deck");
+  eleventyConfig.addExtension("deck", {
+    getData: async (inputPath) => slideDataParser(inputPath, 'deck'),
+    compile: async (inputContent) => {
+      let output = options.markdownFunctions.block(inputContent);
+      return async () => { return output; };
+    },
+  });
 
   // slides
   eleventyConfig.addFilter('buildSlides', buildSlides);

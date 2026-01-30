@@ -8,6 +8,7 @@ layout: template
   :@slides="this.slideDeck"
 >
   <default-slide
+    webc:if="this.slotTest"
     webc:nokeep
     :@slide="({
       pre: 'inserted',
@@ -17,6 +18,7 @@ layout: template
   ></default-slide>
 
   <default-slide
+    webc:if="this.slotTest"
     webc:nokeep
     slot="after"
     :@slide="({

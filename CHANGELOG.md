@@ -1,3 +1,10 @@
+## v0.5.2 - 2026-01-30
+
+- New: The `*.deck` template uses the `*.11tydata.slides` format,
+  returning markdown content of the notes,
+  with any slides added to the data cascade
+- New: Add basic HTML highlighting to the prism defaults
+
 ## v0.5.1 - 2026-01-14
 
 - Fix: Explicit slide colors override default slide-mode colors

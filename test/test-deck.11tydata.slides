@@ -210,9 +210,11 @@ quote: >
 <!-- @slide
 caption: a code slide
 css: |
+  /* a css comment */
   * { box-sizing: border-box; }
   html { --from: 'oddbird'; }
 html: |
+  <!-- html comments are hard inside html comments! --\>
   <p data-attr="test">lorem stuff</p>
 js: |
   const year = 2008;

@@ -1,4 +1,5 @@
 ---
 layout: slides
-title: Test Slide Deck
+title: A test page with all the slide types
+slotTest: true
 ---

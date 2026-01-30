@@ -5,6 +5,7 @@ layout: page
 <h1>Test Setup for Slide Decks</h1>
 
 <section webc:for="slidePage of collections.slideDeck">
+  <hr>
   <h2>
     <a
       :href="slidePage.url"
@@ -12,7 +13,7 @@ layout: page
     ></a>
   </h2>
 
-  <div webc:if="slidePage.data.slideResources.pens">
+  <div webc:if="slidePage.data.slideResources.pens.length > 0">
     <h3>CodePen Demos</h3>
     <ul>
       <li
@@ -22,7 +23,7 @@ layout: page
     </ul>
   </div>
 
-  <div webc:if="slidePage.data.slideResources.cite">
+  <div webc:if="slidePage.data.slideResources.cite.length > 0">
     <h3>Links Cited</h3>
     <ul>
       <li
