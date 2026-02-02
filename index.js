@@ -58,7 +58,7 @@ export default async function(eleventyConfig, options) {
 
   eleventyConfig.addTemplateFormats("deck");
   eleventyConfig.addExtension("deck", {
-    getData: async (inputPath) => slideDataParser(inputPath, 'deck'),
+    getData: async (inputPath) => slideDataParser(inputPath),
     compile: async (inputContent) => {
       let output = options.markdownFunctions.block(inputContent);
       return async () => { return output; };
