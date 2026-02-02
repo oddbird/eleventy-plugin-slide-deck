@@ -1,4 +1,6 @@
 import doxray from "doxray";
+import { log } from "node:console";
+import path from 'node:path';
 
 const slideFormat = {
   opening: /<!--\s*@slide[^\n]*\n/m,
@@ -17,8 +19,9 @@ const doxOptions = {
 
 const unescapeHtmlComments = (content) => content.replace('--\\\>', '-->');
 
-export const slideDataParser = (filePath, format = 'slides') => {
+export const slideDataParser = (filePath) => {
   const data = doxray(filePath, doxOptions);
+  const format = path.extname(filePath).slice(1);
 
   data.patterns.map((slide) => {
     slide.note = slide[format];

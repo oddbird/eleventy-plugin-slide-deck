@@ -1,3 +1,7 @@
+## v0.5.3 - 2026-02-02
+
+- Fix: Previous version broke notes for `*.slides` data format.
+
 ## v0.5.2 - 2026-02-02
 
 - New: The `*.deck` template uses the `*.11tydata.slides` format,
@@ -7,8 +11,7 @@
   inside `slide.html` and `slide.code` properties,
   so that it's possible to include HTML-shaped code comments
 - New: Add basic HTML highlighting to the prism defaults
-- Breaking: Change default view to `article`,
-  with `defaultView` property to override.
+- Breaking: Change default view to `article`
 
 ## v0.5.1 - 2026-01-14
 
