@@ -1,0 +1,25 @@
+---
+title: Using the `*.deck` Template Format
+layout: slides
+---
+
+Hello world
+
+<!-- @slide
+known: start-deck
+title: Another Slide Deck
+venue: Eleventy
+date: 2026-01-30
+-->
+
+This allows the slide format
+to create a new page directly
+using the `*.deck` extension.
+
+<!-- @slide
+pre: If you see this,
+title: It **Works**
+-->
+
+This is likely the better way
+to create slide decks.

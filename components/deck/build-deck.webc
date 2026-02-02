@@ -2,7 +2,7 @@
   webc:import="npm:@oddbird/slide-deck"
   :id="this.id || 'slides'"
   :@slides="this.slides"
-  slide-view="slideshow"
+  :slide-view="this.defaultView || 'article'"
   key-control
   follow-active
 >
@@ -396,9 +396,14 @@
       background: var(--slide-background);
       tab-size: 2;
 
+      --slide-code-color-1: var(--slide-accent-color);
+      --slide-code-color-2: oklch(from var(--slide-code-color-1) l c calc(h + 90));
+      --slide-code-color-3: oklch(from var(--slide-code-color-1) l c calc(h + 90 * 2));
+      --slide-code-color-4: oklch(from var(--slide-code-color-1) l c calc(h + 90 * 3));
+
       .token {
         &.comment {
-          color: var(--slide-accent-color);
+          color: var(--slide-code-color-1);
           font-style: italic;
         }
 
@@ -407,13 +412,14 @@
         }
 
         &.parameter {
-          color: oklch(from var(--slide-accent-color) l c calc(h + 90 * 3));
+          color: var(--slide-code-color-4);
         }
 
         &.prolog,
         &.doctype,
         &.cdata,
         &.punctuation {
+          color: var(--slide-color);
           opacity: 0.5;
         }
 
@@ -421,14 +427,22 @@
         &.regex,
         &.number,
         &.literal {
-          color: oklch(from var(--slide-accent-color) l c calc(h + 90));
+          color: var(--slide-code-color-2);
         }
 
         &.rule,
         &.selector,
         &.keyword + .function {
-          color: oklch(from var(--slide-accent-color) l c calc(h + 90 * 2));
+          color: var(--slide-code-color-3);
           font-weight: bold;
+        }
+
+        &.tag {
+          color: var(--slide-code-color-3);
+        }
+
+        &.attr-name {
+          font-style: italic;
         }
 
         &.deleted {

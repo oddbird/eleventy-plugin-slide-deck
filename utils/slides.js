@@ -1,33 +1,38 @@
 import doxray from "doxray";
 
+const slideFormat = {
+  opening: /<!--\s*@slide[^\n]*\n/m,
+  closing: /-->/,
+  comment: /<!--\s*@slide(?:[^-]|[\r\n]|-[^-]|--[^>])*-->/gm,
+  ignore: /<!--\s*@ignore[\s\S]*/gm
+};
+
 const doxOptions = {
+  processors: [],
   regex: {
-    slides: {
-      opening: /<!--\s*@slide[^\n]*\n/m,
-      closing: /-->/,
-      comment: /<!--\s*@slide(?:[^-]|[\r\n]|-[^-]|--[^>])*-->/gm,
-      ignore: /<!--\s*@ignore[\s\S]*/gm
-    }
+    slides: slideFormat,
+    deck: slideFormat,
   }
 };
 
-export const slideDataType = {
-  parser: (filePath) => {
-    const data = doxray(filePath, doxOptions);
+const unescapeHtmlComments = (content) => content.replace('--\\\>', '-->');
 
-    data.patterns.map((slide) => {
-      slide.note = slide.slides;
-      delete slide.slides;
-      delete slide.filename;
-      return slide;
+export const slideDataParser = (filePath, format = 'slides') => {
+  const data = doxray(filePath, doxOptions);
+
+  data.patterns.map((slide) => {
+    slide.note = slide[format];
+    delete slide[format];
+    delete slide.filename;
+
+    ['html', 'code'].forEach((lang) => {
+      if (slide[lang]) slide[lang] = unescapeHtmlComments(slide[lang]);
     });
 
-    return {slides: data.patterns};
-  },
+    return slide;
+  });
 
-  // defaults are shown:
-  read: false,
-  encoding: "utf8",
+  return {slides: data.patterns};
 };
 
 const getItem = (source, key) => {

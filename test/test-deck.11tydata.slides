@@ -210,11 +210,16 @@ quote: >
 <!-- @slide
 caption: a code slide
 css: |
+  /* a css comment */
   * { box-sizing: border-box; }
   html { --from: 'oddbird'; }
 html: |
-  <p data-attr="test">lorem stuff</p>
+  <!-- html comments need escaping --\>
+  <p data-attr="test">
+    End html-shaped comments with `--\>`
+  </p>
 js: |
+  /* what do JS comments look like? */
   const year = 2008;
   const myName = (name) => name || 'Mia';
 -->
