@@ -1,5 +1,4 @@
 import doxray from "doxray";
-import { log } from "node:console";
 import path from 'node:path';
 
 const slideFormat = {
