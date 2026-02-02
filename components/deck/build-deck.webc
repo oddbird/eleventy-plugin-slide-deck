@@ -2,7 +2,7 @@
   webc:import="npm:@oddbird/slide-deck"
   :id="this.id || 'slides'"
   :@slides="this.slides"
-  slide-view="slideshow"
+  :slide-view="this.defaultView || 'article'"
   key-control
   follow-active
 >
