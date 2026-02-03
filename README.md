@@ -144,7 +144,8 @@ that accept a variety of properties:
   - `slide.cite` Markdown text, often appended to the `caption`.
     This is useful when you want to provide links to more info
     without changing how the slide is rendered otherwise.
-  - `slide.background`, `slide.color`, & `slide.mode` CSS values
+  - `slide.background`, `slide.color`, `slide.mode`, `slide.padding`,
+    `slide.place-content`, and `slide.place-items` CSS values.
 
 - `<event-slide>` -- usually the first/last slides of a deck
   - `slide.pre`, `slide.title`, & `slide.sub` for the talk title block
@@ -163,7 +164,7 @@ that accept a variety of properties:
 - `<img-slide>`
   - `slide.src` and `slide.alt` to embed an image
   - `slide.credit` for (inline markdown) photo credits
-  - `slide.fit`, `slide.position`, & `slide.padding` CSS values
+  - `slide.fit`, & `slide.position` CSS values
 
 - `<split-slide>` -- combo of `image-slide` and `default-slide` props
 - `<source-slide>` -- combo of `image-slide` and `source`/`name`/`url` data
@@ -175,7 +176,7 @@ that accept a variety of properties:
   - `slide.size` controls the screenshot size/dimensions
   - `slide.type` can be set to `og` to use the open-graph API instead
   - `slide.title` will be added to the caption (and used as alt-fallback)
-  - `slide.fit`, `slide.position`, & `slide.padding` CSS values
+  - `slide.fit`, & `slide.position` CSS values
 
 - `<quote-slide>`
   - `slide.quote` the (block markdown) text of the blockquote

@@ -7,7 +7,7 @@
   :@note="this.slide.note"
   :@src="this.slide.img"
   :@credit="this.slide.credit"
-  :style="slideStyles(this.slide, ['fit', 'position', 'padding'])"
+  :style="slideStyles(this.slide, ['fit', 'position'])"
 >
   <div slide-content="image">
     <img

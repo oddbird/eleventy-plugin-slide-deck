@@ -15,16 +15,27 @@
     ></slide-title>
   </h2>
   <p slide-title="sub" webc:if="this.slide.sub" @html="slideMarkdownInline(this.slide.sub)"></p>
-  <div webc:if="this.slide.md" @html="slideMarkdownBlock(this.slide.md)"></div>
-  <div webc:if="this.slide.webc" @html="this.slide.webc"></div>
+  <slide-md
+    webc:if="this.slide.md"
+    @html="slideMarkdownBlock(this.slide.md)"
+  ></slide-md>
+  <slide-webc
+    webc:if="this.slide.webc"
+    @html="this.slide.webc"
+  ></slide-webc>
 </slide-item>
 <error-slide webc:nokeep webc:else></error-slide>
 
 <style webc:bucket="slides-core">
 @layer slide.type {
   [slide-content~=default] {
-    place-content: safe center;
-    padding: var(--slide-gap);
+    ---slide-type-padding: var(--slide-gap);
+    ---slide-type-place-content: safe center;
+  }
+
+  slide-md,
+  slide-webc {
+    display: contents;
   }
 }
 </style>

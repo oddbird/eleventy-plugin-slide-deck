@@ -37,9 +37,9 @@
 <style webc:bucket="slides-core">
 @layer slide.type {
   [slide-content~=quote] {
-    place-content: safe center;
+    ---slide-type-padding: var(--slide-gap);
+    ---slide-type-place-content: safe center;
     gap: var(--slide-gap);
-    padding: var(--slide-gap);
     grid-template:
       'marker quote' auto
       / minmax(1lh, 2lh) fit-content(28em)
