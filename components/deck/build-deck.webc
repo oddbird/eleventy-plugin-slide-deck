@@ -79,7 +79,10 @@
   [slide-view=slideshow] {
     @media (orientation: landscape) {
       --slide-ratio: unset;
-      grid-auto-rows: 100svh;
+
+      [slide-item=container] {
+        grid-template-rows: 100svh;
+      }
     }
 
     @media (orientation: portrait) {

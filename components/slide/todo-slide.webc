@@ -16,7 +16,11 @@
 
 <style webc:bucket="slides-core">
 @layer slide.type {
-  [slide-canvas='todo'] {
+  [slide-content~=todo] {
+    overflow: auto;
+  }
+
+  [slide-canvas=todo] {
     --slide-canvas-border: medium dashed mediumvioletred;
   }
 }

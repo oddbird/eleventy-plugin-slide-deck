@@ -69,6 +69,7 @@
       [code-start] auto [code-end]
       1fr [full-end]
     ;
+    overflow: auto;
 
     & slide-code-block {
       display: grid;
