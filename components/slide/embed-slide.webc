@@ -24,8 +24,8 @@
 <style webc:bucket="slides-core">
 @layer slide.type {
   [slide-content~=embed] {
+    ---slide-type-overflow: clip;
     container: video / size;
-    overflow: clip;
 
     > iframe,
     > video {

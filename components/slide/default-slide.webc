@@ -31,7 +31,6 @@
   [slide-content~=default] {
     ---slide-type-padding: var(--slide-gap);
     ---slide-type-place-content: safe center;
-    overflow: auto;
   }
 
   slide-md,

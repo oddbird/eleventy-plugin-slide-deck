@@ -167,6 +167,7 @@
   [slide-content] {
     display: grid;
     grid-area: content;
+    overflow: var(--slide-overflow, var(---slide-type-overflow, auto));
     padding: var(--slide-padding, var(---slide-type-padding));
     place-content: var(--slide-place-content, var(---slide-type-place-content));
     place-items: var(--slide-place-items, var(---slide-type-place-items));

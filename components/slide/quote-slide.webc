@@ -44,7 +44,6 @@
       'marker quote' auto
       / minmax(1lh, 2lh) fit-content(28em)
     ;
-    overflow: auto;
 
     & slide-quote-marker {
       display: grid;

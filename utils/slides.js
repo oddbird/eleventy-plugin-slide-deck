@@ -157,6 +157,7 @@ export const slideStyles = (slide, allow = []) => {
   const props = [
     'background', 'color', 'mode',
     'place-content', 'place-items', 'padding',
+    'overflow',
     ...allow
   ];
   const style = [];
