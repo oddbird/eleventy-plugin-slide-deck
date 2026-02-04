@@ -7,6 +7,7 @@
   (both are `display: contents` by default)
 - New: Allow `slide.place-content`, `slide.place-items`, `slide.padding`,
   & `slide.overflow` on all slide types.
+- Fix: Better handling of slide overflow.
 
 ## v0.5.3 - 2026-02-02
 
