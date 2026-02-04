@@ -145,7 +145,8 @@ that accept a variety of properties:
     This is useful when you want to provide links to more info
     without changing how the slide is rendered otherwise.
   - `slide.background`, `slide.color`, `slide.mode`, `slide.padding`,
-    `slide.place-content`, and `slide.place-items` CSS values.
+    `slide.place-content`, `slide.place-items`, and `slide.overflow`
+    CSS properties (`mode` is e.g. `color-scheme`).
 
 - `<event-slide>` -- usually the first/last slides of a deck
   - `slide.pre`, `slide.title`, & `slide.sub` for the talk title block
