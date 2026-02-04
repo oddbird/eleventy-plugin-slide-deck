@@ -134,6 +134,7 @@
     --slide-large-text: var(--step-2);
     --slide-xlarge-text: var(--step-3);
     --slide-title-text: var(--slide-xlarge-text);
+    ---default-slide-content-height: minmax(min-content, 1fr);
 
     aspect-ratio: var(--slide-ratio);
     background: var(--slide-background, Canvas);
@@ -143,7 +144,8 @@
     container: slide-canvas / inline-size;
     display: grid;
     grid-template:
-      'content content' minmax(0 ,1fr)
+      'content content'
+      var(--slide-content-height, var(---default-slide-content-height))
       'caption to-slide' auto
       / minmax(0, 1fr) auto;
     margin: 0;
@@ -158,7 +160,8 @@
       --to-slide-area: content;
       --to-slide-placement: end;
       grid-template:
-        'content content' 1fr
+        'content content'
+        var(--slide-content-height, var(---default-slide-content-height))
         / minmax(0, 1fr) auto
       ;
     }

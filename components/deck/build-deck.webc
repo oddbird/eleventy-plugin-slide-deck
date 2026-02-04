@@ -79,6 +79,7 @@
   [slide-view=slideshow] {
     @media (orientation: landscape) {
       --slide-ratio: unset;
+      --slide-content-height: minmax(0, 1fr);
 
       [slide-item=container] {
         grid-template-rows: 100svh;
@@ -105,6 +106,7 @@
   [slide-view=speaker] {
     --slide-border: thin solid var(--slide-border-color);
     --slide-normal-text: var(--slide-small-text);
+    --slide-content-height: minmax(0, 1fr);
 
     @media (width > 35em) {
       display: grid;
