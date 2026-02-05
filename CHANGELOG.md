@@ -1,3 +1,14 @@
+## v0.6.0 - UNRELEASED
+
+- Breaking: `[slide-content]` is `position: relative`
+- Breaking: Default slide `md` and `webc` output
+  are wrapped in `<slide-md>` and `<slide-webc>` elements
+  rather than unnamed `<div>`s
+  (both are `display: contents` by default)
+- New: Allow `slide.place-content`, `slide.place-items`, `slide.padding`,
+  & `slide.overflow` on all slide types.
+- Fix: Better handling of slide overflow.
+
 ## v0.5.3 - 2026-02-02
 
 - Fix: Previous version broke notes for `*.slides` data format.

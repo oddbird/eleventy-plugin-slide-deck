@@ -54,6 +54,20 @@ We can put basically anything we want
 into the `slide.note` field.
 
 <!-- @slide
+title: Overflow Test
+md: |
+  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+
+  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+caption: >
+  This should still be visible,
+  and able to wrap on multiple lines without issue --
+  even though that causes the content to overflow more.
+-->
+
+Here's a long paragraph, to test what happens with overflow.
+
+<!-- @slide
 webc: |
   <h3>Put WebC in here…</h3>
   <oddbird-logo style="fill: deepPink"></oddbird-logo>

@@ -61,10 +61,10 @@
 <style webc:bucket="slides-core">
 @layer slide.type {
   [slide-content='event'] {
+    ---slide-type-padding: var(--slide-gap);
     display: flex;
     flex-direction: column;
     gap: var(--slide-gap);
-    padding: var(--slide-gap);
   }
 
   [slide-auto=exit] {

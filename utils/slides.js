@@ -154,7 +154,12 @@ export const getSlideResources = (deck) => {
 }
 
 export const slideStyles = (slide, allow = []) => {
-  const props = ['background', 'color', 'mode', ...allow];
+  const props = [
+    'background', 'color', 'mode',
+    'place-content', 'place-items', 'padding',
+    'overflow',
+    ...allow
+  ];
   const style = [];
 
   props.forEach((prop) => {

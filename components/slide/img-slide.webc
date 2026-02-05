@@ -7,7 +7,7 @@
   :@note="this.slide.note"
   :@src="slideImg(this.slide.img)"
   :@credit="this.slide.credit"
-  :style="slideStyles(this.slide, ['fit', 'position', 'padding'])"
+  :style="slideStyles(this.slide, ['fit', 'position'])"
 >
   <img
     :src="this.src"
@@ -28,10 +28,9 @@
 <style webc:bucket="slides-core">
 @layer slide.type {
   [slide-content~=image] {
+    ---slide-type-place-items: stretch;
     display: flex;
     flex-direction: column;
-    place-items: stretch;
-    position: relative;
 
     img {
       clip-path: var(--slide-image-clip);
