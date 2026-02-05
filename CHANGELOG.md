@@ -1,4 +1,4 @@
-## v0.6.0 - UNRELEASED
+## v0.6.0 - 2026-02-05
 
 - Breaking: `[slide-content]` is `position: relative`
 - Breaking: Default slide `md` and `webc` output
