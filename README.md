@@ -153,7 +153,7 @@ that accept a variety of properties:
   - `slide.venue` the event title
   - `slide.date` the date of the talk
   - `slide.exit` optional (inline markdown) "back" link in the top
-  - `slide.detail` optional (block markdown) section for more detail
+  - `slide.md` optional (block markdown) section for more detail
 
 - `<todo-slide>` -- for drafting a new talk
   - `slide.todo` markdown block

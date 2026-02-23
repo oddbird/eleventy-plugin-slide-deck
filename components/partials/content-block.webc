@@ -1,0 +1,8 @@
+<div slide-md
+  webc:if="this.slideMd"
+  @html="slideMarkdownBlock(this.slideMd)"
+></div>
+<div slide-webc
+  webc:if="this.slideWebc"
+  @html="this.slideWebc"
+></div>

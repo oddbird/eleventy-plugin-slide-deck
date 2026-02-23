@@ -43,11 +43,13 @@
     </header>
 
     <div slide-auto="detail">
-      <template
+      <content-block
+        webc:if="slide.md || slide.webc"
         webc:nokeep
-        webc:if="slide.detail"
-        @html="slideMarkdownBlock(slide.detail)"
-      ></template>
+        :@slide-md="slide.md"
+        :@slide-webc="slide.webc"
+      ></slide-content>
+
       <a
         webc:elseif="$data.slideDeckConfig.domain"
         :href="page.url"

@@ -1,14 +1,37 @@
+<script webc:setup>
+  const buildSlideContent = (slide) => {
+    errorSlide = { title: 'Error…' };
+
+    if (slide) {
+      errorSlide.webc = `
+        <pre>${JSON.stringify(slide, null, '\t')}</pre>
+      `;
+    } else {
+      errorSlide.md = `
+        No slide data available
+      `;
+    }
+
+    return errorSlide;
+  }
+</script>
+
 <slide-item
-  @canvas-type="todo"
-  :@slide="this.slide"
+  @canvas-type="error"
+  :@slide="buildSlideContent(this.slide)"
   :@caption="this.slide?.caption"
   :@cite="this.slide?.cite"
   :@note="this.slide?.note"
 >
-  <h2>Error:</h2>
-  <pre
-    webc:if="this.slide"
-    @text="JSON.stringify(this.slide, null, '\t')"
-  ></pre>
-  <p webc:else>No slide data available</p>
+  <slide-content
+    :@slide="this.slide"
+  ></slide-default>
 </slide-item>
+
+<style webc:bucket="slides-core">
+@layer slide.type {
+  [slide-canvas=error] {
+    --slide-canvas-border: medium solid mediumvioletred;
+  }
+}
+</style>

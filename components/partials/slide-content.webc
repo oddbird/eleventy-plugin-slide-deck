@@ -1,0 +1,21 @@
+<h2
+  webc:if="this.slide.title || this.slide.pre"
+  slide-title="main"
+>
+  <slide-title
+    webc:nokeep
+    :@pre="this.slide.pre"
+    :@title="this.slide.title"
+  ></slide-title>
+</h2>
+<p
+  slide-title="sub"
+  webc:if="this.slide.sub"
+  @html="slideMarkdownInline(this.slide.sub)"
+></p>
+
+<content-block
+  webc:nokeep
+  :@slide-md="this.slide.md"
+  :@slide-webc="this.slide.webc"
+></slide-content>
