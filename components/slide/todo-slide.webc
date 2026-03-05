@@ -1,17 +1,17 @@
-<slide-item
-  @canvas-type="todo"
+<script webc:setup>
+  const buildMDSlide = (slide) => {
+    slide.title = slide.title || 'ToDo…';
+    slide.md = slide.todo;
+    return slide;
+  }
+</script>
+
+<default-slide
+  webc:nokeep
   webc:if="this.slide"
-  :id="this.slide.id"
-  :@caption="this.slide.caption"
-  :@cite="this.slide.cite"
-  :@note="this.slide.note"
-  :@slide="this.slide"
->
-  <h2>Todo:</h2>
-  <div
-    @html="slideMarkdownBlock(this.slide.todo || this.slide)"
-  ></div>
-</slide-item>
+  @canvas-type="todo"
+  :@slide="buildMDSlide(this.slide)"
+></default-slide>
 <error-slide webc:nokeep webc:else></error-slide>
 
 <style webc:bucket="slides-core">

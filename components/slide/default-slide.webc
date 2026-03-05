@@ -5,37 +5,12 @@
   :@cite="this.slide.cite"
   :@note="this.slide.note"
   :@slide="this.slide"
+  :@canvas-type="this.canvasType || 'default'"
   :style="slideStyles(this.slide)"
 >
-  <h2 webc:if="this.slide.title || this.slide.pre" slide-title="main">
-    <slide-title
-      webc:nokeep
-      :@pre="this.slide.pre"
-      :@title="this.slide.title"
-    ></slide-title>
-  </h2>
-  <p slide-title="sub" webc:if="this.slide.sub" @html="slideMarkdownInline(this.slide.sub)"></p>
-  <slide-md
-    webc:if="this.slide.md"
-    @html="slideMarkdownBlock(this.slide.md)"
-  ></slide-md>
-  <slide-webc
-    webc:if="this.slide.webc"
-    @html="this.slide.webc"
-  ></slide-webc>
+  <slide-content
+    webc:nokeep
+    :@slide="slide"
+  ></slide-default>
 </slide-item>
 <error-slide webc:nokeep webc:else></error-slide>
-
-<style webc:bucket="slides-core">
-@layer slide.type {
-  [slide-content~=default] {
-    ---slide-type-padding: var(--slide-gap);
-    ---slide-type-place-content: safe center;
-  }
-
-  slide-md,
-  slide-webc {
-    display: contents;
-  }
-}
-</style>

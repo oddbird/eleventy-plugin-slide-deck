@@ -119,6 +119,11 @@
   [slide-content] {
     font-size: var(--slide-normal-text);
   }
+
+  [slide-md],
+  [slide-webc] {
+    display: contents;
+  }
 }
 
 @layer slide.theme {
@@ -175,6 +180,11 @@
     place-content: var(--slide-place-content, var(---slide-type-place-content));
     place-items: var(--slide-place-items, var(---slide-type-place-items));
     position: relative;
+  }
+
+  [slide-content~=default] {
+    ---slide-type-padding: var(--slide-gap);
+    ---slide-type-place-content: safe center;
   }
 
   slide-caption-wrapper {

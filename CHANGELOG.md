@@ -1,3 +1,14 @@
+## v0.7.0 - 2026-02-24
+
+- Fix: Styles for default content moved to the core stylesheet
+- Breaking: Event slides use `slide.md` or `slide.webc`
+  rather than a specialized `slide.details`
+- New: Default slide accepts `canvas-type` attribute
+- New: `<slide-content>` component renders the default
+  slide title and content blocks
+- New: `<content-block>` component renders `:slide-md` (markdown)
+  and `:slide-webc` (webc/html) content blocks
+
 ## v0.6.0 - 2026-02-05
 
 - Breaking: `[slide-content]` is `position: relative`
