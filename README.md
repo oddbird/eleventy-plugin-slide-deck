@@ -176,7 +176,6 @@ that accept a variety of properties:
   - `slide.alt` optional alt text for the image
   - `slide.size` controls the screenshot size/dimensions
   - `slide.type` can be set to `og` to use the open-graph API instead
-  - `slide.title` will be added to the caption (and used as alt-fallback)
   - `slide.fit`, & `slide.position` CSS values
 
 - `<quote-slide>`

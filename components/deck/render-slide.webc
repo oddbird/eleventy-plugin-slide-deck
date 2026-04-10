@@ -4,6 +4,12 @@
   :@slide="this.slide"
 ></todo-slide>
 
+<blank-slide
+  webc:elseif="this.slide.layout === 'blank'"
+  webc:nokeep
+  :@slide="this.slide"
+></blank-slide>
+
 <event-slide
   webc:if="this.slide.layout === 'event'"
   webc:nokeep

@@ -1,0 +1,6 @@
+<default-slide
+  webc:nokeep
+  aria-hidden="true"
+  @canvas-type="blank"
+  :@slide="this.slide"
+></default-slide>
