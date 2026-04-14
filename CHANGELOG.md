@@ -1,3 +1,12 @@
+## v0.8.0 - 2026-04-10
+
+- Breaking: The `slide.title` property is no longer supported
+  in the `<url-slide>` layout, use `layout.source` instead.
+- Breaking: A slide with `slide.title` (or other general content)
+  will prefer the `default` layout over the `url` layout.
+- New: A new `<blank-slide>` is available using `layout:blank`,
+  and can be styled with the `[slide-canvas=blank]` selector.
+
 ## v0.7.0 - 2026-02-24
 
 - Fix: Styles for default content moved to the core stylesheet

@@ -8,7 +8,7 @@
   }
   const buildImgSlide = (slide) => {
     slide.img = urlSrc(slide);
-    slide.alt = slide.alt || slide.title || '';
+    slide.alt = slide.alt || slide.source || '';
     return slide;
   }
 </script>

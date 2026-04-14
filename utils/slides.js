@@ -72,17 +72,17 @@ const slideType = (slide) => {
     slide.scss
   ) return 'code';
 
-  const hasGeneral = slide.title
-    || slide.pre || slide.sub
-    || slide.md || slide.webc;
+  const hasTitle = Boolean(slide.title || slide.pre || slide.sub);
+  const hasMarkup = Boolean(slide.md || slide.webc);
 
   if (slide.img) {
-    if (hasGeneral) return 'split';
+    if (hasTitle || hasMarkup) return 'split';
     return 'image'
   }
 
+  if (hasTitle || hasMarkup) return 'default';
+
   if (slide.url) return 'url';
-  if (hasGeneral) return 'default';
   if (slide.name || slide.source || slide.avatar) return 'source';
 
   // error-slide
