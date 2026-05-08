@@ -26,13 +26,6 @@
 
 <style webc:bucket="slides-core">
 @layer slide.base {
-  slide-deck,
-  slide-deck *,
-  slide-deck *::before,
-  slide-deck *::after {
-    box-sizing: border-box;
-  }
-
   slide-deck {
     --slide-gap: clamp(12px, 2cqmin, 24px);
     --slide-half-gap: calc(var(--slide-gap) / 2);
@@ -65,7 +58,6 @@
 
   [slide-view=grid] {
     --slide-border: thin solid var(--slide-border-color);
-    --slide-note-margin-block: var(--slide-gap);
     --slide-normal-text: smaller;
     grid-template-columns: repeat(auto-fill, minmax(min(35ch, 100%), 1fr));
     font-size: var(--slide-small-text);
@@ -147,8 +139,6 @@
 
     [slide-note] {
       font-size: var(--note-font-size);
-      background-color: Canvas;
-      color: CanvasText;
       padding-inline: var(--slide-gap);
     }
 
@@ -167,7 +157,7 @@
        var(--slide-accent-color) var(--slide-deck-progress, 0),
         canvas var(--slide-deck-progress, 0)
         );
-      block-size: 1lh;
+      block-size: var(--slide-gap);
       inset: auto 0 0 0;
       position: fixed;
       z-index: 12;
@@ -232,111 +222,7 @@
       --slide-sans-font: var(--slide-web-font-sans, var(--slide-os-sans-font, ui-sans-serif)), sans-serif;
       --slide-code-font: var(--slide-web-font-code, var(--slide-os-code-font, ui-monospace)), monospace, serif;
 
-      background: var(--slide-background);
-      color: var(--slide-color);
-      font-family: var(--slide-sans-font);
-      font-size: var(--slide-normal-text);
-      font-size-adjust: from-font;
-      line-height: 1.3;
-
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6 {
-        font-family: var(--slide-sans-font);
-      }
-
-      :focus-visible {
-        outline: medium dotted var(--slide-accent-color);
-        outline-offset: 0.25em;
-      }
-
-      button {
-        background-color: var(--slide-button-state-color, var(--slide-button-color));
-        border: thick double;
-        border-radius: 0.25em;
-        color: var(--slide-button-state-text, var(--slide-button-text));
-        font: inherit;
-
-        &:focus,
-        &:hover,
-        &:active {
-          --slide-button-state-color: var(--slide-accent-color);
-        }
-      }
-
-      [aria-pressed=true] {
-        --slide-button-state-color: var(--slide-active-color);
-      }
-
-      pre {
-        white-space: pre-wrap;
-        overflow-wrap: break-word;
-        tab-size: 2;
-      }
-
-      pre,
-      code:not(pre *) {
-        font-family: var(--slide-code-font);
-      }
-
-      mark {
-        background: linear-gradient(to top,
-            var(--slide-mark-bg-color) 65%,
-            transparent 65%);
-        color: inherit;
-        text-shadow: 1px 1px 0 var(--slide-shadow-color);
-      }
-
-      a {
-        &:where(:link),
-        &:where(:visited) {
-          --slide-underline-color--default: var(--slide-accent-color);
-          --slide-underline-thickness--default: 0.1em;
-          --slide-underline-offset--default: 0.15em;
-
-          color: var(--slide-link-color, var(--slide-action-color));
-          text-decoration: underline;
-          text-decoration-color: var(--slide-underline-color,
-              var(--slide-underline-color--default));
-          text-decoration-thickness: var(--slide-underline-thickness,
-              var(--slide-underline-thickness--default));
-          text-decoration-skip-ink: auto;
-          text-underline-offset: var(--slide-underline-offset,
-              var(--slide-underline-offset--default));
-          transition: text-decoration-thickness 150ms ease-out;
-        }
-
-        &:where(:hover),
-        &:where(:focus) {
-          --slide-underline-color: var(--slide-active-color);
-          --slide-underline-thickness: 0.2em;
-
-          color: var(--slide-link-focus, var(--slide-active-color));
-        }
-
-        &:has(link-text) {
-          text-decoration: none;
-        }
-
-        [data-icon] {
-          block-size: 1lh;
-        }
-      }
-
-      s,
-      strike,
-      del {
-        text-decoration-color: var(--slide-strikeout-color);
-        text-decoration-thickness: 0.125em;
-      }
-
-      ::selection {
-        background-color: var(--slide-active-color) !important;
-        color: var(--slide-background) !important;
-      }
+      --slide-font: var(--slide-sans-font);
     }
 
     slide-deck,

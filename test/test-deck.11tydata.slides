@@ -106,6 +106,9 @@ title: >
 mode: light
 -->
 
+The slide mode
+doesn't impact the notes.
+
 <!-- @slide (light and dark modes)
 pre: a slide in
 title: >

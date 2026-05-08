@@ -331,13 +331,20 @@ and code (`--slide-os-code-font`) fonts.
 
 To add a main font for each font stack type, manually
 add self-hosted or web-based fonts to your project and then set the
-font-family name to the respective custom property for each font.
-
-Example:
+font-family name to the respective custom property for each stack:
 
 ```css
 --slide-web-font-sans: "Recursive Sans Linear";
 --slide-web-font-serif: freight-text-pro;
 ```
+
+By default the `--slide-sans-font` stack is used
+across slides and notes,
+but it's possible to change the
+(general) `--slide-font`
+or override the specific
+`--slide-title-font`, `--slide-caption-font`,
+`--slide-code-font`, or `--slide-note-font` variables
+if needed.
 
 There's more to document, but this is a start.
