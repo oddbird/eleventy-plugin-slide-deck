@@ -91,6 +91,7 @@
     & pre {
       align-content: safe center;
       background: unset;
+      box-sizing: border-box;
       display: grid;
       grid-column: code;
       margin: unset;

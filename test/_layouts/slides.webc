@@ -67,4 +67,8 @@ layout: template
     width: auto;
     height: 1.5lh;
   }
+
+  /* slide-deck {
+    --slide-font: var(--slide-sans-font);
+  } */
 </style>

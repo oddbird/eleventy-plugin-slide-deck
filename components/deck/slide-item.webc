@@ -63,9 +63,10 @@
       max-inline-size: 100%;
     }
 
+    img, svg { box-sizing: border-box; }
     svg { fill: currentColor; }
 
-    textarea:not([rows]) { min-height: 5lh; }
+    textarea:not([rows]) { min-block-size: 5lh; }
     [hidden] { display: none !important; }
 
     visually-hidden,
@@ -100,7 +101,7 @@
       margin-block: unset;
     }
 
-    slide-title {
+    [slide-title=main] {
       font-size: var(--slide-title-text);
     }
 
@@ -148,11 +149,15 @@
     color-scheme: var(--slide-mode);
     container: slide-canvas / inline-size;
     display: grid;
+    font-family: var(--slide-font);
+    font-size: var(--slide-normal-text);
+    font-size-adjust: from-font;
     grid-template:
       'content content'
       var(--slide-content-height, var(---default-slide-content-height))
       'caption to-slide' auto
       / minmax(0, 1fr) auto;
+    line-height: var(--slide-line-height, 1.3);
     margin: 0;
     position: relative;
 
@@ -169,6 +174,105 @@
         var(--slide-content-height, var(---default-slide-content-height))
         / minmax(0, 1fr) auto
       ;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: var(--slide-title-font, inherit);
+    }
+
+    :focus-visible {
+      outline: medium dotted var(--slide-accent-color);
+      outline-offset: 0.25em;
+    }
+
+    button {
+      background-color: var(--slide-button-state-color, var(--slide-button-color));
+      border: thick double;
+      border-radius: 0.25em;
+      color: var(--slide-button-state-text, var(--slide-button-text));
+      font: inherit;
+
+      &:focus,
+      &:hover,
+      &:active {
+        --slide-button-state-color: var(--slide-accent-color);
+      }
+    }
+
+    [aria-pressed=true] {
+      --slide-button-state-color: var(--slide-active-color);
+    }
+
+    pre {
+      overflow-wrap: break-word;
+      tab-size: 2;
+      white-space: pre-wrap;
+    }
+
+    pre,
+    code:not(pre *) {
+      font-family: var(--slide-code-font);
+    }
+
+    mark {
+      background: linear-gradient(to top,
+          var(--slide-mark-bg-color) 65%,
+          transparent 65%);
+      color: inherit;
+      text-shadow: 1px 1px 0 var(--slide-shadow-color);
+    }
+
+    a {
+      &:where(:link),
+      &:where(:visited) {
+        --slide-underline-color--default: var(--slide-accent-color);
+        --slide-underline-thickness--default: 0.1em;
+        --slide-underline-offset--default: 0.15em;
+
+        color: var(--slide-link-color, var(--slide-action-color));
+        text-decoration: underline;
+        text-decoration-color: var(--slide-underline-color,
+            var(--slide-underline-color--default));
+        text-decoration-skip-ink: auto;
+        text-decoration-thickness: var(--slide-underline-thickness,
+            var(--slide-underline-thickness--default));
+        text-underline-offset: var(--slide-underline-offset,
+            var(--slide-underline-offset--default));
+        transition: text-decoration-thickness 150ms ease-out;
+      }
+
+      &:where(:hover),
+      &:where(:focus) {
+        --slide-underline-color: var(--slide-active-color);
+        --slide-underline-thickness: 0.2em;
+
+        color: var(--slide-link-focus, var(--slide-active-color));
+      }
+
+      &:has(link-text) {
+        text-decoration: none;
+      }
+
+      [data-icon] {
+        block-size: 1lh;
+      }
+    }
+
+    s,
+    strike,
+    del {
+      text-decoration-color: var(--slide-strikeout-color);
+      text-decoration-thickness: 0.125em;
+    }
+
+    ::selection {
+      background-color: var(--slide-active-color) !important;
+      color: var(--slide-background) !important;
     }
   }
 
@@ -190,6 +294,7 @@
   slide-caption-wrapper {
     display: contents;
     font-size: var(--slide-small-text);
+    font-family: var(--slide-caption-font, inherit);
 
     &:has([slide-caption]) {
       align-items: center;
@@ -231,6 +336,10 @@
     &::after {
       content: var(--slide-index-string);
     }
+  }
+
+  [slide-note] {
+    font-family: var(--slide-note-font, inherit);
   }
 }
 </style>

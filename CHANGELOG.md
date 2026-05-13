@@ -1,3 +1,14 @@
+## v0.9.0 - UNRELEASED
+
+- Breaking: Remove default `box-sizing` and only apply where needed
+- New/Breaking: Add `--slide-font`, and more targeted…
+  - `--slide-title-font`
+  - `--slide-caption-font`
+  - `--slide-note-font`
+  - `--slide-line-height`
+- Breaking: Slide colors and type are only used inside the slide canvas
+  by default (`--slide-note-font` is not set by default)
+
 ## v0.8.0 - 2026-04-10
 
 - Breaking: The `slide.title` property is no longer supported
