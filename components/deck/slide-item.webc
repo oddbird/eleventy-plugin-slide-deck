@@ -151,6 +151,7 @@
     display: grid;
     font-family: var(--slide-font);
     font-size: var(--slide-normal-text);
+    font-size-adjust: from-font;
     grid-template:
       'content content'
       var(--slide-content-height, var(---default-slide-content-height))
@@ -208,9 +209,9 @@
     }
 
     pre {
-      white-space: pre-wrap;
       overflow-wrap: break-word;
       tab-size: 2;
+      white-space: pre-wrap;
     }
 
     pre,
@@ -237,9 +238,9 @@
         text-decoration: underline;
         text-decoration-color: var(--slide-underline-color,
             var(--slide-underline-color--default));
+        text-decoration-skip-ink: auto;
         text-decoration-thickness: var(--slide-underline-thickness,
             var(--slide-underline-thickness--default));
-        text-decoration-skip-ink: auto;
         text-underline-offset: var(--slide-underline-offset,
             var(--slide-underline-offset--default));
         transition: text-decoration-thickness 150ms ease-out;
