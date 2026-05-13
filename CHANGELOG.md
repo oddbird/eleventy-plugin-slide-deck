@@ -8,6 +8,8 @@
   - `--slide-line-height`
 - Breaking: Slide colors and type are only used inside the slide canvas
   by default (`--slide-note-font` is not set by default)
+- New: Add `slide.diff-html`, `slide.diff-css`, `slide.diff-js`,
+  and `slide.diff-scss` as first-class languages for code slides.
 
 ## v0.8.0 - 2026-04-10
 

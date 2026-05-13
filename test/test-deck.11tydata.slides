@@ -246,6 +246,30 @@ JS is also supported as a property,
 if you're into that kind of thing.
 
 <!-- @slide
+diff-html: |
+  -<h1>Support diffs</h1>
+  +<h1>Support first-class diffs</h1>
+   <p>
+    Using the <code>slide.diff-html</code> property
+    for example.
+   </p>
+diff-css: |
+  --- useful to have metadata here
+  +++ when the first-line is not a change
+  @@ and starts with a space @@
+
+   .language-diff-css {
+  -  /* along with styles */
+  +  /* with improved styles */
+     color: green;
+   }
+-->
+
+Support for
+`slide.diff-html`, `slide.diff-css`, `slide.diff-js`, and `slide.diff-scss`
+properties for code slides.
+
+<!-- @slide
 escapeHtml: true
 lang: www-styles
 code: |

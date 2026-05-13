@@ -67,9 +67,10 @@ const slideType = (slide) => {
   if (slide.quote) return 'quote';
   if (slide.pen) return 'pen';
   if (
-    slide.code ||
-    slide.html || slide.css || slide.js ||
-    slide.scss
+    slide.code
+    || slide.html || slide.css || slide.js || slide.scss
+    || slide['diff-html'] || slide['diff-css']
+    || slide['diff-js'] || slide['diff-scss']
   ) return 'code';
 
   const hasTitle = Boolean(slide.title || slide.pre || slide.sub);
