@@ -1,8 +1,4 @@
 <script webc:setup>
-  const findPage = (demo) => $data.collections.demos.find(
-    (page) => (page.data.demo === demo)
-  );
-
   const demoPage = (slide) => {
     const found = {
       title: slide.title,
