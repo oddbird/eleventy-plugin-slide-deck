@@ -10,6 +10,7 @@
   by default (`--slide-note-font` is not set by default)
 - New: Add `slide.diff-html`, `slide.diff-css`, `slide.diff-js`,
   and `slide.diff-scss` as first-class languages for code slides.
+- Fix: Improve diff styling in provided prism styles
 
 ## v0.8.0 - 2026-04-10
 

@@ -292,22 +292,33 @@
       --slide-code-color-3: oklch(from var(--slide-code-color-1) l c calc(h + 90 * 2));
       --slide-code-color-4: oklch(from var(--slide-code-color-1) l c calc(h + 90 * 3));
 
-      --slide-code-added-light: hsl(120deg 93% 80%);
-      --slide-code-added-dark: hsl(146deg 50% 36%);
-      --slide-code-removed-light: hsl(300deg 76% 72%);
-      --slide-code-removed-dark: hsl(300deg 100% 27%);
+      /* don't love this, but it improves compat significantly */
+      --slide-code-added-light-hsl: 120deg 93% 80%;
+      --slide-code-added-dark-hsl: 146deg 50% 36%;
+      --slide-code-removed-light-hsl: 300deg 76% 72%;
+      --slide-code-removed-dark-hsl: 300deg 100% 27%;
 
-      --slide-code-added-bg: var(--slide-code-added-light);
-      --slide-code-removed-bg: var(--slide-code-removed-light);
+      --slide-code-added-bg: hsl(var(--slide-code-added-light-hsl));
+      --slide-code-added-bg-fade: hsl(var(--slide-code-added-light-hsl) / 0.2);
+      --slide-code-removed-bg: hsl(var(--slide-code-removed-light-hsl));
+      --slide-code-removed-bg-fade: hsl(var(--slide-code-removed-light-hsl) / 0.2);
 
-      @supports (color: light-dark(red, green))  {
+      /* these have the same baseline date */
+      @supports (color: light-dark(red, green))
+        and (color: hsl(from red h s l)) {
         --slide-code-added-bg: light-dark(
-          var(--slide-code-added-light),
-          var(--slide-code-added-dark)
+          hsl(var(--slide-code-added-light-hsl)),
+          hsl(var(--slide-code-added-dark-hsl))
+        );
+        --slide-code-added-bg-fade: hsl(
+          from var(--slide-code-added-bg) h s l / 0.2
         );
         --slide-code-removed-bg: light-dark(
-          var(--slide-code-removed-light),
-          var(--slide-code-removed-dark)
+          hsl(var(--slide-code-removed-light-hsl)),
+          hsl(var(--slide-code-removed-dark-hsl))
+        );
+        --slide-code-removed-bg-fade: hsl(
+          from var(--slide-code-removed-bg) h s l / 0.2
         );
       }
 
