@@ -38,7 +38,7 @@
     ></iframe>`;
   }
 
-  export const buildEmbedSlide = (slide) => {
+  const buildEmbedSlide = (slide) => {
     const demo = demoPage(slide);
     slide.embed = demoEmbed(demo);
     slide.cite = cite(slide, demo);

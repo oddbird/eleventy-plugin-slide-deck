@@ -7,7 +7,7 @@
       : `https://v1.screenshot.11ty.dev/${url}/${size}/`;
   }
 
-  export const buildImgSlide = (slide) => {
+  const buildImgSlide = (slide) => {
     slide.img = urlSrc(slide);
     slide.alt = slide.alt || slide.source || '';
     return slide;
