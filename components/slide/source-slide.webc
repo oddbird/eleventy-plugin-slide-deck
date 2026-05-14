@@ -1,5 +1,5 @@
 <script webc:setup>
-  const buildSrcSlide = (slide) => {
+  export const buildSrcSlide = (slide) => {
     if (!slide.title) {
       const title = slide.source || slide.name;
 

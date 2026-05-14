@@ -1,5 +1,5 @@
 <script webc:setup>
-  const buildCaption = (caption, cite) => {
+  export const buildCaption = (caption, cite) => {
     const result = cite && caption
       ? `${caption} [${cite}]`
       : caption || cite;

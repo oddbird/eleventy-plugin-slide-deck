@@ -76,7 +76,7 @@
     ></iframe>`;
   }
 
-  const buildEmbedSlide = (slide) => {
+  export const buildEmbedSlide = (slide) => {
     slide.embed = penEmbed(slide);
     slide.cite = cite(slide);
     return slide;

@@ -1,7 +1,7 @@
 <script webc:setup>
   const langs = ['html', 'css', 'scss', 'js', 'code'];
 
-  const escapeHtml = (str) => {
+  export const escapeHtml = (str) => {
     if (typeof str !== 'string') return '';
 
     const escapeCharacter = (match) => {
@@ -19,7 +19,7 @@
     return str.replace(/[&<>"'`]/g, escapeCharacter);
   }
 
-  const getCode = (slide) => {
+  export const getCode = (slide) => {
     const code = {};
 
     langs.forEach((lang) => {

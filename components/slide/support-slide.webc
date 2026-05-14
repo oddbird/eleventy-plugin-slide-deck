@@ -11,7 +11,7 @@
     `https://web-platform-dx.github.io/web-features-explorer/features/${feature}`
   );
 
-  const buildImgSlide = (slide) => {
+  export const buildImgSlide = (slide) => {
     slide.title = slide.title || `CanIUse ${slide.caniuse}`;
     slide.img = `https://caniuse.bitsofco.de/image/${slide.caniuse}.jpg`;
     slide.alt = slide.alt || slide.title;
@@ -23,7 +23,7 @@
     return slide;
   }
 
-  const buildWebCSlide = (slide) => {
+  export const buildWebCSlide = (slide) => {
     const name = slide.title || slide.support;
     delete slide.title;
 

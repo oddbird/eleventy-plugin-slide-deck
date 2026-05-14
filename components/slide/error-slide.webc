@@ -1,5 +1,5 @@
 <script webc:setup>
-  const buildSlideContent = (slide) => {
+  export const buildSlideContent = (slide) => {
     errorSlide = { title: 'Error…' };
 
     if (slide) {

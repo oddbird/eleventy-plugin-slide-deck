@@ -6,7 +6,8 @@
       ? `https://v1.opengraph.11ty.dev/${url}/${size}/`
       : `https://v1.screenshot.11ty.dev/${url}/${size}/`;
   }
-  const buildImgSlide = (slide) => {
+
+  export const buildImgSlide = (slide) => {
     slide.img = urlSrc(slide);
     slide.alt = slide.alt || slide.source || '';
     return slide;

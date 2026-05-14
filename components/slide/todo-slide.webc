@@ -1,5 +1,5 @@
 <script webc:setup>
-  const buildMDSlide = (slide) => {
+  export const buildMDSlide = (slide) => {
     slide.title = slide.title || 'ToDo…';
     slide.md = slide.todo;
     return slide;
