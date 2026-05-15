@@ -1,4 +1,4 @@
-## v0.9.0 - UNRELEASED
+## v0.9.0 - 2026-05-15
 
 - Breaking: Remove default `box-sizing` and only apply where needed
 - New/Breaking: Add `--slide-font`, and more targeted…
