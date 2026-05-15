@@ -193,7 +193,8 @@ that accept a variety of properties:
   - `slide.live` link a live-code version of the demo, if different
   - `slide.preview` (boolean) set `true` for click-to-load behavior
 - `<code-slide>`
-  - `slide.<language>` (for `html`, `css`, `scss`, or `js`)
+  - `slide.<language>` and `slide.diff-<language>`
+    for `html`, `css`, `scss`, and `js`
   - or `slide.code` and `slide.lang` for any other languages
 - `<support-slide>`
   - `slide.caniuse` feature id for CanIUse

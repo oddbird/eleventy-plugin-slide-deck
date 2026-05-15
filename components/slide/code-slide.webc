@@ -1,5 +1,11 @@
 <script webc:setup>
-  const langs = ['html', 'css', 'scss', 'js', 'code'];
+  const langs = [
+    'html', 'diff-html',
+    'css', 'diff-css',
+    'scss', 'diff-scss',
+    'js', 'diff-js',
+    'code',
+  ];
 
   const escapeHtml = (str) => {
     if (typeof str !== 'string') return '';

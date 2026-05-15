@@ -292,10 +292,46 @@
       --slide-code-color-3: oklch(from var(--slide-code-color-1) l c calc(h + 90 * 2));
       --slide-code-color-4: oklch(from var(--slide-code-color-1) l c calc(h + 90 * 3));
 
+      /* don't love this, but it improves compat significantly */
+      --slide-code-added-light-hsl: 120deg 93% 80%;
+      --slide-code-added-dark-hsl: 146deg 50% 36%;
+      --slide-code-removed-light-hsl: 300deg 76% 72%;
+      --slide-code-removed-dark-hsl: 300deg 100% 27%;
+
+      --slide-code-added-bg: hsl(var(--slide-code-added-light-hsl));
+      --slide-code-added-bg-fade: hsl(var(--slide-code-added-light-hsl) / 0.2);
+      --slide-code-removed-bg: hsl(var(--slide-code-removed-light-hsl));
+      --slide-code-removed-bg-fade: hsl(var(--slide-code-removed-light-hsl) / 0.2);
+
+      /* these have the same baseline date */
+      @supports (color: light-dark(red, green))
+        and (color: hsl(from red h s l)) {
+        --slide-code-added-bg: light-dark(
+          hsl(var(--slide-code-added-light-hsl)),
+          hsl(var(--slide-code-added-dark-hsl))
+        );
+        --slide-code-added-bg-fade: hsl(
+          from var(--slide-code-added-bg) h s l / 0.2
+        );
+        --slide-code-removed-bg: light-dark(
+          hsl(var(--slide-code-removed-light-hsl)),
+          hsl(var(--slide-code-removed-dark-hsl))
+        );
+        --slide-code-removed-bg-fade: hsl(
+          from var(--slide-code-removed-bg) h s l / 0.2
+        );
+      }
+
       .token {
-        &.comment {
+        &.comment,
+        &.coord {
           color: var(--slide-code-color-1);
           font-style: italic;
+        }
+
+        &.coord {
+          /* +++ is a problem */
+          font-variant-ligatures: none;
         }
 
         &.keyword {
@@ -304,14 +340,6 @@
 
         &.parameter {
           color: var(--slide-code-color-4);
-        }
-
-        &.prolog,
-        &.doctype,
-        &.cdata,
-        &.punctuation {
-          color: var(--slide-color);
-          opacity: 0.5;
         }
 
         &.string,
@@ -336,14 +364,31 @@
           font-style: italic;
         }
 
-        &.deleted {
-          background-color: #ffdddd;
-          color: #434343;
+        &.deleted:not(.prefix) {
+          background-color: hsl(from var(--slide-code-removed-bg) h s l / 0.2);
+          opacity: 0.6;
+          text-decoration: line-through;
+          text-decoration-color: var(--slide-color);
+
+          &:hover {
+            text-decoration: unset;
+            opacity: unset;
+          }
+
+          * { filter: grayscale(0.5); }
         }
 
-        &.inserted {
-          background-color: #ddffdd;
-          color: #434343;
+        &.inserted:not(.prefix) {
+          background-color: hsl(from var(--slide-code-added-bg) h s l / 0.2);
+        }
+
+        &.inserted.prefix {
+          background-color: var(--slide-code-added-bg);
+        }
+
+        &.deleted.prefix {
+          background-color: var(--slide-code-removed-bg);
+          filter: none;
         }
 
         &.bold {
@@ -353,6 +398,14 @@
         &.important,
         &.italic {
           font-style: italic;
+        }
+
+        &.prefix,
+        &.prolog,
+        &.doctype,
+        &.cdata,
+        &.punctuation {
+          color: hsl(from var(--slide-color) h s l / 0.6);
         }
       }
     }
