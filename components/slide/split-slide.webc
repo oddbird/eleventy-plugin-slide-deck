@@ -31,7 +31,7 @@
 
 <style webc:bucket="slides-core">
 @layer slide.type {
-  [slide-content='split'] {
+  [slide-content=split] {
     --slide-image-clip: polygon(
       0 0, 100% 0,
       calc(100% - 5cqi) 100%,
