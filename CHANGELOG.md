@@ -1,3 +1,9 @@
+## v0.9.1 - 2026-05-26
+
+- Fix: Use `@container` rather than `@media`
+  for determining when slides can be full-height
+  rather than using an aspect-ratio.
+
 ## v0.9.0 - 2026-05-15
 
 - Breaking: Remove default `box-sizing` and only apply where needed
