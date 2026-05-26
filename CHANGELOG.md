@@ -1,4 +1,4 @@
-## v0.9.1 - UNRELEASED
+## v0.9.1 - 2026-05-26
 
 - Fix: Use `@container` rather than `@media`
   for determining when slides can be full-height
