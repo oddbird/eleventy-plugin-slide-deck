@@ -1,8 +1,18 @@
 ---
-layout: template
+layout: base
 ---
 
-<template webc:nokeep @raw="this.content"></template>
+<main @raw="this.content"></main>
+<footer>
+  <label for="color-scheme">Color Scheme</label>
+  <select id="color-scheme">
+    <option value="auto-mode">Auto</option>
+    <option value="light-mode">Light</option>
+    <option value="dark-mode">Dark</option>
+  </select>
+</footer>
+
 <style>
   main { margin: 1em; }
+  footer { padding: 1em; }
 </style>

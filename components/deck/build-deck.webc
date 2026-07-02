@@ -1,10 +1,12 @@
 <slide-deck
   webc:import="npm:@oddbird/slide-deck"
-  :id="this.id || 'slides'"
+  @attributes="({
+    id: this.id || 'slides',
+    'slide-view': this.slideView || 'article',
+    'key-control': this.keyControl,
+    'follow-active': this.followActive,
+  })"
   :@slides="this.slides"
-  slide-view="article"
-  key-control
-  follow-active
 >
   <slot></slot>
 

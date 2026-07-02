@@ -1,6 +1,7 @@
 ---
 title: Using the `*.deck` Template Format
 layout: slides
+keyControl: true
 ---
 
 Hello world

@@ -1,3 +1,10 @@
+## v0.10.0 - 2026-07-02
+
+- Breaking: Allow setting `slide-view`, `key-control`, and `follow-active`
+  attributes when calling the `<build-deck>` component.
+  The default `slide-view` is still `article`,
+  but the others have been removed by default.
+
 ## v0.9.1 - 2026-05-26
 
 - Fix: Use `@container` rather than `@media`
