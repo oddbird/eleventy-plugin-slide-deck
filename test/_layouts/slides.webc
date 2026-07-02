@@ -5,6 +5,9 @@ layout: template
 <build-deck
   webc:nokeep
   id="my-very-good-talk"
+  :@slide-view="this.slideView"
+  :@key-control="this.keyControl"
+  :@follow-active="this.followActive"
   :@slides="this.slideDeck"
 >
   <default-slide

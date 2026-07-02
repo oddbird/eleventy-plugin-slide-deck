@@ -19,3 +19,17 @@
   <script @raw="getBundle('js')" webc:keep></script>
 </body>
 </html>
+
+<style>
+  html {
+    color-scheme: light dark;
+
+    &:has(option[value=light-mode]:checked) {
+      color-scheme: light;
+    }
+
+    &:has(option[value=dark-mode]:checked) {
+      color-scheme: dark;
+    }
+  }
+</style>
