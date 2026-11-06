@@ -16,7 +16,7 @@ const doxOptions = {
   }
 };
 
-const unescapeHtmlComments = (content) => content.replace('--\\\>', '-->');
+const unescapeHtmlComments = (content) => content.replaceAll('--\\\>', '-->');
 
 export const slideDataParser = (filePath) => {
   const data = doxray(filePath, doxOptions);
