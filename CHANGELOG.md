@@ -1,4 +1,4 @@
-## v0.10.1 - 2026-11-06
+## v0.10.1 - 2026-11-09
 
 - Fix: Unescape all HTML code comments, not just the first one in a slide.
 
