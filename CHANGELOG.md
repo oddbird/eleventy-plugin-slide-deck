@@ -1,3 +1,7 @@
+## v0.10.1 - 2026-11-06
+
+- Fix: Unescape all HTML code comments, not just the first one in a slide.
+
 ## v0.10.0 - 2026-07-02
 
 - Breaking: Allow setting `slide-view`, `key-control`, and `follow-active`

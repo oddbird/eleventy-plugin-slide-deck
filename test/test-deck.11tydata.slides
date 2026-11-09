@@ -233,8 +233,9 @@ css: |
 html: |
   <!-- html comments need escaping --\>
   <p data-attr="test">
-    End html-shaped comments with `--\>`
+    End html-shaped comments with `\>`
   </p>
+  <!-- html comments need escaping --\>
 js: |
   /* what do JS comments look like? */
   const year = 2008;
